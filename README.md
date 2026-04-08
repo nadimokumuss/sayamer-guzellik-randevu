@@ -19,6 +19,25 @@ npm test
 npm run build
 ```
 
+## Demo Girisi
+
+Proje canliya acildiginda tum sayfalar `middleware.ts` ile korunur. Su ortam degiskenlerini tanimlayin:
+
+```bash
+DEMO_ACCESS_PASSWORD=degistir-beni
+DEMO_SESSION_SECRET=uzun-ve-rastgele-bir-deger
+```
+
+Giris ekrani `/giris` adresindedir. Parola dogruysa kullanici 12 saatlik demo oturumu alir.
+
+## Vercel Deploy
+
+```bash
+npm run deploy:vercel
+```
+
+Deploy oncesi Vercel projesinde `DEMO_ACCESS_PASSWORD` ve `DEMO_SESSION_SECRET` env degerlerini ekleyin.
+
 ## Not
 
 Bu surum tasarim + demo odaklidir. Veri katmani su anda mock calisir; sonraki asama gercek veritabani ve admin yetkilendirmesidir.
