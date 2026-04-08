@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { AvailabilityPicker } from "@/components/booking/availability-picker";
 import { BookingSummaryCard } from "@/components/booking/booking-summary-card";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageIntro } from "@/components/ui/page-intro";
 import { getItemSummary, getStaffById } from "@/lib/catalog";
 import { getNextOpenDate } from "@/lib/utils";
 
@@ -35,10 +35,19 @@ export default async function CalendarPage({
 
   return (
     <div className="shell py-10">
-      <SectionHeading
+      <PageIntro
         eyebrow="Takvim Adımı"
         title="Gün ve saat seçimi"
         copy="Uygunluk motoru; çalışma saatlerini, bloke aralıkları ve dolu randevuları birlikte dikkate alır."
+        icon="calendar"
+        asideTitle="Boş seansı hızlı kapat"
+        asideCopy="Yalnızca gerçekten müsait saatler görünür. Sistem uygun olmayan aralıkları otomatik gizler."
+        stats={[
+          { label: "Akış", value: "3 / 4" },
+          { label: "Uzman", value: staff.name },
+          { label: "Süre", value: `${item.durationMinutes} dk` },
+          { label: "Başlangıç", value: date },
+        ]}
       />
 
       <div className="mt-10 grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">

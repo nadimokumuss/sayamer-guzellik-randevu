@@ -3,7 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
+import { appointmentStatusLabelMap, getAppointmentStatusTone } from "@/components/admin/status-pill";
 import { AppointmentStatus } from "@/lib/types";
+import { classNames } from "@/lib/utils";
 
 type StatusSelectProps = {
   appointmentId: string;
@@ -11,13 +13,6 @@ type StatusSelectProps = {
 };
 
 const options: AppointmentStatus[] = ["confirmed", "checked_in", "completed", "cancelled"];
-
-const labelMap: Record<AppointmentStatus, string> = {
-  confirmed: "Onaylandı",
-  checked_in: "Geldi",
-  completed: "Tamamlandı",
-  cancelled: "İptal",
-};
 
 export function StatusSelect({ appointmentId, currentStatus }: StatusSelectProps) {
   const router = useRouter();
@@ -44,11 +39,14 @@ export function StatusSelect({ appointmentId, currentStatus }: StatusSelectProps
         });
       }}
       disabled={isPending}
-      className="rounded-full border border-rosewood/15 bg-white/80 px-4 py-2 text-sm text-espresso"
+      className={classNames(
+        "rounded-full border px-4 py-2 text-sm font-medium transition disabled:opacity-70",
+        getAppointmentStatusTone(value),
+      )}
     >
       {options.map((option) => (
         <option key={option} value={option}>
-          {labelMap[option]}
+          {appointmentStatusLabelMap[option]}
         </option>
       ))}
     </select>

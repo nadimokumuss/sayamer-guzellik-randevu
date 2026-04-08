@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { HeroShowcase } from "@/components/ui/hero-showcase";
+import { AppIcon } from "@/components/ui/app-icon";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getCatalog } from "@/lib/catalog";
 import { getDashboardStats } from "@/lib/booking";
@@ -18,25 +19,56 @@ export default function HomePage() {
     <div className="pb-8">
       <HeroShowcase campaigns={catalog.campaigns} testimonials={catalog.testimonials} />
 
-      <section className="shell mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="glass-card p-8">
+      <section className="shell mt-10 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="spotlight-panel">
           <SectionHeading
-            eyebrow="Marka Dünyası"
-            title="Premium-soft tasarım dili"
-            copy="Şampanya, pudra ve sakin yeşil tonları; zarif serif başlıklar ve yumuşak kart katmanlarıyla salon deneyimi dijitalde yeniden kuruldu."
+            eyebrow="Deneyim Omurgası"
+            title="Karar yükünü azaltan görsel yönlendirme"
+            copy="Her alan, müşteri veya salon ekibinin sıradaki hamlesini öne çıkaracak şekilde yeniden düzenlendi. Uzun açıklamalar arka planda kaldı; ön planda ise kısa karar blokları ve okunabilir kartlar var."
           />
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              { icon: "spark", title: "Seç", copy: "Hizmet veya paketi belirle" },
+              { icon: "users", title: "Eşleştir", copy: "Doğru uzmanı hızlı ayır" },
+              { icon: "calendar", title: "Kapat", copy: "Takvimden seansı sabitle" },
+            ].map((item) => (
+              <div key={item.title} className="metric-card">
+                <span className="icon-badge h-11 w-11 rounded-[18px]">
+                  <AppIcon name={item.icon as "spark" | "users" | "calendar"} />
+                </span>
+                <p className="mt-4 font-medium text-espresso">{item.title}</p>
+                <p className="mt-2 text-sm leading-6 text-[#6f5c5e]">{item.copy}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="visual-grid">
           {[
-            { label: "Kategori", value: stats.categories },
-            { label: "Uzman", value: stats.staff },
-            { label: "Bugünkü yoğunluk", value: dashboardStats.todayCount },
-            { label: "Yaklaşan randevu", value: dashboardStats.upcomingCount },
+            { icon: "layers", label: "Kategori", value: String(stats.categories) },
+            { icon: "users", label: "Uzman", value: String(stats.staff) },
+            { icon: "calendar", label: "Bugünkü yoğunluk", value: String(dashboardStats.todayCount) },
+            { icon: "chart", label: "Yaklaşan randevu", value: String(dashboardStats.upcomingCount) },
+            { icon: "block", label: "Bloke saat", value: String(dashboardStats.blockedCount) },
+            { icon: "check", label: "Aktif ciro", value: formatCurrency(dashboardStats.confirmedRevenue) },
           ].map((item) => (
-            <div key={item.label} className="glass-card p-6">
-              <p className="text-xs uppercase tracking-[0.22em] text-[#8c7376]">{item.label}</p>
-              <p className="mt-5 font-display text-5xl text-espresso">{item.value}</p>
+            <div key={item.label} className="metric-card min-h-[168px]">
+              <span className="icon-badge h-11 w-11 rounded-[18px]">
+                <AppIcon
+                  name={
+                    item.icon as
+                      | "layers"
+                      | "users"
+                      | "calendar"
+                      | "chart"
+                      | "block"
+                      | "check"
+                  }
+                />
+              </span>
+              <p className="mt-5 text-xs uppercase tracking-[0.22em] text-[#8c7376]">{item.label}</p>
+              <p className="mt-3 font-display text-4xl text-espresso">{item.value}</p>
             </div>
           ))}
         </div>
@@ -46,16 +78,19 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Öne Çıkan Hizmetler"
           title="En sık tercih edilen bakım rotaları"
-          copy="Kategoriler arası dolaşmadan hızlı seçim yapabilmek için öne çıkan bakım ve seanslar girişte görünür tutuldu."
+          copy="Kategoriler arası kaybolmadan karar verebilmek için en çok seçilen seansları girişte net aksiyon kartlarına dönüştürdük."
         />
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {featuredServices.map((service) => (
-            <article key={service.id} className="glass-card p-6">
+            <article key={service.id} className="glass-card overflow-hidden p-6">
               <div className="flex items-center justify-between gap-3">
-                <span className="eyebrow">{service.tag || "Demo akışı"}</span>
-                <span className="text-sm font-medium text-[#8c7376]">
-                  {service.durationMinutes} dk
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="icon-badge h-11 w-11 rounded-[18px] bg-[#f8efe9]">
+                    <AppIcon name="spark" />
+                  </span>
+                  <span className="eyebrow">{service.tag || "Demo akışı"}</span>
+                </div>
+                <span className="text-sm font-medium text-[#8c7376]">{service.durationMinutes} dk</span>
               </div>
               <h3 className="mt-5 font-display text-3xl text-espresso">{service.name}</h3>
               <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{service.description}</p>
@@ -78,19 +113,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="shell mt-16 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="shell mt-16 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="glass-card p-8">
-          <SectionHeading
-            eyebrow="Paketler"
-            title="Tek blokta planlanan hazır seremoniler"
-            copy="Paket seçildiğinde müşteri yalnızca sorumlu uzmanı ve uygun zamanı seçer; panel tarafında tüm içerik tek randevu bloğu olarak görünür."
-          />
+          <div className="flex items-center gap-4">
+            <span className="icon-badge icon-badge-lg">
+              <AppIcon name="layers" className="h-7 w-7" />
+            </span>
+            <SectionHeading
+              eyebrow="Paketler"
+              title="Tek blokta planlanan hazır seremoniler"
+              copy="Paket seçildiğinde müşteri yalnızca sorumlu uzmanı ve uygun zamanı seçer; panel tarafında tüm içerik tek randevu bloğu olarak görünür."
+            />
+          </div>
+
           <div className="mt-8 grid gap-4">
             {featuredPackages.map((pkg) => (
-              <div
-                key={pkg.id}
-                className="rounded-[24px] border border-white/70 bg-white/70 p-5"
-              >
+              <div key={pkg.id} className="rounded-[24px] border border-white/70 bg-white/70 p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.22em] text-[#8c7376]">
@@ -111,21 +149,27 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="glass-card p-8">
-          <SectionHeading
-            eyebrow="Panel Özeti"
-            title="Salon tarafında görünüm"
-            copy="Takvim, bloke saatler ve statü güncellemeleri aynı mock veri kümesi üzerinde gerçek zamanlı hissiyle ilerler."
-          />
-          <div className="mt-8 space-y-4">
+        <div className="spotlight-panel">
+          <div className="flex items-center gap-4">
+            <span className="icon-badge icon-badge-lg">
+              <AppIcon name="chart" className="h-7 w-7" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8c7376]">
+                Panel Özeti
+              </p>
+              <h2 className="mt-2 font-display text-3xl text-espresso">Salon tarafında görünüm</h2>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-3">
             {[
               `Aktif hizmet: ${stats.services}`,
               `Hazır paket: ${stats.packages}`,
               `Bloke saat: ${dashboardStats.blockedCount}`,
               `Toplam aktif ciro: ${formatCurrency(dashboardStats.confirmedRevenue)}`,
             ].map((item) => (
-              <div key={item} className="rounded-[24px] bg-[#fcf7f3] px-5 py-4 text-sm text-[#5d494b]">
-                {item}
+              <div key={item} className="metric-card">
+                <p className="text-sm text-[#5d494b]">{item}</p>
               </div>
             ))}
           </div>

@@ -1,4 +1,7 @@
+import { AppIcon } from "@/components/ui/app-icon";
+import { PageIntro } from "@/components/ui/page-intro";
 import { getCatalog, getCategoryById } from "@/lib/catalog";
+import { getInitials } from "@/lib/utils";
 
 export default function AdminStaffPage() {
   const catalog = getCatalog();
@@ -10,25 +13,55 @@ export default function AdminStaffPage() {
 
   return (
     <div className="space-y-6">
-      <section className="glass-card p-8">
-        <span className="eyebrow">Personeller</span>
-        <h1 className="mt-5 font-display text-5xl tracking-tight text-espresso">
-          Hizmet başına uzman ekibi
-        </h1>
-      </section>
+      <PageIntro
+        eyebrow="Personeller"
+        title="Hizmet başına uzman ekibi"
+        copy="Ekip kartları biyografi duvarı gibi akmak yerine rol, imza alanı ve uzmanlık rozetleriyle daha okunabilir hale getirildi."
+        icon="users"
+        asideTitle="Profil odaklı ekip görünümü"
+        asideCopy="Kategori başlıkları ekipleri ayırır; her kartta önce isim ve imza alanı, sonra detaylar görünür."
+        stats={[
+          { label: "Toplam uzman", value: String(catalog.staff.length) },
+          { label: "Kategori", value: String(catalog.categories.length) },
+          { label: "Çalışma modeli", value: "Uzman bazlı" },
+          { label: "Görünüm", value: "Profil kartları" },
+        ]}
+      />
 
       <div className="space-y-5">
         {Object.entries(grouped).map(([categoryId, members]) => (
           <section key={categoryId} className="glass-card p-6">
-            <h2 className="font-display text-3xl text-espresso">
-              {getCategoryById(categoryId)?.name}
-            </h2>
+            <div className="flex items-center gap-4">
+              <span className="icon-badge icon-badge-lg">
+                <AppIcon name="users" className="h-7 w-7" />
+              </span>
+              <div>
+                <span className="eyebrow">{getCategoryById(categoryId)?.name}</span>
+                <h2 className="mt-4 font-display text-3xl text-espresso">
+                  {getCategoryById(categoryId)?.heroLine}
+                </h2>
+              </div>
+            </div>
+
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {members.map((member) => (
-                <article key={member.id} className="rounded-[24px] bg-[#fcf7f3] p-5">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[#8c7376]">{member.title}</p>
-                  <h3 className="mt-3 font-display text-3xl text-espresso">{member.name}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{member.bio}</p>
+                <article key={member.id} className="rounded-[28px] bg-[#fcf7f3] p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.22em] text-[#8c7376]">{member.title}</p>
+                      <h3 className="mt-3 font-display text-3xl text-espresso">{member.name}</h3>
+                    </div>
+                    <span className="icon-badge h-14 w-14 rounded-[20px] bg-white/80 font-display text-xl text-rosewood">
+                      {getInitials(member.name)}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 rounded-[22px] bg-white/75 p-4">
+                    <p className="text-xs uppercase tracking-[0.18em] text-[#8c7376]">İmza alanı</p>
+                    <p className="mt-2 font-medium text-espresso">{member.signature}</p>
+                  </div>
+
+                  <p className="mt-4 text-sm leading-7 text-[#6f5c5e]">{member.bio}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {member.specialties.map((specialty) => (
                       <span

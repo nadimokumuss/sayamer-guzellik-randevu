@@ -4,10 +4,10 @@
 
 :root {
   color-scheme: light;
-  --background: #fcf8f4;
+  --background: #faf4ee;
   --foreground: #2b1d1b;
   --muted: #6f5c5e;
-  --card: rgba(255, 252, 249, 0.9);
+  --card: rgba(255, 252, 249, 0.82);
   --line: rgba(146, 92, 97, 0.12);
 }
 
@@ -18,9 +18,10 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(244, 214, 215, 0.55), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(169, 179, 166, 0.25), transparent 24%),
-    linear-gradient(180deg, #fcf8f4 0%, #f7efe8 52%, #fdfaf7 100%);
+    radial-gradient(circle at top left, rgba(244, 214, 215, 0.65), transparent 30%),
+    radial-gradient(circle at top right, rgba(240, 228, 209, 0.4), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(169, 179, 166, 0.32), transparent 24%),
+    linear-gradient(180deg, #fbf6f0 0%, #f6ede4 48%, #fcf8f3 100%);
   color: var(--foreground);
 }
 
@@ -34,6 +35,19 @@ body::before {
     linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 36px 36px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 85%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto 5% 12% auto;
+  z-index: -1;
+  height: 18rem;
+  width: 18rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.42), transparent 70%);
+  filter: blur(32px);
+  pointer-events: none;
 }
 
 a {
@@ -56,15 +70,16 @@ textarea {
 }
 
 .glass-card {
-  @apply rounded-[28px] border border-white/60 bg-white/75 shadow-soft backdrop-blur;
+  @apply rounded-[32px] border border-white/70 bg-white/70 shadow-soft backdrop-blur-xl;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 251, 247, 0.72));
 }
 
 .eyebrow {
-  @apply inline-flex items-center rounded-full border border-rosewood/10 bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-rosewood;
+  @apply inline-flex items-center rounded-full border border-rosewood/10 bg-white/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-rosewood;
 }
 
 .section-title {
-  @apply font-display text-3xl tracking-tight text-espresso sm:text-4xl;
+  @apply font-display text-3xl tracking-tight text-espresso sm:text-5xl;
 }
 
 .section-copy {
@@ -72,17 +87,97 @@ textarea {
 }
 
 .soft-button {
-  @apply inline-flex items-center justify-center rounded-full bg-espresso px-5 py-3 text-sm font-medium text-white transition hover:bg-[#1f1413];
+  @apply inline-flex items-center justify-center rounded-full bg-gradient-to-r from-espresso to-[#4a322f] px-5 py-3 text-sm font-medium text-white shadow-soft transition hover:-translate-y-0.5 hover:from-[#211514] hover:to-[#402927];
 }
 
 .soft-button-secondary {
-  @apply inline-flex items-center justify-center rounded-full border border-rosewood/15 bg-white/80 px-5 py-3 text-sm font-medium text-espresso transition hover:border-rosewood/30 hover:bg-white;
+  @apply inline-flex items-center justify-center rounded-full border border-rosewood/15 bg-white/85 px-5 py-3 text-sm font-medium text-espresso transition hover:-translate-y-0.5 hover:border-rosewood/30 hover:bg-white;
 }
 
 .field {
-  @apply w-full rounded-2xl border border-[#e8dcd1] bg-white/80 px-4 py-3 text-sm text-espresso placeholder:text-[#a39395] transition focus:border-rosewood/30 focus:bg-white;
+  @apply w-full rounded-[22px] border border-[#e8dcd1] bg-white/85 px-4 py-3 text-sm text-espresso placeholder:text-[#a39395] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] transition focus:border-rosewood/30 focus:bg-white;
 }
 
 .admin-chip {
   @apply inline-flex items-center rounded-full border border-rosewood/10 bg-[#fcf7f3] px-3 py-1 text-xs font-medium text-[#7d5257];
+}
+
+.icon-badge {
+  @apply inline-flex items-center justify-center rounded-[20px] border border-white/70 bg-white/75 text-rosewood shadow-soft;
+}
+
+.icon-badge-lg {
+  @apply h-16 w-16 rounded-[26px];
+}
+
+.spotlight-panel {
+  @apply relative overflow-hidden rounded-[30px] border border-white/75 bg-[linear-gradient(160deg,rgba(255,255,255,0.78),rgba(250,244,238,0.88))] p-6 shadow-soft;
+}
+
+.spotlight-panel::before {
+  content: "";
+  position: absolute;
+  inset: auto -2rem -2rem auto;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 9999px;
+  background: rgba(244, 214, 215, 0.5);
+  filter: blur(8px);
+}
+
+.metric-card {
+  @apply relative overflow-hidden rounded-[26px] border border-white/70 bg-white/80 p-4;
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(146, 92, 97, 0.6), rgba(169, 179, 166, 0.6));
+}
+
+.page-intro-glow {
+  background: linear-gradient(135deg, rgba(244, 214, 215, 0.58), rgba(255, 255, 255, 0.04));
+}
+
+.page-intro-blur {
+  background: rgba(169, 179, 166, 0.24);
+  filter: blur(16px);
+}
+
+.visual-grid {
+  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
+}
+
+.status-pill {
+  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+
+.pulse-soft {
+  animation: pulse-soft 3.2s ease-in-out infinite;
 }

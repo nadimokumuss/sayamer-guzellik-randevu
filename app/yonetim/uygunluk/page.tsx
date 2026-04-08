@@ -1,4 +1,5 @@
 import { BlockedSlotManager } from "@/components/admin/blocked-slot-manager";
+import { PageIntro } from "@/components/ui/page-intro";
 import { getCatalog } from "@/lib/catalog";
 import { getBlockedSlots } from "@/lib/store";
 import { getNextOpenDate } from "@/lib/utils";
@@ -11,12 +12,20 @@ export default function AdminAvailabilityPage() {
 
   return (
     <div className="space-y-6">
-      <section className="glass-card p-8">
-        <span className="eyebrow">Uygunluk</span>
-        <h1 className="mt-5 font-display text-5xl tracking-tight text-espresso">
-          Bloke saat yönetimi
-        </h1>
-      </section>
+      <PageIntro
+        eyebrow="Uygunluk"
+        title="Bloke saat yönetimi"
+        copy="Operasyon araları, mola blokları ve oda hazırlık zamanları ayrı bir yüzeyde yönetilir. Form ve mevcut liste artık birbirinden daha net ayrılmıştır."
+        icon="block"
+        asideTitle="Çakışmayı görsel yönet"
+        asideCopy="Yeni blok ekleme ve mevcut kapanışları silme işlemleri aynı ekranda ama ayrı rollerle düzenlenir."
+        stats={[
+          { label: "Uzman", value: String(catalog.staff.length) },
+          { label: "Aktif bloke", value: String(blockedSlots.length) },
+          { label: "Başlangıç günü", value: getNextOpenDate() },
+          { label: "Kullanım", value: "Operasyon odaklı" },
+        ]}
+      />
 
       <BlockedSlotManager
         staff={catalog.staff}

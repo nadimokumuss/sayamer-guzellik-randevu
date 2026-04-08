@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { BookingSummaryCard } from "@/components/booking/booking-summary-card";
 import { CustomerForm } from "@/components/booking/customer-form";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { PageIntro } from "@/components/ui/page-intro";
 import { getItemSummary, getStaffById } from "@/lib/catalog";
 import { addMinutesToTime } from "@/lib/utils";
 
@@ -38,10 +38,19 @@ export default async function CustomerDetailsPage({
 
   return (
     <div className="shell py-10">
-      <SectionHeading
+      <PageIntro
         eyebrow="Bilgi Formu"
         title="Son adım: müşteri bilgileri"
         copy="Bu adım tamamlandığında randevu anında oluşturulur, onay ekranına taşınır ve WhatsApp bağlantısı hazırlanır."
+        icon="shield"
+        asideTitle="Kısa ve kontrollü form"
+        asideCopy="Zorunlu alanlar öne alınır; opsiyonel not ayrı tutulur. Böylece form daha hızlı tamamlanır."
+        stats={[
+          { label: "Akış", value: "4 / 4" },
+          { label: "Uzman", value: staff.name },
+          { label: "Saat", value: startTime },
+          { label: "Sonuç", value: "Anında onay" },
+        ]}
       />
 
       <div className="mt-10 grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">
