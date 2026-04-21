@@ -4,11 +4,12 @@
 
 :root {
   color-scheme: light;
-  --background: #faf4ee;
+  --background: #fbf5ee;
   --foreground: #2b1d1b;
   --muted: #6f5c5e;
-  --card: rgba(255, 252, 249, 0.82);
-  --line: rgba(146, 92, 97, 0.12);
+  --card: #ffffff;
+  --line: rgba(146, 92, 97, 0.14);
+  --ring: rgba(146, 92, 97, 0.32);
 }
 
 html {
@@ -18,36 +19,11 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(244, 214, 215, 0.65), transparent 30%),
-    radial-gradient(circle at top right, rgba(240, 228, 209, 0.4), transparent 22%),
-    radial-gradient(circle at bottom right, rgba(169, 179, 166, 0.32), transparent 24%),
-    linear-gradient(180deg, #fbf6f0 0%, #f6ede4 48%, #fcf8f3 100%);
+    radial-gradient(circle at top left, rgba(244, 214, 215, 0.34), transparent 28%),
+    radial-gradient(circle at top right, rgba(214, 192, 173, 0.2), transparent 22%),
+    linear-gradient(180deg, #fcf7f1 0%, #f8f0e8 52%, #fdfaf7 100%);
   color: var(--foreground);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 85%);
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: auto 5% 12% auto;
-  z-index: -1;
-  height: 18rem;
-  width: 18rem;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.42), transparent 70%);
-  filter: blur(32px);
-  pointer-events: none;
+  font-feature-settings: "ss01", "cv11";
 }
 
 a {
@@ -65,68 +41,195 @@ textarea {
   background: rgba(146, 92, 97, 0.18);
 }
 
+/* Layout */
 .shell {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
-.glass-card {
-  @apply rounded-[32px] border border-white/70 bg-white/70 shadow-soft backdrop-blur-xl;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 251, 247, 0.72));
+/* ---------- Primitive components ---------- */
+
+/* Card */
+.card {
+  @apply rounded-3xl border bg-white shadow-soft transition;
+  border-color: rgba(214, 192, 173, 0.36);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 252, 249, 0.98));
 }
 
-.eyebrow {
-  @apply inline-flex items-center rounded-full border border-rosewood/10 bg-white/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-rosewood;
+.card-editorial {
+  @apply overflow-hidden rounded-3xl border shadow-editorial;
+  border-color: rgba(214, 192, 173, 0.36);
 }
 
-.section-title {
-  @apply font-display text-3xl tracking-tight text-espresso sm:text-5xl;
+.card-muted {
+  @apply rounded-3xl border p-5;
+  border-color: rgba(214, 192, 173, 0.36);
+  background: #fcf7f3;
 }
 
-.section-copy {
-  @apply max-w-2xl text-sm leading-7 text-[#6f5c5e] sm:text-base;
+.card-ghost {
+  @apply rounded-3xl border border-transparent p-5 transition;
+  background: rgba(255, 255, 255, 0.55);
 }
 
-.soft-button {
-  @apply inline-flex items-center justify-center rounded-full bg-gradient-to-r from-espresso to-[#4a322f] px-5 py-3 text-sm font-medium text-white shadow-soft transition hover:-translate-y-0.5 hover:from-[#211514] hover:to-[#402927];
+.card-ghost:hover {
+  border-color: rgba(146, 92, 97, 0.12);
+  background: rgba(255, 255, 255, 0.85);
 }
 
-.soft-button-secondary {
-  @apply inline-flex items-center justify-center rounded-full border border-rosewood/15 bg-white/85 px-5 py-3 text-sm font-medium text-espresso transition hover:-translate-y-0.5 hover:border-rosewood/30 hover:bg-white;
+/* Buttons */
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-pill text-sm font-medium transition duration-300 ease-soft disabled:cursor-not-allowed disabled:opacity-60;
 }
 
+.btn-sm {
+  @apply px-4 py-2 text-xs;
+}
+
+.btn-md {
+  @apply px-5 py-3 text-sm;
+}
+
+.btn-lg {
+  @apply px-7 py-4 text-base;
+}
+
+.btn-primary {
+  @apply text-white shadow-soft hover:-translate-y-0.5 hover:shadow-elevated;
+  background: linear-gradient(135deg, #2b1d1b 0%, #925c61 100%);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid rgba(146, 92, 97, 0.6);
+  outline-offset: 2px;
+}
+
+.btn-outline {
+  @apply border bg-white text-espresso hover:-translate-y-0.5 hover:bg-[#fdf8f4];
+  border-color: rgba(146, 92, 97, 0.18);
+}
+
+.btn-ghost {
+  @apply text-ink-500 hover:text-espresso;
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 252, 249, 0.7);
+}
+
+.btn-link {
+  @apply text-rosewood underline-offset-4 hover:underline;
+  background: transparent;
+  padding: 0;
+}
+
+/* Inputs */
 .field {
-  @apply w-full rounded-[22px] border border-[#e8dcd1] bg-white/85 px-4 py-3 text-sm text-espresso placeholder:text-[#a39395] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] transition focus:border-rosewood/30 focus:bg-white;
+  @apply w-full rounded-3xl border bg-white/85 px-4 py-3 text-sm text-espresso placeholder:text-[#a39395] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] transition;
+  border-color: rgba(232, 220, 209, 1);
+}
+
+.field:focus {
+  @apply bg-white;
+  border-color: rgba(146, 92, 97, 0.32);
+  box-shadow: 0 0 0 4px rgba(146, 92, 97, 0.1);
+}
+
+.field-error {
+  border-color: rgba(183, 76, 76, 0.6);
+}
+
+.field-label {
+  @apply mb-2 block text-xs font-semibold uppercase tracking-wider text-ink-500;
+}
+
+/* Badges / Chips */
+.eyebrow {
+  @apply inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-eyebrow text-rosewood;
+  border-color: rgba(146, 92, 97, 0.14);
+  background: rgba(251, 242, 234, 0.96);
+}
+
+.badge {
+  @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium;
+  border-color: rgba(146, 92, 97, 0.18);
+  background: rgba(255, 255, 255, 0.9);
+  color: rgba(146, 92, 97, 1);
+}
+
+.badge-soft {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+  background: #f7efe8;
+  color: rgba(146, 92, 97, 1);
+}
+
+.badge-dark {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white;
+  background: #2b1d1b;
 }
 
 .admin-chip {
   @apply inline-flex items-center rounded-full border border-rosewood/10 bg-[#fcf7f3] px-3 py-1 text-xs font-medium text-[#7d5257];
 }
 
+.status-pill {
+  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+}
+
+/* Typography utilities */
+.section-title {
+  @apply font-display text-display-md text-espresso;
+}
+
+.section-title-lg {
+  @apply font-display text-display-lg text-espresso;
+}
+
+.section-title-xl {
+  @apply font-display text-display-xl text-espresso;
+}
+
+.section-copy {
+  @apply max-w-2xl text-sm leading-7 text-ink-500 sm:text-base sm:leading-8;
+}
+
+.eyebrow-text {
+  @apply text-[11px] font-semibold uppercase tracking-eyebrow text-ink-400;
+}
+
+/* Icons */
 .icon-badge {
-  @apply inline-flex items-center justify-center rounded-[20px] border border-white/70 bg-white/75 text-rosewood shadow-soft;
+  @apply inline-flex items-center justify-center rounded-2xl border text-rosewood shadow-soft;
+  border-color: rgba(214, 192, 173, 0.36);
+  background: #fbf2ea;
 }
 
 .icon-badge-lg {
-  @apply h-16 w-16 rounded-[26px];
+  @apply h-16 w-16 rounded-3xl;
 }
 
+.icon-badge-sm {
+  @apply h-10 w-10 rounded-2xl;
+}
+
+/* Editorial panels */
 .spotlight-panel {
-  @apply relative overflow-hidden rounded-[30px] border border-white/75 bg-[linear-gradient(160deg,rgba(255,255,255,0.78),rgba(250,244,238,0.88))] p-6 shadow-soft;
+  @apply relative overflow-hidden rounded-3xl border p-6 shadow-soft;
+  border-color: rgba(214, 192, 173, 0.36);
+  background: linear-gradient(180deg, #fffdfa, #fbf4ed);
 }
 
 .spotlight-panel::before {
   content: "";
   position: absolute;
-  inset: auto -2rem -2rem auto;
-  height: 7rem;
-  width: 7rem;
-  border-radius: 9999px;
-  background: rgba(244, 214, 215, 0.5);
-  filter: blur(8px);
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, rgba(146, 92, 97, 0.52), rgba(214, 192, 173, 0.5));
 }
 
 .metric-card {
-  @apply relative overflow-hidden rounded-[26px] border border-white/70 bg-white/80 p-4;
+  @apply relative overflow-hidden rounded-3xl border bg-[#fcf8f4] p-5;
+  border-color: rgba(214, 192, 173, 0.36);
 }
 
 .metric-card::before {
@@ -150,10 +253,20 @@ textarea {
   @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
 }
 
-.status-pill {
-  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em];
+/* ---------- Legacy (backward compat during migration) ---------- */
+.glass-card {
+  @apply card;
 }
 
+.soft-button {
+  @apply btn btn-md btn-primary;
+}
+
+.soft-button-secondary {
+  @apply btn btn-md btn-outline;
+}
+
+/* Animations */
 @keyframes float {
   0%,
   100% {
@@ -174,10 +287,38 @@ textarea {
   }
 }
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .float-slow {
   animation: float 7s ease-in-out infinite;
 }
 
 .pulse-soft {
   animation: pulse-soft 3.2s ease-in-out infinite;
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-soft both;
+}
+
+/* Accessibility: reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .pulse-soft,
+  .fade-up {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

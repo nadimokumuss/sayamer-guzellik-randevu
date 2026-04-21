@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 import { catalog, getSeedAppointmentsDateOffsets } from "@/lib/seed";
+import { siteContent } from "@/lib/site";
 import { Appointment, BlockedSlot, Customer } from "@/lib/types";
 import { addMinutesToTime } from "@/lib/utils";
 
@@ -187,7 +188,7 @@ export function resetStore() {
 }
 
 export function getSalonPhone() {
-  return "905388887766";
+  return siteContent.contact.phoneRaw;
 }
 
 export function getCatalogSummary() {

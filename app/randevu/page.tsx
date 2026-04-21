@@ -1,95 +1,169 @@
 import Link from "next/link";
 
-import { AppIcon } from "@/components/ui/app-icon";
-import { PageIntro } from "@/components/ui/page-intro";
+import { EditorialPhoto } from "@/components/ui/editorial-photo";
+import { buildPageMetadata, siteContent } from "@/lib/site";
 import { getCatalog } from "@/lib/catalog";
 import { buildBookingHref, formatCurrency } from "@/lib/utils";
 
-export default function ServicesPage() {
+export const metadata = buildPageMetadata(
+  "Online Randevu",
+  "Sayamer Güzellik için hizmet veya paket seçerek online randevu oluşturun.",
+);
+
+export default function BookingEntryPage() {
   const catalog = getCatalog();
-  const featuredCount = catalog.services.filter((service) => service.featured).length;
+  const featuredServices = catalog.services.filter((service) => service.featured).slice(0, 4);
+  const featuredPackages = catalog.packages.slice(0, 3);
 
   return (
     <div className="shell py-10">
-      <PageIntro
-        eyebrow="Hizmet Seçimi"
-        title="Kategorilere göre randevu oluştur"
-        copy="Müşteri önce hizmetini seçer, ardından uygun uzman ve saat adımına geçer. Paket yerine tekli bakım planlamak için bu sayfa kullanılır."
-        icon="spark"
-        asideTitle="Kararı kolaylaştıran vitrin"
-        asideCopy="Her kategori kendi tonunda ayrılır; süre, fiyat ve yönlendirme ilk bakışta görünür."
-        stats={[
-          { label: "Kategori", value: String(catalog.categories.length) },
-          { label: "Öne çıkan", value: String(featuredCount) },
-          { label: "Sonraki adım", value: "Uzman" },
-          { label: "Akış", value: "1 / 4" },
-        ]}
-      />
+      <section className="glass-card overflow-hidden p-8 sm:p-10">
+        <p className="text-sm text-[#8c7376]">
+          <Link href="/">Ana Sayfa</Link> / Online Randevu
+        </p>
+        <div className="mt-4 grid gap-6 xl:grid-cols-[1.05fr_0.95fr] xl:items-center">
+          <div>
+            <span className="eyebrow">Online Randevu</span>
+            <h1 className="mt-4 font-display text-5xl tracking-tight text-espresso">
+              Bakım yolculuğunu şimdi başlatın
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[#6f5c5e]">
+              Önce hizmet veya paketinizi seçin, ardından uygun uzman ve saat aralığını görüntüleyin.
+              Randevu akışı hızlı, net ve birkaç adımda tamamlanacak şekilde tasarlandı.
+            </p>
+          </div>
 
-      <div className="mt-10 space-y-10">
-        {catalog.categories.map((category) => {
-          const services = catalog.services.filter((service) => service.categoryId === category.id);
+          <EditorialPhoto
+            src={siteContent.hero.slides[1].src}
+            alt={siteContent.hero.slides[1].alt}
+            eyebrow="Rezervasyon"
+            title="Gör, seç ve tamamla"
+            copy="Bakım planınızı size uygun uzman ve zaman aralığıyla birlikte oluşturun."
+            imageClassName="aspect-[5/4] min-h-[300px]"
+          />
+        </div>
+      </section>
 
-          return (
-            <section key={category.id} className="glass-card overflow-hidden">
-              <div className={`grid gap-6 bg-gradient-to-r ${category.accent} p-8 lg:grid-cols-[0.9fr_1.1fr]`}>
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="icon-badge h-11 w-11 rounded-[18px] bg-white/75">
-                      <AppIcon name="spark" />
-                    </span>
-                    <span className="eyebrow">{category.name}</span>
-                  </div>
-                  <h2 className="mt-4 font-display text-4xl text-espresso">{category.heroLine}</h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-[#5d494b]">
-                    {category.description}
-                  </p>
-                </div>
+      <section className="mt-10 grid gap-4 md:grid-cols-3">
+        {[
+          { title: "1. Hizmet veya paket seçin", copy: "İhtiyacınıza uygun bakım alanını belirleyin." },
+          { title: "2. Uzmanınızı görüntüleyin", copy: "Seçtiğiniz hizmete uygun ekip listelensin." },
+          { title: "3. Saat aralığını kapatın", copy: "Uygun boşluklar içinden randevunuzu kesinleştirin." },
+        ].map((item) => (
+          <article key={item.title} className="rounded-[24px] border border-[#eadfd3] bg-white p-5 shadow-soft">
+            <h2 className="font-display text-3xl text-espresso">{item.title}</h2>
+            <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{item.copy}</p>
+          </article>
+        ))}
+      </section>
 
-                <div className="grid gap-3 sm:grid-cols-3">
-                  <div className="metric-card">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Toplam hizmet</p>
-                    <p className="mt-3 font-display text-3xl text-espresso">{services.length}</p>
-                  </div>
-                  <div className="metric-card">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Rota</p>
-                    <p className="mt-3 font-display text-3xl text-espresso">Tek seçim</p>
-                  </div>
-                  <div className="metric-card">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Devam</p>
-                    <p className="mt-3 font-display text-3xl text-espresso">Takvim</p>
-                  </div>
-                </div>
+      <section className="mt-10 grid gap-6 lg:grid-cols-2">
+        <article className="glass-card overflow-hidden">
+          <img
+            src={siteContent.categoryHighlights[0].image}
+            alt="Tekli hizmet seçimi"
+            className="aspect-[16/10] w-full object-cover"
+          />
+          <div className="p-6">
+            <span className="eyebrow">Tekli Hizmet</span>
+            <h2 className="mt-4 font-display text-4xl text-espresso">İhtiyacınıza göre seçim yapın</h2>
+            <p className="mt-4 text-sm leading-7 text-[#6f5c5e]">
+              Kategori, süre ve fiyat bilgisiyle hizmetinizi belirleyin; ardından uygun uzman ve
+              boş saat akışına geçin.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/hizmetler" className="soft-button">
+                Hizmetleri Aç
+              </Link>
+              <Link href="/uzmanlar" className="soft-button-secondary">
+                Uzmanları Gör
+              </Link>
+            </div>
+          </div>
+        </article>
+
+        <article className="glass-card overflow-hidden">
+          <img
+            src={siteContent.categoryHighlights[2].image}
+            alt="Paket seçimi"
+            className="aspect-[16/10] w-full object-cover"
+          />
+          <div className="p-6">
+            <span className="eyebrow">Hazır Paket</span>
+            <h2 className="mt-4 font-display text-4xl text-espresso">Tek blokta planlanan paketler</h2>
+            <p className="mt-4 text-sm leading-7 text-[#6f5c5e]">
+              Hazır içerik, net fiyat ve daha kısa karar süreci. Uygun uzman ve zamanı seçerek
+              rezervasyonu kolayca tamamlayın.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/paketler" className="soft-button">
+                Paketleri Aç
+              </Link>
+              <Link href="/iletisim" className="soft-button-secondary">
+                Ön Bilgi Al
+              </Link>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="eyebrow">Hızlı Seçim</span>
+            <h2 className="mt-4 font-display text-4xl text-espresso">En çok tercih edilen hizmetler</h2>
+          </div>
+          <Link href="/hizmetler" className="soft-button-secondary">
+            Tümünü Gör
+          </Link>
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {featuredServices.map((service) => (
+            <article key={service.id} className="glass-card p-5">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-[#8c7376]">
+                {service.durationMinutes} dk
+              </p>
+              <h3 className="mt-4 font-display text-3xl text-espresso">{service.name}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{service.description}</p>
+              <div className="mt-6 flex items-center justify-between gap-4">
+                <strong className="text-lg text-espresso">{formatCurrency(service.price)}</strong>
+                <Link
+                  href={buildBookingHref("/personeller", {
+                    bookingType: "service",
+                    itemId: service.id,
+                  })}
+                  className="soft-button-secondary"
+                >
+                  Başla
+                </Link>
               </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-              <div className="grid gap-5 p-6 md:grid-cols-2 xl:grid-cols-3">
-                {services.map((service) => (
-                  <article key={service.id} className="rounded-[26px] bg-white/80 p-5 shadow-soft">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="eyebrow">{service.tag || category.name}</span>
-                      <span className="text-sm text-[#8c7376]">{service.durationMinutes} dk</span>
-                    </div>
-                    <h3 className="mt-5 font-display text-3xl text-espresso">{service.name}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{service.description}</p>
-                    <div className="mt-6 flex items-center justify-between">
-                      <strong className="text-lg text-espresso">{formatCurrency(service.price)}</strong>
-                      <Link
-                        href={buildBookingHref("/personeller", {
-                          bookingType: "service",
-                          itemId: service.id,
-                        })}
-                        className="soft-button-secondary"
-                      >
-                        Uzman Seç
-                      </Link>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </div>
+      <section className="mt-12 grid gap-5 lg:grid-cols-3">
+        {featuredPackages.map((pkg) => (
+          <article key={pkg.id} className="glass-card p-6">
+            <span className="eyebrow">{pkg.savingsLabel}</span>
+            <h3 className="mt-4 font-display text-3xl text-espresso">{pkg.name}</h3>
+            <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{pkg.description}</p>
+            <div className="mt-6 flex items-center justify-between gap-4">
+              <strong className="text-lg text-espresso">{formatCurrency(pkg.price)}</strong>
+              <Link
+                href={buildBookingHref("/personeller", {
+                  bookingType: "package",
+                  itemId: pkg.id,
+                })}
+                className="soft-button"
+              >
+                Paketi Seç
+              </Link>
+            </div>
+          </article>
+        ))}
+      </section>
     </div>
   );
 }

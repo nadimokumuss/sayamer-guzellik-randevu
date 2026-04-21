@@ -48,16 +48,17 @@ export default async function ConfirmationPage({
             </div>
 
             <p className="mt-5 max-w-2xl text-base leading-8 text-[#6f5c5e]">
-              Seçilen hizmet, uzman ve zaman aralığı salon paneline düştü. İstersen önceden
-              hazırlanmış WhatsApp mesajıyla ekip ile hızlıca iletişime geçebilirsin.
+              Seçilen hizmet, uzman ve zaman aralığı rezervasyon sistemine işlendi. İstersen
+              önceden hazırlanmış WhatsApp mesajıyla ekiple hızlıca iletişime geçebilir veya diğer
+              hizmetlere göz atabilirsin.
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <Link href={appointment.whatsappUrl} className="soft-button" target="_blank">
                 WhatsApp Mesajını Aç
               </Link>
-              <Link href="/yonetim/randevular" className="soft-button-secondary">
-                Panelde Görüntüle
+              <Link href="/hizmetler" className="soft-button-secondary">
+                Hizmetleri İncele
               </Link>
             </div>
 
