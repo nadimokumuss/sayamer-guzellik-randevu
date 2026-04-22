@@ -77,26 +77,26 @@ export const siteContent = {
       "Profesyonel bakım, modern uygulamalar ve huzur hissini aynı akışta sunan bir salon deneyimi tasarlıyoruz. Hizmetlerimizi inceleyin, uygun bakım rotanızı seçin ve online randevunuzu oluşturun.",
     slides: [
       {
-        src: "https://images.pexels.com/photos/3736396/pexels-photo-3736396.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Aydınlık ve modern güzellik salonu iç mekanı",
+        src: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Siyah koltukları ve modern tasarımıyla güzellik salonu iç mekanı",
         title: "Şehir ortasında sakin bakım alanı",
         copy: "İlk bakışta güven veren, aydınlık ve düzenli salon atmosferi.",
         href: "/hizmetler",
         label: "Hizmetler",
       },
       {
-        src: "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Bakım ürünleri ve çalışma alanı bulunan salon bölümü",
-        title: "Profesyonel uygulama köşeleri",
-        copy: "Bakım kararını destekleyen temiz ve düzenli hizmet alanları.",
+        src: "https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Profesyonel manikür uygulaması — uzman kalıcı oje çalışıyor",
+        title: "Uzman elinde hızlı ve temiz uygulama",
+        copy: "Her hizmet için uzman bazlı planlanan, hijyenik ve net bir akış.",
         href: "/randevu",
         label: "Randevu Oluştur",
       },
       {
-        src: "https://images.pexels.com/photos/3736519/pexels-photo-3736519.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Skincare ürünlerinin raflarda sergilendiği salon köşesi",
-        title: "Bakım ve ürün yaklaşımı",
-        copy: "Yazı yoğunluğunu kıran ve marka hissini taşıyan görsel detaylar.",
+        src: "https://images.pexels.com/photos/3997995/pexels-photo-3997995.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Serin bir ortamda yüz bakımı uygulaması alan kadın",
+        title: "Bakım ve dinginlik birlikte",
+        copy: "Sakin aydınlatma, özenli hazırlık ve uzman eşliğinde sürdürülen bakım seansları.",
         href: "/iletisim",
         label: "İletişim",
       },
@@ -123,7 +123,7 @@ export const siteContent = {
         "Konforu önceleyen epilasyon çözümleriyle, farklı bölgelere ve farklı ihtiyaçlara uygun bakım rotaları sunuyoruz.",
       href: "/hizmetler#epilasyon",
       image:
-        "https://images.pexels.com/photos/5069436/pexels-photo-5069436.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "https://images.pexels.com/photos/3997984/pexels-photo-3997984.jpeg?auto=compress&cs=tinysrgb&w=1200",
     },
     {
       id: "cilt",
@@ -132,7 +132,7 @@ export const siteContent = {
         "Cilt tipine göre seçilen uygulamalarla arınma, nem dengesi ve daha canlı bir görünüm hedeflenir.",
       href: "/hizmetler#cilt-bakimi",
       image:
-        "https://images.pexels.com/photos/6621463/pexels-photo-6621463.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=1200",
     },
     {
       id: "body",
@@ -141,27 +141,35 @@ export const siteContent = {
         "G5, lenf drenaj ve destekleyici seanslarla vücut bakımını planlı bir programa dönüştürüyoruz.",
       href: "/hizmetler#g5",
       image:
-        "https://images.pexels.com/photos/6621143/pexels-photo-6621143.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        "https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1200",
     },
   ],
   serviceCategoryMedia: {
+    // Saç yıkama / kuaför — yakın plan saç hizmeti
     kuafor:
-      "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3993454/pexels-photo-3993454.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Ayak bakımı — aromaterapi/masaj dokunuşu, rahatlama
     "ayak-bakimi":
-      "https://images.pexels.com/photos/3736519/pexels-photo-3736519.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3997990/pexels-photo-3997990.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Tırnak bakımı — uzman elinde kalıcı oje
     "tirnak-bakimi":
-      "https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Epilasyon — pürüzsüz cilt / sakin sırt seansı
     epilasyon:
-      "https://images.pexels.com/photos/35884502/pexels-photo-35884502.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    g5: "https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3997984/pexels-photo-3997984.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // G5 / vücut bakımı — sırt masajı, yağ uygulaması
+    g5: "https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Cilt bakımı — uzman uygulamada maske
     "cilt-bakimi":
-      "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    masaj:
-      "https://images.pexels.com/photos/3736396/pexels-photo-3736396.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Masaj — dingin spa ortamı
     "kafa-masaji":
-      "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/3997988/pexels-photo-3997988.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    masaj:
+      "https://images.pexels.com/photos/3997986/pexels-photo-3997986.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    // Saç taraması / şekillendirme — tarak ile uygulama
     "sac-taramasi":
-      "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
+      "https://images.pexels.com/photos/7755513/pexels-photo-7755513.jpeg?auto=compress&cs=tinysrgb&w=1400",
   },
   promos: [
     {
@@ -196,28 +204,28 @@ export const siteContent = {
     editorial: [
       {
         src: "https://images.pexels.com/photos/35884502/pexels-photo-35884502.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Hazırlanmış bakım odası ve havlular",
+        alt: "Masaj masası, havlular, mumlar ve aromaterapi yağları",
         eyebrow: "Bakım Odası",
         title: "Dingin hazırlık alanı",
         copy: "Sitenin yoğun yazı yerine his taşımaya başladığı ilk katman.",
       },
       {
-        src: "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Bakım seansı için hazırlanmış yatak ve ürünler",
-        eyebrow: "Cilt Bakımı",
+        src: "https://images.pexels.com/photos/7755512/pexels-photo-7755512.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Pembe havlu üzerinde profesyonel kuaför aletleri",
+        eyebrow: "Uygulama Hazırlığı",
         title: "Uygulama öncesi düzen",
-        copy: "Cilt ve yüz bakımı sayfalarında ritim kuran yumuşak bir sahne.",
+        copy: "Her seansın ardındaki titiz hazırlığı temsil eden yakın plan.",
       },
       {
-        src: "https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Manikür hizmeti alan müşteri elleri",
+        src: "https://images.pexels.com/photos/3997388/pexels-photo-3997388.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Beyaz kumaş üzerinde tek kırmızı tırnak detayı",
         eyebrow: "Tırnak Bakımı",
         title: "Detay odaklı uygulama",
-        copy: "Tırnak ve el bakımında yakın plan kalite hissi verir.",
+        copy: "Tırnak ve el bakımında minimal ama net bir sahne.",
       },
       {
-        src: "https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Salon içinde koltuk ve ayna bulunan aydınlık alan",
+        src: "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Siyah deri koltuk ve ayna bulunan salon köşesi",
         eyebrow: "Salon Hissi",
         title: "Karşılama ve bekleme alanı",
         copy: "Kurumsal ve iletişim sayfalarında mekân hissini güçlendirir.",
