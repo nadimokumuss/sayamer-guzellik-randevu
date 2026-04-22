@@ -5,6 +5,12 @@ import { FormEvent, useState, useTransition } from "react";
 
 import { AppIcon } from "@/components/ui/app-icon";
 import { Appointment, BookingType } from "@/lib/types";
+import {
+  EMAIL_FORMAT_MESSAGE,
+  PHONE_FORMAT_MESSAGE,
+  isValidEmail,
+  normalizePhone,
+} from "@/lib/validation";
 
 type CustomerFormProps = {
   bookingType: BookingType;
@@ -30,6 +36,28 @@ export function CustomerForm({
     setError(null);
 
     const formData = new FormData(event.currentTarget);
+    const firstName = String(formData.get("firstName") || "").trim();
+    const lastName = String(formData.get("lastName") || "").trim();
+    const phoneRaw = String(formData.get("phone") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const note = String(formData.get("note") || "").trim();
+
+    if (!firstName || !lastName || !phoneRaw) {
+      setError("Ad, soyad ve telefon alanları zorunlu.");
+      return;
+    }
+
+    const normalizedPhone = normalizePhone(phoneRaw);
+    if (!normalizedPhone) {
+      setError(PHONE_FORMAT_MESSAGE);
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError(EMAIL_FORMAT_MESSAGE);
+      return;
+    }
+
     const payload = {
       bookingType,
       itemId,
@@ -37,18 +65,13 @@ export function CustomerForm({
       date,
       startTime,
       customer: {
-        firstName: String(formData.get("firstName") || "").trim(),
-        lastName: String(formData.get("lastName") || "").trim(),
-        phone: String(formData.get("phone") || "").trim(),
-        email: String(formData.get("email") || "").trim(),
-        note: String(formData.get("note") || "").trim(),
+        firstName,
+        lastName,
+        phone: normalizedPhone,
+        email,
+        note,
       },
     };
-
-    if (!payload.customer.firstName || !payload.customer.lastName || !payload.customer.phone) {
-      setError("Ad, soyad ve telefon alanları zorunlu.");
-      return;
-    }
 
     startTransition(() => {
       void (async () => {
@@ -73,7 +96,7 @@ export function CustomerForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card space-y-5 p-6 sm:p-8">
+    <form onSubmit={handleSubmit} noValidate className="glass-card space-y-5 p-6 sm:p-8">
       <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
         <div>
           <div className="flex items-center gap-4">
@@ -131,13 +154,26 @@ export function CustomerForm({
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
             Telefon
           </span>
-          <input name="phone" placeholder="Telefon" className="field" />
+          <input
+            name="phone"
+            placeholder="05XX XXX XX XX"
+            inputMode="numeric"
+            maxLength={17}
+            autoComplete="tel"
+            className="field"
+          />
         </label>
         <label className="space-y-2">
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
             E-posta
           </span>
-          <input name="email" placeholder="E-posta" type="email" className="field" />
+          <input
+            name="email"
+            placeholder="E-posta"
+            type="email"
+            autoComplete="email"
+            className="field"
+          />
         </label>
       </div>
 

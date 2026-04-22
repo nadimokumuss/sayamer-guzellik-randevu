@@ -20,6 +20,7 @@ export function BlockedSlotManager({
 }: BlockedSlotManagerProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -168,6 +169,12 @@ export function BlockedSlotManager({
           <span className="admin-chip">{blockedSlots.length} kayıt</span>
         </div>
 
+        {deleteError ? (
+          <div className="mt-4 rounded-[20px] border border-rosewood/15 bg-[#fff4f4] px-4 py-3 text-sm text-rosewood" role="alert">
+            {deleteError}
+          </div>
+        ) : null}
+
         <div className="mt-6 space-y-3">
           {blockedSlots.map((slot) => {
             const member = staff.find((entry) => entry.id === slot.staffId);
@@ -195,10 +202,23 @@ export function BlockedSlotManager({
                     onClick={() =>
                       startTransition(() => {
                         void (async () => {
-                          await fetch(`/api/admin/blocked-slots/${slot.id}`, {
-                            method: "DELETE",
-                          });
-                          router.refresh();
+                          setDeleteError(null);
+                          try {
+                            const response = await fetch(
+                              `/api/admin/blocked-slots/${slot.id}`,
+                              { method: "DELETE" },
+                            );
+                            if (!response.ok) {
+                              const result = (await response
+                                .json()
+                                .catch(() => ({}))) as { error?: string };
+                              setDeleteError(result.error || "Bloke saat silinemedi.");
+                              return;
+                            }
+                            router.refresh();
+                          } catch {
+                            setDeleteError("Bloke saat silinemedi.");
+                          }
                         })();
                       })
                     }

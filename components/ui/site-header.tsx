@@ -45,7 +45,7 @@ export function SiteHeader() {
       )}
     >
       {!scrolled ? (
-        <div className="border-b border-line-subtle bg-white/60">
+        <div className="hidden border-b border-line-subtle bg-white/60 sm:block">
           <div className="shell flex flex-col gap-2 py-2.5 text-xs text-ink-500 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
               <span className="flex items-center gap-1.5">

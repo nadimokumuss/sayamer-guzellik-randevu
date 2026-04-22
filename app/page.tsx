@@ -73,7 +73,7 @@ export default function HomePage() {
             <img
               src={siteContent.hero.slides[0].src}
               alt={siteContent.hero.slides[0].alt}
-              className="h-full min-h-[420px] w-full object-cover"
+              className="h-full min-h-[280px] w-full object-cover md:min-h-[420px]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-espresso/60 via-espresso/10 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">

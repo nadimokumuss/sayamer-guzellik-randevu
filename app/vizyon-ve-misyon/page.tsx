@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AppIcon } from "@/components/ui/app-icon";
 import { Eyebrow } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
+import { EditorialPhoto } from "@/components/ui/editorial-photo";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
 export const metadata = buildPageMetadata(
@@ -77,6 +78,27 @@ export default function VisionMissionPage() {
             {siteContent.visionMission.mission}
           </p>
         </article>
+      </section>
+
+      {/* Editorial */}
+      <section className="mt-16">
+        <Eyebrow>Salon Kareleri</Eyebrow>
+        <h2 className="mt-4 font-display text-display-md text-espresso">
+          Sayamer'in atmosferinden kesitler
+        </h2>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {siteContent.media.editorial.slice(0, 3).map((item) => (
+            <EditorialPhoto
+              key={item.src}
+              src={item.src}
+              alt={item.alt}
+              eyebrow={item.eyebrow}
+              title={item.title}
+              copy={item.copy}
+              imageClassName="aspect-[4/5] min-h-[260px]"
+            />
+          ))}
+        </div>
       </section>
 
       {/* Principles */}

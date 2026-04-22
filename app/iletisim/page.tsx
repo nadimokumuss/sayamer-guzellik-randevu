@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AppIcon } from "@/components/ui/app-icon";
 import { Eyebrow } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
+import { ContactForm } from "@/components/contact/contact-form";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
 export const metadata = buildPageMetadata(
@@ -11,6 +12,12 @@ export const metadata = buildPageMetadata(
 );
 
 export default function ContactPage() {
+  const mapQuery = [
+    siteContent.contact.addressTitle,
+    ...siteContent.contact.addressLines,
+  ].join(", ");
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+
   return (
     <div className="shell py-10">
       {/* Hero */}
@@ -105,26 +112,17 @@ export default function ContactPage() {
         </article>
       </section>
 
-      {/* Map placeholder + social */}
+      {/* Map + social + contact form */}
       <section className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="overflow-hidden rounded-3xl border border-line shadow-soft">
-          <div
-            className="relative flex aspect-[16/10] w-full items-center justify-center bg-surface-muted"
-            aria-label="Salon konumu haritası"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-100/40 via-surface-muted to-champagne" />
-            <div className="relative z-10 text-center">
-              <span className="icon-badge icon-badge-lg mx-auto">
-                <AppIcon name="compass" className="h-7 w-7" />
-              </span>
-              <p className="mt-4 font-display text-2xl text-espresso">
-                {siteContent.contact.addressTitle}
-              </p>
-              <p className="mt-2 text-sm text-ink-500">
-                Konum ayrıntısı rezervasyon sonrası paylaşılır.
-              </p>
-            </div>
-          </div>
+          <iframe
+            src={mapSrc}
+            title="Salon konumu"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="aspect-[16/10] w-full border-0"
+            allowFullScreen
+          />
         </div>
 
         <div className="space-y-4">
@@ -162,6 +160,10 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mt-12">
+        <ContactForm />
       </section>
     </div>
   );
