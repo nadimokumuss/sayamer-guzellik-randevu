@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HomeSlider } from "@/components/ui/home-slider";
 import { getCatalog } from "@/lib/catalog";
 import { siteContent } from "@/lib/site";
 import { buildBookingHref, formatCurrency } from "@/lib/utils";
@@ -11,8 +12,11 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* 1. HERO — typographic only */}
-      <section className="shell min-h-[78vh] pt-24 pb-24 lg:min-h-[88vh] lg:pt-40">
+      {/* 1. SLIDER */}
+      <HomeSlider />
+
+      {/* 2. HERO — typographic only */}
+      <section className="shell pb-24 pt-20 lg:pb-32 lg:pt-28">
         <div className="max-w-4xl">
           <p className="eyebrow-tag">Sayamer Güzellik · İstanbul</p>
           <h1 className="mt-10 font-display text-display-2xl text-graphite">
