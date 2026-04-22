@@ -23,15 +23,27 @@ export default function BookingEntryPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-        <p className="eyebrow-tag">Online randevu</p>
-        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
-          Bakım yolculuğunu şimdi başlatın.
-        </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
-          Önce hizmet veya paketinizi seçin, ardından uygun uzman ve saat aralığını
-          görüntüleyin. Akış birkaç adımda tamamlanır.
-        </p>
+      <section className="warm-wash">
+        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+          <p className="eyebrow-tag" data-reveal>
+            Online randevu
+          </p>
+          <h1
+            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
+            data-reveal
+            data-reveal-delay="1"
+          >
+            Bakım yolculuğunu şimdi başlatın.
+          </h1>
+          <p
+            className="mt-8 max-w-xl text-base leading-8 text-ash"
+            data-reveal
+            data-reveal-delay="2"
+          >
+            Önce hizmet veya paketinizi seçin, ardından uygun uzman ve saat aralığını
+            görüntüleyin. Akış birkaç adımda tamamlanır.
+          </p>
+        </div>
       </section>
 
       {/* STEPS */}
@@ -61,11 +73,11 @@ export default function BookingEntryPage() {
         <div className="shell py-24 lg:py-32">
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
             <article>
-              <div className="overflow-hidden">
+              <div className="overflow-hidden" data-reveal>
                 <img
                   src={siteContent.categoryHighlights[0].image}
                   alt="Tekli hizmet"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
                 />
               </div>
               <p className="mt-8 eyebrow-tag">Tekli hizmet</p>
@@ -87,11 +99,11 @@ export default function BookingEntryPage() {
             </article>
 
             <article>
-              <div className="overflow-hidden">
+              <div className="overflow-hidden" data-reveal>
                 <img
                   src={siteContent.categoryHighlights[2].image}
                   alt="Hazır paket"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
                 />
               </div>
               <p className="mt-8 eyebrow-tag">Hazır paket</p>

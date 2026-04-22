@@ -17,15 +17,27 @@ export default function BlogPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-        <p className="eyebrow-tag">Blog</p>
-        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
-          Bakım notları ve kısa rehberler.
-        </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
-          Bakım rutinleri, uygulama öncesi hazırlıklar ve hizmet seçiminde yardımcı
-          olacak kısa rehber içerikler burada yer alır.
-        </p>
+      <section className="warm-wash">
+        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+          <p className="eyebrow-tag" data-reveal>
+            Blog
+          </p>
+          <h1
+            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
+            data-reveal
+            data-reveal-delay="1"
+          >
+            Bakım notları ve kısa rehberler.
+          </h1>
+          <p
+            className="mt-8 max-w-xl text-base leading-8 text-ash"
+            data-reveal
+            data-reveal-delay="2"
+          >
+            Bakım rutinleri, uygulama öncesi hazırlıklar ve hizmet seçiminde yardımcı
+            olacak kısa rehber içerikler burada yer alır.
+          </p>
+        </div>
       </section>
 
       {/* FEATURED */}
@@ -34,11 +46,11 @@ export default function BlogPage() {
           <div className="shell py-24 lg:py-32">
             <Link href={`/blog/${featured.slug}`} className="group block">
               <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-                <div className="overflow-hidden">
+                <div className="overflow-hidden" data-reveal>
                   <img
                     src={blogImages[0]}
                     alt={featured.title}
-                    className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                    className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out group-hover:scale-[1.03]"
                   />
                 </div>
                 <div>

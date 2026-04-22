@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 
 import "@/app/globals.css";
 
+import { RevealInit } from "@/components/ui/reveal-init";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
 import { siteContent } from "@/lib/site";
@@ -42,6 +43,7 @@ export default function RootLayout({
           <main>{children}</main>
           <SiteFooter />
         </div>
+        <RevealInit />
       </body>
     </html>
   );

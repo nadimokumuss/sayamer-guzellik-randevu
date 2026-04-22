@@ -27,22 +27,38 @@ export default function ExpertsPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-        <p className="eyebrow-tag">Uzmanlar</p>
-        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
-          Bakım alanlarına göre deneyimli ekibimiz.
-        </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
-          Her kategori için uzman ekip üyelerini görüntüleyebilir, uzmanlık alanlarını
-          inceleyebilir ve ardından online randevu akışına geçebilirsiniz.
-        </p>
-        <div className="mt-12 flex flex-wrap items-center gap-8">
-          <Link href="/randevu" className="btn-minimal-solid">
-            Randevu al
-          </Link>
-          <Link href="/hizmetler" className="link-underline">
-            Hizmetleri gör
-          </Link>
+      <section className="warm-wash">
+        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+          <p className="eyebrow-tag" data-reveal>
+            Uzmanlar
+          </p>
+          <h1
+            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
+            data-reveal
+            data-reveal-delay="1"
+          >
+            Bakım alanlarına göre deneyimli ekibimiz.
+          </h1>
+          <p
+            className="mt-8 max-w-xl text-base leading-8 text-ash"
+            data-reveal
+            data-reveal-delay="2"
+          >
+            Her kategori için uzman ekip üyelerini görüntüleyebilir, uzmanlık alanlarını
+            inceleyebilir ve ardından online randevu akışına geçebilirsiniz.
+          </p>
+          <div
+            className="mt-12 flex flex-wrap items-center gap-8"
+            data-reveal
+            data-reveal-delay="3"
+          >
+            <Link href="/randevu" className="btn-minimal-solid">
+              Randevu al
+            </Link>
+            <Link href="/hizmetler" className="link-underline">
+              Hizmetleri gör
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -93,11 +109,11 @@ export default function ExpertsPage() {
                   reverse ? "lg:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden" data-reveal>
                   <img
                     src={getCategoryImage(categoryId)}
                     alt={category.name}
-                    className="aspect-[4/5] w-full object-cover"
+                    className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
                   />
                 </div>
 

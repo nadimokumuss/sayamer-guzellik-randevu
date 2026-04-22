@@ -26,32 +26,48 @@ export default function AboutPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-        <p className="eyebrow-tag">Hakkımızda</p>
-        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
-          Güzelliğe sakin, planlı ve özenli bir yaklaşım.
-        </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
-          {siteContent.sections.welcomeCopy}
-        </p>
-        <div className="mt-12 flex flex-wrap items-center gap-8">
-          <Link href="/vizyon-ve-misyon" className="btn-minimal-solid">
-            Vizyon ve misyon
-          </Link>
-          <Link href="/randevu" className="link-underline">
-            Online randevu
-          </Link>
+      <section className="warm-wash">
+        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+          <p className="eyebrow-tag" data-reveal>
+            Hakkımızda
+          </p>
+          <h1
+            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
+            data-reveal
+            data-reveal-delay="1"
+          >
+            Güzelliğe sakin, planlı ve özenli bir yaklaşım.
+          </h1>
+          <p
+            className="mt-8 max-w-xl text-base leading-8 text-ash"
+            data-reveal
+            data-reveal-delay="2"
+          >
+            {siteContent.sections.welcomeCopy}
+          </p>
+          <div
+            className="mt-12 flex flex-wrap items-center gap-8"
+            data-reveal
+            data-reveal-delay="3"
+          >
+            <Link href="/vizyon-ve-misyon" className="btn-minimal-solid">
+              Vizyon ve misyon
+            </Link>
+            <Link href="/randevu" className="link-underline">
+              Online randevu
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* EDITORIAL PHOTO */}
       <section className="rule-top bg-bone">
         <div className="shell py-24 lg:py-32">
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" data-reveal>
             <img
               src={siteContent.media.editorial[3].src}
               alt={siteContent.media.editorial[3].alt}
-              className="h-[60vh] w-full object-cover lg:h-[72vh]"
+              className="h-[38vh] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02] lg:h-[48vh]"
             />
           </div>
           <div className="mt-6 flex items-start justify-between gap-6">

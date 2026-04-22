@@ -404,12 +404,110 @@ textarea {
   animation: fade-up 0.6s ease-soft both;
 }
 
+/* Scroll-triggered reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-delay="1"] {
+  transition-delay: 80ms;
+}
+
+[data-reveal-delay="2"] {
+  transition-delay: 160ms;
+}
+
+[data-reveal-delay="3"] {
+  transition-delay: 240ms;
+}
+
+/* Ken Burns for slider */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-0.8%, -0.6%, 0);
+  }
+}
+
+.ken-burns {
+  animation: ken-burns 14s ease-out forwards;
+  transform-origin: center center;
+}
+
+/* Warm tonal washes */
+.warm-wash {
+  background:
+    radial-gradient(ellipse at 80% -10%, rgba(244, 214, 215, 0.45), transparent 55%),
+    radial-gradient(ellipse at -10% 110%, rgba(247, 239, 232, 0.7), transparent 55%),
+    #faf7f2;
+}
+
+.warm-wash-soft {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(214, 192, 173, 0.22), transparent 50%),
+    radial-gradient(ellipse at 0% 100%, rgba(169, 179, 166, 0.18), transparent 55%),
+    #faf7f2;
+}
+
+/* Slow drift (decorative motion accent) */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.drift {
+  animation: drift 8s ease-in-out infinite;
+}
+
+/* Service row bottom rule that fills on hover */
+.service-row-rule {
+  position: relative;
+}
+
+.service-row-rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: rgba(26, 26, 24, 0.85);
+  transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-row-rule:hover::after {
+  width: 100%;
+}
+
 /* Accessibility: reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .pulse-soft,
-  .fade-up {
+  .fade-up,
+  .ken-burns,
+  .drift {
     animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   html {

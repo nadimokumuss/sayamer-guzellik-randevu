@@ -15,22 +15,38 @@ export default function PackagesPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-        <p className="eyebrow-tag">Paketler</p>
-        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
-          Tek rezervasyonda planlanan bakım paketleri.
-        </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
-          İçeriği, süresi ve fiyat avantajı önceden belirlenmiş paketlerle bakım planınızı
-          tek adımda oluşturabilirsiniz.
-        </p>
-        <div className="mt-12 flex flex-wrap items-center gap-8">
-          <Link href="/randevu" className="btn-minimal-solid">
-            Randevu al
-          </Link>
-          <Link href="/hizmetler" className="link-underline">
-            Tekli hizmetler
-          </Link>
+      <section className="warm-wash">
+        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+          <p className="eyebrow-tag" data-reveal>
+            Paketler
+          </p>
+          <h1
+            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
+            data-reveal
+            data-reveal-delay="1"
+          >
+            Tek rezervasyonda planlanan bakım paketleri.
+          </h1>
+          <p
+            className="mt-8 max-w-xl text-base leading-8 text-ash"
+            data-reveal
+            data-reveal-delay="2"
+          >
+            İçeriği, süresi ve fiyat avantajı önceden belirlenmiş paketlerle bakım planınızı
+            tek adımda oluşturabilirsiniz.
+          </p>
+          <div
+            className="mt-12 flex flex-wrap items-center gap-8"
+            data-reveal
+            data-reveal-delay="3"
+          >
+            <Link href="/randevu" className="btn-minimal-solid">
+              Randevu al
+            </Link>
+            <Link href="/hizmetler" className="link-underline">
+              Tekli hizmetler
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -101,11 +117,11 @@ export default function PackagesPage() {
                       reverse ? "lg:[&>*:first-child]:order-2" : ""
                     }`}
                   >
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden" data-reveal>
                       <img
                         src={image}
                         alt={pkg.name}
-                        className="aspect-[4/5] w-full object-cover"
+                        className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
                       />
                     </div>
 

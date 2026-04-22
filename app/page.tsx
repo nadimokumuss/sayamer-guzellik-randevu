@@ -16,34 +16,56 @@ export default function HomePage() {
       <HomeSlider />
 
       {/* 2. HERO — typographic only */}
-      <section className="shell pb-24 pt-20 lg:pb-32 lg:pt-28">
-        <div className="max-w-4xl">
-          <p className="eyebrow-tag">Sayamer Güzellik · İstanbul</p>
-          <h1 className="mt-10 font-display text-display-2xl text-graphite">
-            Bakım.<br />
-            Sadece gereken.
-          </h1>
-          <p className="mt-10 max-w-xl text-base leading-8 text-ash">
-            Saç, cilt, tırnak ve bakım ritüellerini sakin bir salon atmosferi ve net
-            bir rezervasyon akışıyla sunuyoruz.
-          </p>
-          <div className="mt-12 flex flex-wrap items-center gap-8">
-            <Link href="/randevu" className="btn-minimal-solid">
-              Randevu al
-            </Link>
-            <Link href="/hizmetler" className="link-underline">
-              Hizmetleri görüntüle
-            </Link>
+      <section className="warm-wash">
+        <div className="shell pb-24 pt-20 lg:pb-32 lg:pt-28">
+          <div className="max-w-4xl">
+            <p className="eyebrow-tag" data-reveal>
+              Sayamer Güzellik · İstanbul
+            </p>
+            <h1
+              className="mt-10 font-display text-display-2xl text-graphite"
+              data-reveal
+              data-reveal-delay="1"
+            >
+              Bakım.<br />
+              Sadece gereken.
+            </h1>
+            <p
+              className="mt-10 max-w-xl text-base leading-8 text-ash"
+              data-reveal
+              data-reveal-delay="2"
+            >
+              Saç, cilt, tırnak ve bakım ritüellerini sakin bir salon atmosferi ve net
+              bir rezervasyon akışıyla sunuyoruz.
+            </p>
+            <div
+              className="mt-12 flex flex-wrap items-center gap-8"
+              data-reveal
+              data-reveal-delay="3"
+            >
+              <Link href="/randevu" className="btn-minimal-solid">
+                Randevu al
+              </Link>
+              <Link href="/hizmetler" className="link-underline">
+                Hizmetleri görüntüle
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 2. MANIFESTO */}
-      <section className="rule-top bg-bone">
+      <section className="rule-top warm-wash-soft">
         <div className="shell py-24 lg:py-32">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-24">
-            <p className="eyebrow-tag">Bakım anlayışımız</p>
-            <p className="font-display text-2xl leading-[1.5] text-graphite sm:text-3xl sm:leading-[1.5]">
+            <p className="eyebrow-tag" data-reveal>
+              Bakım anlayışımız
+            </p>
+            <p
+              className="font-display text-2xl leading-[1.5] text-graphite sm:text-3xl sm:leading-[1.5]"
+              data-reveal
+              data-reveal-delay="1"
+            >
               Karmaşayı değil sakinliği seçtik. Hizmeti, uzmanı ve saati net görüyor,
               gereksiz adım yaşamadan bakımınızı planlıyorsunuz. Her detay özenli ama
               hiçbiri fazla değil.
@@ -55,7 +77,7 @@ export default function HomePage() {
       {/* 3. SERVICES — typographic list */}
       <section className="rule-top bg-bone">
         <div className="shell py-24 lg:py-32">
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
               <p className="eyebrow-tag">Hizmetler</p>
               <h2 className="mt-6 font-display text-display-lg text-graphite">
@@ -67,7 +89,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <ul className="mt-16 rule-top">
+          <ul className="mt-16 rule-top" data-reveal data-reveal-delay="1">
             {categoriesForHome.map((category, index) => {
               const services = catalog.services.filter((s) => s.categoryId === category.id);
               const min = services.length > 0 ? Math.min(...services.map((s) => s.price)) : 0;
@@ -75,7 +97,7 @@ export default function HomePage() {
                 <li key={category.id}>
                   <Link
                     href={`/hizmetler#${category.id}`}
-                    className="service-row transition hover:pl-2 hover:text-clay"
+                    className="service-row service-row-rule transition hover:pl-2 hover:text-clay"
                   >
                     <span className="service-row-number">
                       {String(index + 1).padStart(2, "0")}
@@ -98,11 +120,11 @@ export default function HomePage() {
       {/* 4. EDITORIAL PHOTO */}
       <section className="rule-top bg-bone">
         <div className="shell py-24 lg:py-32">
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" data-reveal>
             <img
               src={siteContent.media.editorial[3].src}
               alt={siteContent.media.editorial[3].alt}
-              className="h-[60vh] w-full object-cover lg:h-[72vh]"
+              className="h-[38vh] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02] lg:h-[48vh]"
             />
           </div>
           <div className="mt-6 flex items-start justify-between gap-6">
@@ -115,9 +137,9 @@ export default function HomePage() {
       </section>
 
       {/* 5. PACKAGES — list */}
-      <section className="rule-top bg-bone">
+      <section className="rule-top warm-wash-soft">
         <div className="shell py-24 lg:py-32">
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex items-end justify-between gap-6" data-reveal>
             <div>
               <p className="eyebrow-tag">Paketler</p>
               <h2 className="mt-6 font-display text-display-lg text-graphite">
@@ -129,7 +151,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <ul className="mt-16 rule-top">
+          <ul className="mt-16 rule-top" data-reveal data-reveal-delay="1">
             {featuredPackages.map((pkg, index) => (
               <li key={pkg.id}>
                 <Link
@@ -137,7 +159,7 @@ export default function HomePage() {
                     bookingType: "package",
                     itemId: pkg.id,
                   })}
-                  className="service-row flex-col items-start gap-3 transition hover:pl-2 hover:text-clay sm:flex-row sm:items-baseline sm:gap-6"
+                  className="service-row service-row-rule flex-col items-start gap-3 transition hover:pl-2 hover:text-clay sm:flex-row sm:items-baseline sm:gap-6"
                 >
                   <span className="service-row-number">
                     {String(index + 1).padStart(2, "0")}
@@ -159,7 +181,7 @@ export default function HomePage() {
       {/* 6. VISIT */}
       <section className="rule-top bg-bone">
         <div className="shell py-24 lg:py-32">
-          <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+          <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]" data-reveal>
             <div>
               <p className="eyebrow-tag">Ziyaret</p>
               <h2 className="mt-6 font-display text-display-lg text-graphite">

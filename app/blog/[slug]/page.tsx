@@ -65,11 +65,11 @@ export default async function BlogDetailPage({ params }: { params: Promise<Param
       {/* IMAGE */}
       <section className="rule-top bg-bone">
         <div className="shell py-16 lg:py-24">
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" data-reveal>
             <img
               src={image}
               alt={post.title}
-              className="h-[60vh] w-full object-cover lg:h-[72vh]"
+              className="h-[36vh] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02] lg:h-[48vh]"
             />
           </div>
         </div>
