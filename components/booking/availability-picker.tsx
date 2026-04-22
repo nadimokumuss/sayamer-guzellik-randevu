@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { startTransition, useDeferredValue, useEffect, useMemo, useState } from "react";
 
-import { AppIcon } from "@/components/ui/app-icon";
 import { AvailabilityResponse, BookingType } from "@/lib/types";
 import { buildBookingHref, formatDayShort } from "@/lib/utils";
 
@@ -63,127 +62,98 @@ export function AvailabilityPicker({
   );
 
   return (
-    <div className="glass-card p-6 sm:p-8">
-      <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="spotlight-panel">
-          <div className="flex items-center gap-4">
-            <span className="icon-badge icon-badge-lg">
-              <AppIcon name="calendar" className="h-7 w-7" />
-            </span>
-            <div>
-              <span className="eyebrow">Takvim</span>
-              <h2 className="mt-4 font-display text-3xl tracking-tight text-espresso">
-                Tarih ve saat seçimi
-              </h2>
-            </div>
-          </div>
-          <p className="mt-4 max-w-lg text-sm leading-7 text-[#6f5c5e]">
-            Sistem 30 dakikalık ızgara üzerinde en uygun seansları gösterir. Dolu veya bloke
-            saatler otomatik olarak dışarıda bırakılır.
+    <div>
+      <div className="flex flex-col gap-6 border-b border-hairline pb-8 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="eyebrow-tag">Takvim</p>
+          <p className="mt-3 font-display text-2xl text-graphite">
+            {formatDayShort(date)}
           </p>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="metric-card">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Seçili gün</p>
-              <p className="mt-3 font-display text-3xl text-espresso">{formatDayShort(date)}</p>
-            </div>
-            <div className="metric-card">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">
-                Uygun seans
-              </p>
-              <p className="mt-3 font-display text-3xl text-espresso">{availableSlots.length}</p>
-            </div>
-          </div>
-
-          <label className="mt-6 block space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-              Tarih
-            </span>
-            <input
-              type="date"
-              value={date}
-              onChange={(event) => {
-                const nextDate = event.target.value;
-                startTransition(() => setDate(nextDate));
-              }}
-              className="field min-w-[220px]"
-            />
-          </label>
+          <p className="mt-1 text-sm text-ash">
+            {availableSlots.length} uygun seans
+          </p>
         </div>
 
-        <div>
-          {loading ? (
-            <div className="grid gap-3 sm:grid-cols-2">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="h-24 animate-pulse rounded-[24px] border border-white/70 bg-white/70"
-                />
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
+            Tarih
+          </span>
+          <input
+            type="date"
+            value={date}
+            onChange={(event) => {
+              const nextDate = event.target.value;
+              startTransition(() => setDate(nextDate));
+            }}
+            className="form-line mt-2 min-w-[220px]"
+          />
+        </label>
+      </div>
+
+      <div className="mt-10">
+        {loading ? (
+          <div className="grid gap-px bg-hairline sm:grid-cols-3 lg:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="h-20 animate-pulse bg-bone" />
+            ))}
+          </div>
+        ) : error ? (
+          <p className="text-sm text-clay">{error}</p>
+        ) : availableSlots.length ? (
+          <>
+            <p className="eyebrow-tag">Uygun saatler</p>
+            <ul className="mt-6 grid grid-cols-3 gap-px bg-hairline sm:grid-cols-4 lg:grid-cols-6">
+              {availableSlots.map((slot) => (
+                <li key={slot.startTime} className="bg-bone">
+                  <Link
+                    href={buildBookingHref("/bilgilerim", {
+                      bookingType,
+                      itemId,
+                      staffId,
+                      date: deferredDate,
+                      startTime: slot.startTime,
+                    })}
+                    className="flex h-full flex-col items-start justify-center gap-1 px-4 py-5 transition hover:bg-graphite hover:text-bone"
+                  >
+                    <span className="font-display text-xl tabular-nums">
+                      {slot.startTime}
+                    </span>
+                    <span className="text-[11px] uppercase tracking-[0.18em] opacity-70">
+                      {slot.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <div>
+            <p className="font-display text-xl text-graphite">
+              Bu gün için uygun saat görünmüyor.
+            </p>
+            <p className="mt-2 text-sm leading-7 text-ash">
+              Alternatif tarihlerden birini deneyin.
+            </p>
+          </div>
+        )}
+
+        {!loading && !error && data?.nextAvailableDates.length ? (
+          <div className="mt-12 border-t border-hairline pt-8">
+            <p className="eyebrow-tag">Sonraki uygun günler</p>
+            <div className="mt-6 flex flex-wrap gap-6">
+              {data.nextAvailableDates.map((nextDate) => (
+                <button
+                  key={nextDate}
+                  type="button"
+                  onClick={() => setDate(nextDate)}
+                  className="link-underline"
+                >
+                  {formatDayShort(nextDate)}
+                </button>
               ))}
             </div>
-          ) : error ? (
-            <div className="rounded-[24px] border border-rosewood/15 bg-[#fff4f4] p-5 text-sm text-rosewood">
-              {error}
-            </div>
-          ) : (
-            <>
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                {availableSlots.length ? (
-                  availableSlots.map((slot) => (
-                    <Link
-                      key={slot.startTime}
-                      href={buildBookingHref("/bilgilerim", {
-                        bookingType,
-                        itemId,
-                        staffId,
-                        date: deferredDate,
-                        startTime: slot.startTime,
-                      })}
-                      className="rounded-[26px] border border-white/70 bg-white/80 px-5 py-5 text-left shadow-soft transition hover:-translate-y-0.5 hover:border-rosewood/25 hover:bg-white"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="icon-badge h-11 w-11 rounded-[18px] bg-[#f8efe9]">
-                          <AppIcon name="clock" />
-                        </span>
-                        <span className="admin-chip">Boş</span>
-                      </div>
-                      <p className="mt-5 font-display text-3xl text-espresso">{slot.startTime}</p>
-                      <p className="mt-2 text-sm text-[#5d494b]">{slot.label}</p>
-                    </Link>
-                  ))
-                ) : (
-                  <div className="col-span-full rounded-[24px] border border-dashed border-rosewood/20 bg-white/60 p-6">
-                    <p className="font-medium text-espresso">Bu gün için uygun saat görünmüyor.</p>
-                    <p className="mt-2 text-sm leading-7 text-[#6f5c5e]">
-                      Alternatif tarihlerden birini seçebilir veya panel tarafında bloke saatleri
-                      güncelleyebilirsin.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {data?.nextAvailableDates.length ? (
-                <div className="mt-8 rounded-[26px] bg-[#fcf7f3] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-                    Sonraki uygun günler
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {data.nextAvailableDates.map((nextDate) => (
-                      <button
-                        key={nextDate}
-                        type="button"
-                        onClick={() => setDate(nextDate)}
-                        className="soft-button-secondary"
-                      >
-                        {formatDayShort(nextDate)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
-            </>
-          )}
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

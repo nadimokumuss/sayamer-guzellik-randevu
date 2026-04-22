@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
 
-import { AppIcon } from "@/components/ui/app-icon";
 import { Appointment, BookingType } from "@/lib/types";
 import {
   EMAIL_FORMAT_MESSAGE,
@@ -96,106 +95,66 @@ export function CustomerForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="glass-card space-y-5 p-6 sm:p-8">
-      <div className="grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
-        <div>
-          <div className="flex items-center gap-4">
-            <span className="icon-badge icon-badge-lg">
-              <AppIcon name="shield" className="h-7 w-7" />
-            </span>
-            <div>
-              <span className="eyebrow">Bilgileriniz</span>
-              <h2 className="mt-4 font-display text-3xl tracking-tight text-espresso">
-                Randevunu tamamla
-              </h2>
-            </div>
-          </div>
-          <p className="mt-4 max-w-xl text-sm leading-7 text-[#6f5c5e]">
-            Onay sonrası demo WhatsApp mesajı oluşturulur ve salon paneline randevu hemen düşer.
-          </p>
-        </div>
-
-        <div className="spotlight-panel">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            Bu adımda
-          </p>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            {[
-              { icon: "phone", title: "İletişim", copy: "Doğrulama için telefon alınır." },
-              { icon: "message", title: "Not", copy: "Opsiyonel müşteri notu eklenir." },
-              { icon: "check", title: "Onay", copy: "Kayıt panelde anında görünür." },
-            ].map((item) => (
-              <div key={item.title} className="metric-card">
-                <span className="icon-badge h-10 w-10 rounded-[16px]">
-                  <AppIcon name={item.icon as "phone" | "message" | "check"} />
-                </span>
-                <p className="mt-4 font-medium text-espresso">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-[#6f5c5e]">{item.copy}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+    <form onSubmit={handleSubmit} noValidate className="space-y-10">
+      <div>
+        <p className="eyebrow-tag">Bilgileriniz</p>
+        <p className="mt-4 max-w-xl text-sm leading-7 text-ash">
+          Onay sonrası demo WhatsApp mesajı oluşturulur ve salon paneline randevu hemen
+          düşer. Zorunlu alanlar: ad, soyad ve telefon.
+        </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            Ad
-          </span>
-          <input name="firstName" placeholder="Ad" className="field" />
+      <div className="grid gap-8 sm:grid-cols-2">
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Ad</span>
+          <input name="firstName" placeholder="Ad" className="form-line mt-3" />
         </label>
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            Soyad
-          </span>
-          <input name="lastName" placeholder="Soyad" className="field" />
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Soyad</span>
+          <input name="lastName" placeholder="Soyad" className="form-line mt-3" />
         </label>
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            Telefon
-          </span>
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Telefon</span>
           <input
             name="phone"
             placeholder="05XX XXX XX XX"
             inputMode="numeric"
             maxLength={17}
             autoComplete="tel"
-            className="field"
+            className="form-line mt-3"
           />
         </label>
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            E-posta
-          </span>
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">E-posta</span>
           <input
             name="email"
             placeholder="E-posta"
             type="email"
             autoComplete="email"
-            className="field"
+            className="form-line mt-3"
           />
         </label>
       </div>
 
-      <label className="block space-y-2">
-        <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
+      <label className="block">
+        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
           İsteğe bağlı not
         </span>
         <textarea
           name="note"
           placeholder="Sessiz oda, hassasiyet, kısa notlar..."
-          className="field min-h-[132px] resize-none"
+          className="form-line mt-3 min-h-[120px] resize-none"
         />
       </label>
 
       {error ? (
-        <div className="rounded-[20px] border border-rosewood/15 bg-[#fff4f4] px-4 py-3 text-sm text-rosewood">
+        <p className="text-sm text-clay" role="alert">
           {error}
-        </div>
+        </p>
       ) : null}
 
-      <button type="submit" disabled={isPending} className="soft-button w-full disabled:opacity-70">
-        {isPending ? "Randevu oluşturuluyor..." : "Randevuyu Oluştur"}
+      <button type="submit" disabled={isPending} className="btn-minimal-solid disabled:opacity-70">
+        {isPending ? "Randevu oluşturuluyor..." : "Randevuyu oluştur"}
       </button>
     </form>
   );

@@ -22,9 +22,6 @@ export default function AdminAppointmentsPage() {
         eyebrow="Randevular"
         title="Durum ve müşteri yönetimi"
         copy="Tablo yoğunluğu azaltıldı; randevular statü grupları altında ayrı kartlara ayrıldı. Böylece ekip hangi blokta ne olduğunu tek bakışta ayırt eder."
-        icon="bookmark"
-        asideTitle="Kart bazlı çalışma düzeni"
-        asideCopy="Her randevu müşteri, hizmet, uzman ve statüyü tek yüzeyde toplar. Güncelleme kontrolü kartın içinde kalır."
         stats={[
           { label: "Toplam kayıt", value: String(appointments.length) },
           { label: "Onaylandı", value: String(groups[0].items.length) },

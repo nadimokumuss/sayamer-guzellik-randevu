@@ -34,14 +34,11 @@ export default async function CalendarPage({
   }
 
   return (
-    <div className="shell py-10">
+    <div>
       <PageIntro
-        eyebrow="Takvim Adımı"
+        eyebrow="03 · Takvim"
         title="Gün ve saat seçimi"
-        copy="Uygunluk motoru; çalışma saatlerini, bloke aralıkları ve dolu randevuları birlikte dikkate alır."
-        icon="calendar"
-        asideTitle="Boş seansı hızlı kapat"
-        asideCopy="Yalnızca gerçekten müsait saatler görünür. Sistem uygun olmayan aralıkları otomatik gizler."
+        copy="Uygunluk motoru; çalışma saatlerini, bloke aralıkları ve dolu randevuları birlikte dikkate alır. Yalnızca gerçekten müsait saatler görünür."
         stats={[
           { label: "Akış", value: "3 / 4" },
           { label: "Uzman", value: staff.name },
@@ -50,23 +47,29 @@ export default async function CalendarPage({
         ]}
       />
 
-      <div className="mt-10 grid gap-6 xl:grid-cols-[0.88fr_1.12fr]">
-        <BookingSummaryCard
-          title={item.name}
-          description={item.description}
-          durationMinutes={item.durationMinutes}
-          price={item.price}
-          staffName={staff.name}
-          bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
-          includedServices={item.includedServices.map((service) => service.name)}
-        />
-        <AvailabilityPicker
-          bookingType={bookingType}
-          itemId={itemId}
-          staffId={staffId}
-          initialDate={date}
-        />
-      </div>
+      <section className="rule-top bg-bone">
+        <div className="shell py-16 lg:py-24">
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-0">
+            <BookingSummaryCard
+              title={item.name}
+              description={item.description}
+              durationMinutes={item.durationMinutes}
+              price={item.price}
+              staffName={staff.name}
+              bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
+              includedServices={item.includedServices.map((service) => service.name)}
+            />
+            <div className="lg:pl-12">
+              <AvailabilityPicker
+                bookingType={bookingType}
+                itemId={itemId}
+                staffId={staffId}
+                initialDate={date}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

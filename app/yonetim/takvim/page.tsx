@@ -25,9 +25,6 @@ export default function AdminCalendarPage() {
         eyebrow="Takvim"
         title="Gün bazlı plan görünümü"
         copy="Takvim ekranı, her günün yükünü ayrı başlıkta gösterir. Saat blokları artık kart bazlı ve statü renkleriyle desteklenir."
-        icon="calendar"
-        asideTitle="Zaman çizgisi mantığı"
-        asideCopy="Ekip günlük planı okurken saat, müşteri ve uzman ilişkisini tek satırda görür."
         stats={[
           { label: "Gün", value: String(Object.keys(grouped).length) },
           { label: "Toplam kayıt", value: String(appointments.length) },

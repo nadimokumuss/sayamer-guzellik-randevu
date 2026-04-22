@@ -36,9 +36,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans text-espresso antialiased">
+      <body className="bg-bone font-sans text-graphite antialiased">
         <div className="relative min-h-screen">
-          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-hero-glow" />
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />

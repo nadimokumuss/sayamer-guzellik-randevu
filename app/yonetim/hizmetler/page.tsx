@@ -12,9 +12,6 @@ export default function AdminServicesPage() {
         eyebrow="Katalog"
         title="Hizmet ve paket yapısı"
         copy="Katalog ekranı, kategori bazlı bloklara ayrıldı. Böylece ekip hangi hizmetlerin hangi başlık altında durduğunu daha hızlı ayırt eder."
-        icon="layers"
-        asideTitle="Kümelenmiş katalog görünümü"
-        asideCopy="Kategori üst blokları ve paket kartları artık ayrı görsel ağırlık taşır; bilgi birbirine karışmaz."
         stats={[
           { label: "Kategori", value: String(catalog.categories.length) },
           { label: "Hizmet", value: String(catalog.services.length) },

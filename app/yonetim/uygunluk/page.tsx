@@ -16,9 +16,6 @@ export default function AdminAvailabilityPage() {
         eyebrow="Uygunluk"
         title="Bloke saat yönetimi"
         copy="Operasyon araları, mola blokları ve oda hazırlık zamanları ayrı bir yüzeyde yönetilir. Form ve mevcut liste artık birbirinden daha net ayrılmıştır."
-        icon="block"
-        asideTitle="Çakışmayı görsel yönet"
-        asideCopy="Yeni blok ekleme ve mevcut kapanışları silme işlemleri aynı ekranda ama ayrı rollerle düzenlenir."
         stats={[
           { label: "Uzman", value: String(catalog.staff.length) },
           { label: "Aktif bloke", value: String(blockedSlots.length) },

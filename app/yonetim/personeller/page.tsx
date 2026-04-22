@@ -17,9 +17,6 @@ export default function AdminStaffPage() {
         eyebrow="Personeller"
         title="Hizmet başına uzman ekibi"
         copy="Ekip kartları biyografi duvarı gibi akmak yerine rol, imza alanı ve uzmanlık rozetleriyle daha okunabilir hale getirildi."
-        icon="users"
-        asideTitle="Profil odaklı ekip görünümü"
-        asideCopy="Kategori başlıkları ekipleri ayırır; her kartta önce isim ve imza alanı, sonra detaylar görünür."
         stats={[
           { label: "Toplam uzman", value: String(catalog.staff.length) },
           { label: "Kategori", value: String(catalog.categories.length) },

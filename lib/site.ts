@@ -146,22 +146,22 @@ export const siteContent = {
   ],
   serviceCategoryMedia: {
     kuafor:
-      "https://images.pexels.com/photos/3993446/pexels-photo-3993446.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
     "ayak-bakimi":
-      "https://images.pexels.com/photos/6621141/pexels-photo-6621141.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3736519/pexels-photo-3736519.jpeg?auto=compress&cs=tinysrgb&w=1400",
     "tirnak-bakimi":
-      "https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3993320/pexels-photo-3993320.jpeg?auto=compress&cs=tinysrgb&w=1400",
     epilasyon:
-      "https://images.pexels.com/photos/5069436/pexels-photo-5069436.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    g5: "https://images.pexels.com/photos/6621143/pexels-photo-6621143.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/35884502/pexels-photo-35884502.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    g5: "https://images.pexels.com/photos/458766/pexels-photo-458766.jpeg?auto=compress&cs=tinysrgb&w=1400",
     "cilt-bakimi":
-      "https://images.pexels.com/photos/6621463/pexels-photo-6621463.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1400",
     masaj:
-      "https://images.pexels.com/photos/3997983/pexels-photo-3997983.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3736396/pexels-photo-3736396.jpeg?auto=compress&cs=tinysrgb&w=1400",
     "kafa-masaji":
-      "https://images.pexels.com/photos/5240677/pexels-photo-5240677.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=1400",
     "sac-taramasi":
-      "https://images.pexels.com/photos/7755473/pexels-photo-7755473.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.pexels.com/photos/3736277/pexels-photo-3736277.jpeg?auto=compress&cs=tinysrgb&w=1400",
   },
   promos: [
     {

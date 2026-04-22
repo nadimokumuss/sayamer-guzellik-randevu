@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-import { Eyebrow } from "@/components/ui/badge";
-import { LinkButton } from "@/components/ui/button";
-import { PriceCard } from "@/components/ui/price-card";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 import { getCatalog } from "@/lib/catalog";
 import { buildBookingHref, formatCurrency } from "@/lib/utils";
@@ -24,141 +21,130 @@ export default function ServicesPage() {
   const catalog = getCatalog();
 
   return (
-    <div className="shell py-10">
-      {/* Hero */}
-      <section className="card p-8 sm:p-12">
-        <nav className="flex items-center gap-2 text-xs uppercase tracking-wider text-ink-400">
-          <Link href="/" className="hover:text-espresso">Ana Sayfa</Link>
-          <span>/</span>
-          <span className="text-espresso">Hizmetler</span>
-        </nav>
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <Eyebrow>Hizmetler</Eyebrow>
-            <h1 className="mt-5 font-display text-display-lg text-espresso">
-              Güzelliğinize değer katan profesyonel bakım alanları
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-500">
-              Saç, cilt, tırnak, epilasyon ve destekleyici bakım uygulamalarını kategori bazında
-              inceleyebilir; süre, fiyat ve uzman eşleşmelerini net biçimde görebilirsiniz.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/randevu" variant="primary" size="lg">
-                Randevu Al
-              </LinkButton>
-              <LinkButton href="/paketler" variant="outline" size="lg">
-                Paketleri Gör
-              </LinkButton>
+    <div>
+      {/* HERO — minimal */}
+      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+        <p className="eyebrow-tag">Hizmetler</p>
+        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
+          Saç, cilt, tırnak ve bakım için planlı bir akış.
+        </h1>
+        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
+          Her bakım alanını aynı netlik ve özenle tasarlıyoruz. Süre, fiyat ve uzman
+          eşleşmesi her zaman açık.
+        </p>
+      </section>
+
+      {/* ANCHOR LIST */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-12">
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
+            {catalog.categories.map((category, index) => (
+              <Link
+                key={category.id}
+                href={`#${category.id}`}
+                className="group inline-flex items-baseline gap-3 text-sm text-ash transition hover:text-graphite"
+              >
+                <span className="font-display text-xs tabular-nums tracking-[0.18em]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="border-b border-transparent group-hover:border-graphite">
+                  {category.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      {catalog.categories.map((category, index) => {
+        const services = catalog.services.filter((s) => s.categoryId === category.id);
+        const image = getCategoryImage(category.id);
+        const reverse = index % 2 === 1;
+
+        return (
+          <section
+            key={category.id}
+            id={category.id}
+            className="rule-top scroll-mt-24 bg-bone"
+          >
+            <div className="shell py-24 lg:py-32">
+              <div
+                className={`grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20 ${
+                  reverse ? "lg:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={image}
+                    alt={category.name}
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                </div>
+
+                <div>
+                  <p className="eyebrow-tag">
+                    {String(index + 1).padStart(2, "0")} · Kategori
+                  </p>
+                  <h2 className="mt-6 font-display text-display-lg text-graphite">
+                    {category.name}
+                  </h2>
+                  <p className="mt-6 max-w-lg text-base leading-8 text-ash">
+                    {category.description}
+                  </p>
+                </div>
+              </div>
+
+              <ul className="mt-16 rule-top">
+                {services.map((service) => (
+                  <li key={service.id}>
+                    <Link
+                      href={buildBookingHref("/personeller", {
+                        bookingType: "service",
+                        itemId: service.id,
+                      })}
+                      className="service-row flex-col items-start gap-3 transition hover:pl-2 hover:text-clay sm:flex-row sm:items-baseline sm:gap-6"
+                    >
+                      <span className="flex-1">
+                        <span className="block font-display text-xl text-graphite sm:text-2xl">
+                          {service.name}
+                        </span>
+                        <span className="mt-2 block max-w-xl text-sm leading-6 text-ash">
+                          {service.description}
+                        </span>
+                      </span>
+                      <span className="service-row-meta whitespace-nowrap">
+                        {service.durationMinutes} dk
+                      </span>
+                      <span className="service-row-meta whitespace-nowrap tabular-nums">
+                        {formatCurrency(service.price)}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* BOTTOM CTA */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-24 lg:py-32">
+          <div className="max-w-3xl">
+            <p className="eyebrow-tag">Devam</p>
+            <h2 className="mt-6 font-display text-display-lg text-graphite">
+              Hizmetinizi seçtiyseniz, uzman ve saati birlikte planlayalım.
+            </h2>
+            <div className="mt-10 flex flex-wrap items-center gap-8">
+              <Link href="/randevu" className="btn-minimal-solid">
+                Randevu al
+              </Link>
+              <Link href="/paketler" className="link-underline">
+                Paketleri görüntüle
+              </Link>
             </div>
           </div>
-
-          <div className="overflow-hidden rounded-3xl border border-line shadow-editorial">
-            <img
-              src={siteContent.media.editorial[1].src}
-              alt={siteContent.media.editorial[1].alt}
-              className="aspect-[5/4] w-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Category chips */}
-      <section className="mt-10">
-        <div className="flex flex-wrap gap-2">
-          {catalog.categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`#${category.id}`}
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-500 transition hover:border-rosewood/30 hover:bg-surface-muted hover:text-espresso"
-            >
-              {category.name}
-              <span className="text-xs text-ink-400">
-                {catalog.services.filter((s) => s.categoryId === category.id).length}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="mt-14 space-y-20">
-        {catalog.categories.map((category, index) => {
-          const services = catalog.services.filter((service) => service.categoryId === category.id);
-          const image = getCategoryImage(category.id);
-
-          return (
-            <section key={category.id} id={category.id} className="scroll-mt-28">
-              <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-                <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="overflow-hidden rounded-3xl border border-line shadow-editorial">
-                    <img
-                      src={image}
-                      alt={category.name}
-                      className="aspect-[5/4] w-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                  <Eyebrow>{category.name}</Eyebrow>
-                  <h2 className="mt-4 font-display text-display-md text-espresso">
-                    {category.heroLine}
-                  </h2>
-                  <p className="mt-5 text-base leading-8 text-ink-500">{category.description}</p>
-
-                  <dl className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="card-muted">
-                      <dt className="eyebrow-text">Hizmet sayısı</dt>
-                      <dd className="mt-2 font-display text-2xl text-espresso">
-                        {services.length}
-                      </dd>
-                    </div>
-                    <div className="card-muted">
-                      <dt className="eyebrow-text">Fiyat aralığı</dt>
-                      <dd className="mt-2 font-display text-2xl text-espresso">
-                        {services.length > 0
-                          ? `${formatCurrency(Math.min(...services.map((s) => s.price)))} – ${formatCurrency(Math.max(...services.map((s) => s.price)))}`
-                          : "—"}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-
-              <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {services.map((service) => (
-                  <PriceCard
-                    key={service.id}
-                    name={service.name}
-                    description={service.description}
-                    price={service.price}
-                    durationMinutes={service.durationMinutes}
-                    imageUrl={image}
-                    categoryLabel={service.tag ?? category.name}
-                    href={buildBookingHref("/personeller", {
-                      bookingType: "service",
-                      itemId: service.id,
-                    })}
-                  />
-                ))}
-              </div>
-            </section>
-          );
-        })}
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="mt-24">
-        <div className="card flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center sm:p-10">
-          <div>
-            <Eyebrow>Devam et</Eyebrow>
-            <h2 className="mt-3 font-display text-3xl text-espresso">
-              Size uygun hizmeti seçin, biz uzmanla eşleştirelim
-            </h2>
-          </div>
-          <LinkButton href="/randevu" variant="primary" size="lg">
-            Online Randevu Oluştur
-          </LinkButton>
         </div>
       </section>
     </div>

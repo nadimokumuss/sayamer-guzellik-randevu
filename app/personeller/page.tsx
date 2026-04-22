@@ -2,10 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BookingSummaryCard } from "@/components/booking/booking-summary-card";
-import { AppIcon } from "@/components/ui/app-icon";
 import { PageIntro } from "@/components/ui/page-intro";
 import { getStaffForItem, getItemSummary } from "@/lib/catalog";
-import { buildBookingHref, getInitials } from "@/lib/utils";
+import { buildBookingHref } from "@/lib/utils";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -33,14 +32,11 @@ export default async function StaffPage({
   const staff = getStaffForItem(bookingType, itemId);
 
   return (
-    <div className="shell py-10">
+    <div>
       <PageIntro
-        eyebrow="Uzman Seçimi"
-        title="Bakımını kiminle almak istediğini belirle"
+        eyebrow="02 · Uzman seçimi"
+        title="Bakımını kiminle almak istersin?"
         copy="Her hizmet veya paket için yalnızca uygun uzmanlar listelenir. Bir sonraki adımda sadece seçilen uzmanın boş saatleri gösterilir."
-        icon="users"
-        asideTitle="Doğru ekip eşleşmesi"
-        asideCopy="Profil kartları sadeleştirildi; uzmanı seçerken önce imza alanı, sonra detaylar görünür."
         stats={[
           { label: "Uygun uzman", value: String(staff.length) },
           { label: "Akış", value: "2 / 4" },
@@ -49,75 +45,61 @@ export default async function StaffPage({
         ]}
       />
 
-      <div className="mt-10 grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
-        <BookingSummaryCard
-          title={item.name}
-          description={item.description}
-          durationMinutes={item.durationMinutes}
-          price={item.price}
-          bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
-          includedServices={item.includedServices.map((service) => service.name)}
-        />
+      <section className="rule-top bg-bone">
+        <div className="shell py-16 lg:py-24">
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-0">
+            <BookingSummaryCard
+              title={item.name}
+              description={item.description}
+              durationMinutes={item.durationMinutes}
+              price={item.price}
+              bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
+              includedServices={item.includedServices.map((service) => service.name)}
+            />
 
-        <div className="grid gap-5 md:grid-cols-2">
-          {staff.map((member) => (
-            <article key={member.id} className="glass-card overflow-hidden">
-              <div className={`bg-gradient-to-r ${member.gradient} p-6`}>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.24em] text-[#7b6668]">{member.title}</p>
-                    <h2 className="mt-3 font-display text-3xl text-espresso">{member.name}</h2>
-                  </div>
-                  <span className="icon-badge h-14 w-14 rounded-[20px] bg-white/75 font-display text-xl text-rosewood">
-                    {getInitials(member.name)}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm leading-7 text-[#5d494b]">{member.bio}</p>
-              </div>
-
-              <div className="space-y-4 p-6">
-                <div className="rounded-[24px] bg-[#fcf7f3] p-4">
-                  <div className="flex items-center gap-3">
-                    <span className="icon-badge h-10 w-10 rounded-[16px]">
-                      <AppIcon name="spark" />
-                    </span>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-[#8c7376]">İmza alanı</p>
-                      <p className="font-medium text-espresso">{member.signature}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {member.specialties.map((specialty) => (
-                    <span
-                      key={specialty}
-                      className="rounded-full border border-rosewood/10 bg-[#fcf7f3] px-3 py-2 text-xs text-[#6f5c5e]"
+            <div className="lg:pl-12">
+              <p className="eyebrow-tag">Uygun uzmanlar</p>
+              <ul className="mt-8 rule-top">
+                {staff.map((member, index) => (
+                  <li key={member.id}>
+                    <Link
+                      href={buildBookingHref("/takvim", {
+                        bookingType,
+                        itemId,
+                        staffId: member.id,
+                      })}
+                      className="service-row flex-col items-start gap-3 transition hover:pl-2 hover:text-clay sm:flex-row sm:items-baseline sm:gap-6"
                     >
-                      {specialty}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-sm text-[#6f5c5e]">
-                  Çalışma saatleri: {member.startHour}:00 - {member.endHour}:00
-                </p>
-
-                <Link
-                  href={buildBookingHref("/takvim", {
-                    bookingType,
-                    itemId,
-                    staffId: member.id,
-                  })}
-                  className="soft-button w-full"
-                >
-                  Takvime Geç
-                </Link>
-              </div>
-            </article>
-          ))}
+                      <span className="service-row-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="flex-1">
+                        <p className="font-display text-2xl text-graphite">
+                          {member.name}
+                        </p>
+                        <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-ash">
+                          {member.title}
+                        </p>
+                        <p className="mt-3 max-w-xl text-sm leading-7 text-ash">
+                          {member.bio}
+                        </p>
+                        {member.specialties.length > 0 ? (
+                          <p className="mt-3 text-xs leading-6 text-ash/80">
+                            {member.specialties.slice(0, 4).join(" · ")}
+                          </p>
+                        ) : null}
+                      </div>
+                      <span className="service-row-meta whitespace-nowrap tabular-nums">
+                        {member.startHour}:00 — {member.endHour}:00
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

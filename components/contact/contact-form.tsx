@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from "react";
 
-import { AppIcon } from "@/components/ui/app-icon";
 import { siteContent } from "@/lib/site";
 import {
   EMAIL_FORMAT_MESSAGE,
@@ -54,69 +53,66 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="card space-y-4 p-7">
-      <div className="flex items-center gap-3">
-        <span className="icon-badge icon-badge-sm">
-          <AppIcon name="message" className="h-5 w-5" />
+    <form onSubmit={handleSubmit} noValidate className="space-y-8">
+      <label className="block">
+        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
+          Ad Soyad
         </span>
-        <div>
-          <span className="eyebrow">Bize ulaşın</span>
-          <h3 className="mt-2 font-display text-xl text-espresso">Hızlı iletişim formu</h3>
-        </div>
-      </div>
-      <p className="text-sm leading-7 text-ink-500">
-        Formu doldurun, mesajınız WhatsApp üzerinden salona iletilsin.
-      </p>
-
-      <label className="block space-y-2">
-        <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">Ad Soyad</span>
-        <input name="name" placeholder="Ad Soyad" autoComplete="name" className="field" />
+        <input
+          name="name"
+          placeholder="Ad Soyad"
+          autoComplete="name"
+          className="form-line mt-3"
+        />
       </label>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">Telefon</span>
+      <div className="grid gap-8 sm:grid-cols-2">
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
+            Telefon
+          </span>
           <input
             name="phone"
             placeholder="05XX XXX XX XX"
             inputMode="numeric"
             maxLength={17}
             autoComplete="tel"
-            className="field"
+            className="form-line mt-3"
           />
         </label>
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">E-posta (opsiyonel)</span>
+        <label className="block">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
+            E-posta (opsiyonel)
+          </span>
           <input
             name="email"
             type="email"
             placeholder="E-posta"
             autoComplete="email"
-            className="field"
+            className="form-line mt-3"
           />
         </label>
       </div>
 
-      <label className="block space-y-2">
-        <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">Mesajınız</span>
+      <label className="block">
+        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
+          Mesajınız
+        </span>
         <textarea
           name="message"
           placeholder="Soru veya notunuz..."
-          className="field min-h-[120px] resize-none"
+          className="form-line mt-3 min-h-[120px] resize-none"
         />
       </label>
 
       {error ? (
-        <div
-          className="rounded-[20px] border border-rosewood/15 bg-[#fff4f4] px-4 py-3 text-sm text-rosewood"
-          role="alert"
-        >
+        <p className="text-sm text-clay" role="alert">
           {error}
-        </div>
+        </p>
       ) : null}
 
-      <button type="submit" className="soft-button w-full">
-        WhatsApp ile Gönder
+      <button type="submit" className="btn-minimal-solid">
+        WhatsApp ile gönder
       </button>
     </form>
   );

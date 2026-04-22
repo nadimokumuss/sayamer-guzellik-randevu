@@ -9,6 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        bone: "#faf7f2",
+        ivory: "#ffffff",
+        graphite: "#1a1a18",
+        ash: "#6b6660",
+        clay: "#a8645a",
+        hairline: "rgba(26,26,24,0.10)",
         blush: "#f4d6d7",
         champagne: "#f7efe8",
         espresso: "#2b1d1b",
@@ -96,6 +102,7 @@ const config: Config = {
         ],
       },
       fontSize: {
+        "display-2xl": ["clamp(3.5rem, 9vw, 7.5rem)", { lineHeight: "0.98", letterSpacing: "-0.035em" }],
         "display-xl": ["clamp(3rem, 6vw, 5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
         "display-lg": ["clamp(2.25rem, 4.5vw, 3.75rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
         "display-md": ["clamp(1.875rem, 3.5vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],

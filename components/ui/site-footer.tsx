@@ -1,68 +1,37 @@
 import Link from "next/link";
 
-import { AppIcon } from "@/components/ui/app-icon";
-import { LinkButton } from "@/components/ui/button";
 import { siteContent } from "@/lib/site";
 
-const serviceLinks = [
-  { label: "Saç Tasarımı", href: "/hizmetler#kuafor" },
-  { label: "Cilt Bakımı", href: "/hizmetler#cilt-bakimi" },
-  { label: "Tırnak Bakımı", href: "/hizmetler#tirnak-bakimi" },
-  { label: "Epilasyon", href: "/hizmetler#epilasyon" },
-  { label: "G5 ve Vücut Bakımı", href: "/hizmetler#g5" },
-  { label: "Masaj ve Head Spa", href: "/hizmetler#masaj" },
-];
-
-const corporateLinks = [
-  { label: "Hakkımızda", href: "/hakkimizda" },
-  { label: "Vizyon ve Misyon", href: "/vizyon-ve-misyon" },
-  { label: "Uzmanlar", href: "/uzmanlar" },
-  { label: "İletişim", href: "/iletisim" },
-];
-
-const mediaLinks = [
-  { label: "Blog", href: "/blog" },
-  { label: "Bilgi Bankası", href: "/bilgi-bankasi" },
+const navLinks = [
+  { label: "Hizmetler", href: "/hizmetler" },
   { label: "Paketler", href: "/paketler" },
-  { label: "Online Randevu", href: "/randevu" },
+  { label: "Uzmanlar", href: "/uzmanlar" },
+  { label: "Hakkımızda", href: "/hakkimizda" },
+  { label: "Blog", href: "/blog" },
+  { label: "İletişim", href: "/iletisim" },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-line bg-surface-sunken">
-      <div className="shell py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr_1fr]">
+    <footer className="mt-32 border-t border-hairline bg-bone">
+      <div className="shell py-16 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr] lg:gap-20">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="icon-badge icon-badge-lg">
-                <AppIcon name="spark" className="h-7 w-7" />
-              </span>
-              <div>
-                <p className="font-display text-2xl text-espresso">{siteContent.brand.name}</p>
-                <p className="text-[11px] uppercase tracking-eyebrow text-ink-400">
-                  {siteContent.brand.tagline}
-                </p>
-              </div>
-            </div>
-            <p className="mt-6 max-w-sm text-sm leading-7 text-ink-500">
+            <p className="wordmark">{siteContent.brand.shortName}</p>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-ash">
               {siteContent.brand.description}
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <LinkButton href={siteContent.cta.bookingHref} variant="primary" size="sm">
-                {siteContent.cta.bookingLabel}
-              </LinkButton>
-              <LinkButton href={siteContent.contact.whatsappUrl} external variant="outline" size="sm">
-                {siteContent.cta.whatsappLabel}
-              </LinkButton>
-            </div>
+            <Link href="/randevu" className="mt-8 link-underline">
+              Randevu al
+            </Link>
           </div>
 
           <div>
-            <p className="eyebrow-text">Hizmetler</p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-sm text-ink-500">
-              {serviceLinks.map((item) => (
+            <p className="eyebrow-tag">Menü</p>
+            <ul className="mt-6 flex flex-col gap-3 text-sm text-ash">
+              {navLinks.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-espresso">
+                  <Link href={item.href} className="transition hover:text-graphite">
                     {item.label}
                   </Link>
                 </li>
@@ -71,35 +40,11 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="eyebrow-text">Kurumsal</p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-sm text-ink-500">
-              {corporateLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-espresso">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <p className="eyebrow-text mt-8">Medya</p>
-            <ul className="mt-5 flex flex-col gap-2.5 text-sm text-ink-500">
-              {mediaLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-espresso">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="eyebrow-text">İletişim</p>
-            <div className="mt-5 space-y-4 text-sm text-ink-500">
+            <p className="eyebrow-tag">İletişim</p>
+            <div className="mt-6 space-y-5 text-sm text-ash">
               <div>
-                <p className="font-medium text-espresso">{siteContent.contact.addressTitle}</p>
-                <div className="mt-1.5 space-y-0.5 leading-6">
+                <p className="text-graphite">{siteContent.contact.addressTitle}</p>
+                <div className="mt-1 space-y-0.5 leading-6">
                   {siteContent.contact.addressLines.map((line) => (
                     <p key={line}>{line}</p>
                   ))}
@@ -107,33 +52,19 @@ export function SiteFooter() {
               </div>
 
               <div className="space-y-1">
-                <p className="flex items-center gap-2">
-                  <AppIcon name="phone" className="h-4 w-4 text-rosewood" />
+                <a href={`tel:${siteContent.contact.phoneRaw}`} className="block transition hover:text-graphite">
                   {siteContent.contact.phoneDisplay}
-                </p>
-                <p className="flex items-center gap-2">
-                  <AppIcon name="message" className="h-4 w-4 text-rosewood" />
+                </a>
+                <a href={`mailto:${siteContent.contact.email}`} className="block transition hover:text-graphite">
                   {siteContent.contact.email}
-                </p>
+                </a>
               </div>
 
-              <div>
-                <p className="eyebrow-text mb-2">Çalışma saatleri</p>
-                <ul className="space-y-1 leading-6">
-                  {siteContent.contact.hours.map((entry) => (
-                    <li key={entry.label} className="flex items-center justify-between gap-3">
-                      <span className="text-ink-400">{entry.label}</span>
-                      <span className="font-medium text-espresso">{entry.value}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="space-y-1">
-                {siteContent.contact.socials.map((entry) => (
-                  <p key={entry.label}>
-                    <span className="text-ink-400">{entry.label}:</span>{" "}
-                    <span className="font-medium text-espresso">{entry.handle}</span>
+              <div className="space-y-1 pt-2">
+                {siteContent.contact.hours.map((entry) => (
+                  <p key={entry.label} className="flex items-baseline justify-between gap-4 tabular-nums">
+                    <span>{entry.label}</span>
+                    <span className="text-graphite">{entry.value}</span>
                   </p>
                 ))}
               </div>
@@ -141,11 +72,15 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-line-subtle pt-6 text-xs uppercase tracking-wider text-ink-400 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © 2026 {siteContent.brand.name}. Tüm hakları saklıdır.
-          </p>
-          <p>Premium-soft salon deneyimi</p>
+        <div className="mt-16 flex flex-col gap-3 border-t border-hairline pt-6 text-xs tracking-[0.18em] text-ash sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {siteContent.brand.name}</p>
+          <div className="flex gap-5">
+            {siteContent.contact.socials.map((entry) => (
+              <span key={entry.label}>
+                {entry.label} · {entry.handle}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

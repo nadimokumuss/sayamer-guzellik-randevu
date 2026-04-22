@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-import { Eyebrow } from "@/components/ui/badge";
-import { LinkButton } from "@/components/ui/button";
-import { StaffCard } from "@/components/ui/staff-card";
 import { getCatalog, getCategoryById } from "@/lib/catalog";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
@@ -28,75 +25,75 @@ export default function ExpertsPage() {
   }, {});
 
   return (
-    <div className="shell py-10">
-      {/* Hero */}
-      <section className="card p-8 sm:p-12">
-        <nav className="flex items-center gap-2 text-xs uppercase tracking-wider text-ink-400">
-          <Link href="/" className="hover:text-espresso">Ana Sayfa</Link>
-          <span>/</span>
-          <span className="text-espresso">Uzmanlar</span>
-        </nav>
+    <div>
+      {/* HERO */}
+      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+        <p className="eyebrow-tag">Uzmanlar</p>
+        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
+          Bakım alanlarına göre deneyimli ekibimiz.
+        </h1>
+        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
+          Her kategori için uzman ekip üyelerini görüntüleyebilir, uzmanlık alanlarını
+          inceleyebilir ve ardından online randevu akışına geçebilirsiniz.
+        </p>
+        <div className="mt-12 flex flex-wrap items-center gap-8">
+          <Link href="/randevu" className="btn-minimal-solid">
+            Randevu al
+          </Link>
+          <Link href="/hizmetler" className="link-underline">
+            Hizmetleri gör
+          </Link>
+        </div>
+      </section>
 
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
-            <Eyebrow>Uzmanlar</Eyebrow>
-            <h1 className="mt-5 font-display text-display-lg text-espresso">
-              Bakım alanlarına göre deneyimli ekibimiz
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-500">
-              Her kategori için uzman ekip üyelerini görüntüleyebilir, uzmanlık alanlarını
-              inceleyebilir ve ardından online randevu akışına geçebilirsiniz.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/randevu" variant="primary" size="lg">
-                Randevu Oluştur
-              </LinkButton>
-              <LinkButton href="/hizmetler" variant="outline" size="lg">
-                Hizmetleri Gör
-              </LinkButton>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-3xl border border-line shadow-editorial">
-            <img
-              src={siteContent.hero.slides[0].src}
-              alt={siteContent.hero.slides[0].alt}
-              className="aspect-[5/4] w-full object-cover"
-            />
+      {/* ANCHOR LIST */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-12">
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
+            {Object.keys(grouped).map((categoryId, index) => {
+              const category = getCategoryById(categoryId);
+              if (!category) return null;
+              return (
+                <Link
+                  key={categoryId}
+                  href={`#${categoryId}`}
+                  className="group inline-flex items-baseline gap-3 text-sm text-ash transition hover:text-graphite"
+                >
+                  <span className="font-display text-xs tabular-nums tracking-[0.18em]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="border-b border-transparent group-hover:border-graphite">
+                    {category.name}
+                  </span>
+                  <span className="text-[11px] tabular-nums text-ash/70">
+                    ({grouped[categoryId].length})
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Category quick-jump */}
-      <section className="mt-10">
-        <div className="flex flex-wrap gap-2">
-          {Object.keys(grouped).map((categoryId) => {
-            const category = getCategoryById(categoryId);
-            if (!category) return null;
-            return (
-              <Link
-                key={categoryId}
-                href={`#${categoryId}`}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-500 transition hover:border-rosewood/30 hover:bg-surface-muted hover:text-espresso"
+      {/* STAFF GROUPS */}
+      {Object.entries(grouped).map(([categoryId, members], groupIndex) => {
+        const category = getCategoryById(categoryId);
+        if (!category) return null;
+        const reverse = groupIndex % 2 === 1;
+
+        return (
+          <section
+            key={categoryId}
+            id={categoryId}
+            className="rule-top scroll-mt-24 bg-bone"
+          >
+            <div className="shell py-24 lg:py-32">
+              <div
+                className={`grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20 ${
+                  reverse ? "lg:[&>*:first-child]:order-2" : ""
+                }`}
               >
-                {category.name}
-                <span className="text-xs text-ink-400">{grouped[categoryId].length}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Staff groups */}
-      <div className="mt-14 space-y-20">
-        {Object.entries(grouped).map(([categoryId, members]) => {
-          const category = getCategoryById(categoryId);
-          if (!category) return null;
-
-          return (
-            <section key={categoryId} id={categoryId} className="scroll-mt-28">
-              <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-                <div className="overflow-hidden rounded-3xl border border-line shadow-editorial">
+                <div className="overflow-hidden">
                   <img
                     src={getCategoryImage(categoryId)}
                     alt={category.name}
@@ -105,42 +102,76 @@ export default function ExpertsPage() {
                 </div>
 
                 <div>
-                  <Eyebrow>{category.name}</Eyebrow>
-                  <h2 className="mt-4 font-display text-display-md text-espresso">
-                    {category.heroLine}
+                  <p className="eyebrow-tag">
+                    {String(groupIndex + 1).padStart(2, "0")} · Kategori
+                  </p>
+                  <h2 className="mt-6 font-display text-display-lg text-graphite">
+                    {category.name}
                   </h2>
-                  <p className="mt-4 text-base leading-8 text-ink-500">{category.description}</p>
+                  <p className="mt-6 max-w-lg text-base leading-8 text-ash">
+                    {category.description}
+                  </p>
 
-                  <div className="mt-8 grid gap-5 md:grid-cols-2">
-                    {members.map((member) => {
-                      const [firstName, ...rest] = member.name.split(" ");
-                      return (
-                        <StaffCard
-                          key={member.id}
-                          firstName={firstName}
-                          lastName={rest.join(" ")}
-                          title={member.title}
-                          signature={member.signature}
-                          specialties={member.specialties.slice(0, 3)}
-                        />
-                      );
-                    })}
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <LinkButton href={`/hizmetler#${categoryId}`} variant="outline" size="md">
+                  <div className="mt-10 flex flex-wrap items-center gap-8">
+                    <Link href={`/hizmetler#${categoryId}`} className="link-underline">
                       {category.name} hizmetleri
-                    </LinkButton>
-                    <LinkButton href="/randevu" variant="primary" size="md">
-                      Randevu Al
-                    </LinkButton>
+                    </Link>
+                    <Link href="/randevu" className="link-underline">
+                      Randevu al
+                    </Link>
                   </div>
                 </div>
               </div>
-            </section>
-          );
-        })}
-      </div>
+
+              <ul className="mt-16 rule-top">
+                {members.map((member, index) => (
+                  <li key={member.id}>
+                    <div className="service-row flex-col items-start gap-3 sm:flex-row sm:items-baseline sm:gap-6">
+                      <span className="service-row-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="flex-1">
+                        <p className="font-display text-2xl text-graphite">{member.name}</p>
+                        <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-ash">
+                          {member.title}
+                        </p>
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-ash">
+                          {member.signature}
+                        </p>
+                        {member.specialties.length > 0 ? (
+                          <p className="mt-4 text-xs leading-6 text-ash/80">
+                            {member.specialties.slice(0, 4).join(" · ")}
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        );
+      })}
+
+      {/* BOTTOM CTA */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-24 lg:py-32">
+          <div className="max-w-3xl">
+            <p className="eyebrow-tag">Devam</p>
+            <h2 className="mt-6 font-display text-display-lg text-graphite">
+              Uzmanı seçtiyseniz, size uygun hizmet ve saati birlikte planlayalım.
+            </h2>
+            <div className="mt-10 flex flex-wrap items-center gap-8">
+              <Link href="/randevu" className="btn-minimal-solid">
+                Randevu al
+              </Link>
+              <Link href="/paketler" className="link-underline">
+                Paketleri görüntüle
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

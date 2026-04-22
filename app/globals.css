@@ -4,12 +4,12 @@
 
 :root {
   color-scheme: light;
-  --background: #fbf5ee;
-  --foreground: #2b1d1b;
-  --muted: #6f5c5e;
+  --background: #faf7f2;
+  --foreground: #1a1a18;
+  --muted: #6b6660;
   --card: #ffffff;
-  --line: rgba(146, 92, 97, 0.14);
-  --ring: rgba(146, 92, 97, 0.32);
+  --line: rgba(26, 26, 24, 0.10);
+  --ring: rgba(168, 100, 90, 0.32);
 }
 
 html {
@@ -18,10 +18,7 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(244, 214, 215, 0.34), transparent 28%),
-    radial-gradient(circle at top right, rgba(214, 192, 173, 0.2), transparent 22%),
-    linear-gradient(180deg, #fcf7f1 0%, #f8f0e8 52%, #fdfaf7 100%);
+  background: #faf7f2;
   color: var(--foreground);
   font-feature-settings: "ss01", "cv11";
 }
@@ -38,7 +35,104 @@ textarea {
 }
 
 ::selection {
-  background: rgba(146, 92, 97, 0.18);
+  background: rgba(168, 100, 90, 0.18);
+}
+
+/* ---------- Minimal luxe utilities ---------- */
+
+.shell-narrow {
+  @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+}
+
+.hairline {
+  border-color: rgba(26, 26, 24, 0.10);
+}
+
+.rule-top {
+  border-top: 1px solid rgba(26, 26, 24, 0.10);
+}
+
+.rule-bottom {
+  border-bottom: 1px solid rgba(26, 26, 24, 0.10);
+}
+
+.eyebrow-tag {
+  @apply inline-block text-[11px] font-medium uppercase tracking-[0.22em] text-ash;
+}
+
+.link-underline {
+  @apply relative inline-flex items-center gap-2 text-sm text-graphite transition;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(26, 26, 24, 0.35);
+}
+
+.link-underline:hover {
+  border-bottom-color: rgba(168, 100, 90, 0.9);
+  color: #a8645a;
+}
+
+.btn-minimal {
+  @apply inline-flex items-center justify-center rounded-none border px-6 py-3 text-[13px] font-medium uppercase tracking-[0.18em] transition duration-300;
+  border-color: rgba(26, 26, 24, 0.85);
+  color: #1a1a18;
+}
+
+.btn-minimal:hover {
+  background: #1a1a18;
+  color: #faf7f2;
+}
+
+.btn-minimal-solid {
+  @apply inline-flex items-center justify-center rounded-none border px-6 py-3 text-[13px] font-medium uppercase tracking-[0.18em] transition duration-300;
+  background: #1a1a18;
+  border-color: #1a1a18;
+  color: #faf7f2;
+}
+
+.btn-minimal-solid:hover {
+  background: #a8645a;
+  border-color: #a8645a;
+}
+
+.wordmark {
+  @apply font-display text-lg tracking-[0.18em] text-graphite;
+  text-transform: uppercase;
+}
+
+.service-row {
+  @apply flex items-baseline gap-6 py-6;
+  border-bottom: 1px solid rgba(26, 26, 24, 0.10);
+}
+
+.service-row-number {
+  @apply font-display text-xs text-ash tabular-nums;
+  letter-spacing: 0.18em;
+  min-width: 32px;
+}
+
+.service-row-name {
+  @apply flex-1 font-display text-2xl text-graphite;
+}
+
+.service-row-meta {
+  @apply text-sm text-ash tabular-nums;
+}
+
+/* Minimal line input */
+.form-line {
+  @apply block w-full border-0 border-b bg-transparent px-0 py-3 text-base text-graphite placeholder:text-ash/60;
+  border-bottom-color: rgba(26, 26, 24, 0.18);
+  transition: border-color 200ms ease;
+}
+
+.form-line:focus {
+  border-bottom-color: rgba(26, 26, 24, 0.9);
+  outline: none;
+  box-shadow: none;
+}
+
+.form-line-error {
+  border-bottom-color: #a8645a;
 }
 
 /* Layout */

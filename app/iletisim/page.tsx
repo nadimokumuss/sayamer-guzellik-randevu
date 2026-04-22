@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-import { AppIcon } from "@/components/ui/app-icon";
-import { Eyebrow } from "@/components/ui/badge";
-import { LinkButton } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact/contact-form";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
@@ -19,151 +16,132 @@ export default function ContactPage() {
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
   return (
-    <div className="shell py-10">
-      {/* Hero */}
-      <section className="card p-8 sm:p-12">
-        <nav className="flex items-center gap-2 text-xs uppercase tracking-wider text-ink-400">
-          <Link href="/" className="hover:text-espresso">Ana Sayfa</Link>
-          <span>/</span>
-          <span className="text-espresso">İletişim</span>
-        </nav>
+    <div>
+      {/* HERO */}
+      <section className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
+        <p className="eyebrow-tag">İletişim</p>
+        <h1 className="mt-8 max-w-3xl font-display text-display-xl text-graphite">
+          Hızlı iletişim ve online randevu.
+        </h1>
+        <p className="mt-8 max-w-xl text-base leading-8 text-ash">
+          Salon konumu, iletişim bilgileri ve randevu başlangıç adımları aynı sayfada
+          kolayca erişilebilir biçimde sunulur.
+        </p>
+        <div className="mt-12 flex flex-wrap items-center gap-8">
+          <Link href="/randevu" className="btn-minimal-solid">
+            Online randevu
+          </Link>
+          <a
+            href={siteContent.contact.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline"
+          >
+            WhatsApp
+          </a>
+        </div>
+      </section>
 
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <div>
-            <Eyebrow>İletişim</Eyebrow>
-            <h1 className="mt-5 font-display text-display-lg text-espresso">
-              Hızlı iletişim ve online randevu
-            </h1>
-            <p className="mt-5 text-base leading-8 text-ink-500">
-              Salon konumu, iletişim bilgileri ve randevu başlangıç adımları aynı sayfada kolayca
-              erişilebilir biçimde sunulur.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <LinkButton href="/randevu" variant="primary" size="lg">
-                Online Randevu
-              </LinkButton>
-              <LinkButton
-                href={siteContent.contact.whatsappUrl}
-                external
-                variant="outline"
-                size="lg"
-                leadingIcon={<AppIcon name="message" className="h-4 w-4" />}
-              >
-                WhatsApp
-              </LinkButton>
+      {/* CONTACT DETAILS */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-24 lg:py-32">
+          <div className="grid gap-12 lg:grid-cols-3 lg:gap-20">
+            <div>
+              <p className="eyebrow-tag">Adres</p>
+              <p className="mt-6 font-display text-2xl text-graphite">
+                {siteContent.contact.addressTitle}
+              </p>
+              <div className="mt-4 space-y-1 text-sm leading-7 text-ash">
+                {siteContent.contact.addressLines.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="eyebrow-tag">İletişim</p>
+              <div className="mt-6 space-y-4 text-sm leading-7 text-ash">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-ash/80">Telefon</p>
+                  <a
+                    href={`tel:${siteContent.contact.phoneRaw}`}
+                    className="mt-2 block font-display text-xl text-graphite transition hover:text-clay"
+                  >
+                    {siteContent.contact.phoneDisplay}
+                  </a>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-ash/80">E-posta</p>
+                  <a
+                    href={`mailto:${siteContent.contact.email}`}
+                    className="mt-2 block font-display text-xl text-graphite transition hover:text-clay"
+                  >
+                    {siteContent.contact.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p className="eyebrow-tag">Çalışma saatleri</p>
+              <div className="mt-6 space-y-2 tabular-nums text-sm leading-7 text-ash">
+                {siteContent.contact.hours.map((entry) => (
+                  <p key={entry.label} className="flex items-baseline justify-between gap-4 border-b border-hairline pb-2">
+                    <span>{entry.label}</span>
+                    <span className="text-graphite">{entry.value}</span>
+                  </p>
+                ))}
+              </div>
+              <div className="mt-8 space-y-1 text-sm text-ash">
+                {siteContent.contact.socials.map((item) => (
+                  <p key={item.label} className="flex items-baseline justify-between gap-4">
+                    <span className="text-[11px] uppercase tracking-[0.22em] text-ash/80">
+                      {item.label}
+                    </span>
+                    <span className="text-graphite">{item.handle}</span>
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="overflow-hidden rounded-3xl border border-line shadow-editorial">
-            <img
-              src={siteContent.media.editorial[3].src}
-              alt={siteContent.media.editorial[3].alt}
-              className="aspect-[5/4] w-full object-cover"
+      {/* MAP */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-24 lg:py-32">
+          <p className="eyebrow-tag">Konum</p>
+          <div className="mt-8 overflow-hidden">
+            <iframe
+              src={mapSrc}
+              title="Salon konumu"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="aspect-[16/9] w-full border-0"
+              allowFullScreen
             />
           </div>
         </div>
       </section>
 
-      {/* Contact cards */}
-      <section className="mt-12 grid gap-5 md:grid-cols-3">
-        <article className="card p-7">
-          <span className="icon-badge icon-badge-sm">
-            <AppIcon name="compass" className="h-5 w-5" />
-          </span>
-          <h2 className="mt-5 font-display text-xl text-espresso">Adres</h2>
-          <p className="mt-3 font-medium text-espresso">{siteContent.contact.addressTitle}</p>
-          <div className="mt-2 space-y-1 text-sm leading-7 text-ink-500">
-            {siteContent.contact.addressLines.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-          </div>
-        </article>
-
-        <article className="card p-7">
-          <span className="icon-badge icon-badge-sm">
-            <AppIcon name="phone" className="h-5 w-5" />
-          </span>
-          <h2 className="mt-5 font-display text-xl text-espresso">Hızlı iletişim</h2>
-          <div className="mt-3 space-y-2 text-sm leading-7 text-ink-500">
-            <p className="flex items-center gap-2">
-              <span className="eyebrow-text">Telefon</span>
-            </p>
-            <p className="font-medium text-espresso">{siteContent.contact.phoneDisplay}</p>
-            <p className="flex items-center gap-2 pt-2">
-              <span className="eyebrow-text">E-posta</span>
-            </p>
-            <p className="font-medium text-espresso">{siteContent.contact.email}</p>
-          </div>
-        </article>
-
-        <article className="card p-7">
-          <span className="icon-badge icon-badge-sm">
-            <AppIcon name="clock" className="h-5 w-5" />
-          </span>
-          <h2 className="mt-5 font-display text-xl text-espresso">Çalışma saatleri</h2>
-          <ul className="mt-3 space-y-2 text-sm">
-            {siteContent.contact.hours.map((item) => (
-              <li key={item.label} className="flex items-center justify-between gap-3">
-                <span className="text-ink-400">{item.label}</span>
-                <span className="font-medium text-espresso">{item.value}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
-      {/* Map + social + contact form */}
-      <section className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="overflow-hidden rounded-3xl border border-line shadow-soft">
-          <iframe
-            src={mapSrc}
-            title="Salon konumu"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="aspect-[16/10] w-full border-0"
-            allowFullScreen
-          />
-        </div>
-
-        <div className="space-y-4">
-          <div className="card p-7">
-            <Eyebrow>Bizi takip edin</Eyebrow>
-            <div className="mt-5 space-y-3">
-              {siteContent.contact.socials.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between rounded-2xl border border-line bg-white p-4"
-                >
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-ink-400">{item.label}</p>
-                    <p className="mt-1 font-medium text-espresso">{item.handle}</p>
-                  </div>
-                  <AppIcon name="arrow" className="h-4 w-4 text-rosewood" />
-                </div>
-              ))}
+      {/* CONTACT FORM */}
+      <section className="rule-top bg-bone">
+        <div className="shell py-24 lg:py-32">
+          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-24">
+            <div>
+              <p className="eyebrow-tag">Mesaj bırakın</p>
+              <h2 className="mt-6 font-display text-display-lg text-graphite">
+                Kısa bir not yazın, size dönelim.
+              </h2>
+              <p className="mt-6 max-w-lg text-base leading-8 text-ash">
+                Formu doldurun, mesajınız WhatsApp üzerinden salona iletilsin. Genelde
+                aynı gün içinde dönüş yapıyoruz.
+              </p>
             </div>
-          </div>
 
-          <div className="spotlight-panel">
-            <Eyebrow>Online Randevu</Eyebrow>
-            <h3 className="mt-4 font-display text-2xl text-espresso">Şimdi başla</h3>
-            <p className="mt-3 text-sm leading-7 text-ink-500">
-              Hizmet veya paket seçerek birkaç adımda rezervasyonunuzu oluşturabilirsiniz.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <LinkButton href="/randevu" variant="primary" size="md">
-                Randevu
-              </LinkButton>
-              <LinkButton href="/paketler" variant="outline" size="md">
-                Paketler
-              </LinkButton>
-            </div>
+            <ContactForm />
           </div>
         </div>
-      </section>
-
-      <section className="mt-12">
-        <ContactForm />
       </section>
     </div>
   );

@@ -22,9 +22,6 @@ export default function AdminHomePage() {
         eyebrow="Genel Bakış"
         title="Salon akışını tek bakışta oku"
         copy="Müşteri trafiği, ekip kapasitesi ve operasyon araları aynı yüzeyde ayrı bloklar halinde görünür. Böylece panel metin yükü olmadan yön duygusu verir."
-        icon="chart"
-        asideTitle="Bugün odak görünümü"
-        asideCopy="Randevu hacmi, yaklaşan trafik ve bloke saatler önce kartlaşır; detaylar sonra açılır."
         stats={[
           { label: "Bugünkü randevu", value: String(stats.todayCount) },
           { label: "Yaklaşan", value: String(stats.upcomingCount) },
