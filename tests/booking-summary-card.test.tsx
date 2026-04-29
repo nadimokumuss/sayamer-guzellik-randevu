@@ -20,7 +20,7 @@ describe("BookingSummaryCard", () => {
     );
 
     expect(screen.getByText("Cilt Işıltı Seremonisi")).toBeInTheDocument();
-    expect(screen.getByText("Paket İçeriği")).toBeInTheDocument();
+    expect(screen.getByText(/paket içeriği/i)).toBeInTheDocument();
     expect(screen.getByText("Hydra Glow Cilt Bakımı")).toBeInTheDocument();
     expect(screen.getByText("Nazlı Duran")).toBeInTheDocument();
   });

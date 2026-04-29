@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 
+import { BookingProgress } from "@/components/booking/booking-progress";
 import { BookingSummaryCard } from "@/components/booking/booking-summary-card";
 import { CustomerForm } from "@/components/booking/customer-form";
-import { PageIntro } from "@/components/ui/page-intro";
+import { SectionHeader } from "@/components/layout/section-header";
 import { getItemSummary, getStaffById } from "@/lib/catalog";
-import { addMinutesToTime } from "@/lib/utils";
+import { addMinutesToTime, buildBookingHref } from "@/lib/utils";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -38,21 +39,33 @@ export default async function CustomerDetailsPage({
 
   return (
     <div>
-      <PageIntro
-        eyebrow="04 · Bilgi formu"
-        title="Son adım: müşteri bilgileri"
-        copy="Bu adım tamamlandığında randevu anında oluşturulur, onay ekranına taşınır ve WhatsApp bağlantısı hazırlanır."
-        stats={[
-          { label: "Akış", value: "4 / 4" },
-          { label: "Uzman", value: staff.name },
-          { label: "Saat", value: startTime },
-          { label: "Sonuç", value: "Anında onay" },
-        ]}
+      <BookingProgress
+        current="info"
+        hrefs={{
+          service: bookingType === "service" ? "/hizmetler" : "/paketler",
+          staff: buildBookingHref("/personeller", { bookingType, itemId }),
+          time: buildBookingHref("/takvim", { bookingType, itemId, staffId, date }),
+        }}
       />
 
-      <section className="rule-top bg-bone">
-        <div className="shell py-16 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-0">
+      <section className="bg-white">
+        <div className="shell py-14 lg:py-20">
+          <SectionHeader
+            number="04"
+            eyebrow="Bilgi formu"
+            title="Son adım: müşteri bilgileri."
+            align="stacked"
+          />
+          <p className="mt-6 max-w-2xl text-base leading-8 text-ash">
+            Bu adım tamamlandığında randevu anında oluşturulur, onay ekranına taşınır ve
+            WhatsApp bağlantısı hazırlanır.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-t border-hairline bg-white">
+        <div className="shell py-12 lg:py-16">
+          <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
             <BookingSummaryCard
               title={item.name}
               description={item.description}
@@ -64,7 +77,7 @@ export default async function CustomerDetailsPage({
               bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
               includedServices={item.includedServices.map((service) => service.name)}
             />
-            <div className="lg:pl-12">
+            <div>
               <CustomerForm
                 bookingType={bookingType}
                 itemId={itemId}

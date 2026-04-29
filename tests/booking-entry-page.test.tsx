@@ -7,9 +7,10 @@ describe("BookingEntryPage", () => {
   it("shows booking entry actions for services and packages", () => {
     render(<BookingEntryPage />);
 
-    expect(screen.getByText("Bakım yolculuğunu şimdi başlatın")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Hizmetleri Aç" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Paketleri Aç" })).toBeInTheDocument();
-    expect(screen.getByText("En çok tercih edilen hizmetler")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /Hizmetleri aç/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /Paketleri aç/i }).length).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("heading", { name: /En çok tercih edilen hizmetler/i }),
+    ).toBeInTheDocument();
   });
 });

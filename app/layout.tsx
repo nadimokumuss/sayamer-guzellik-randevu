@@ -5,7 +5,6 @@ import "@/app/globals.css";
 
 import { CursorDot } from "@/components/motion/cursor-dot";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
-import { RevealInit } from "@/components/ui/reveal-init";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
 import { siteContent } from "@/lib/site";
@@ -46,7 +45,6 @@ export default function RootLayout({
           <main>{children}</main>
           <SiteFooter />
         </div>
-        <RevealInit />
         <CursorDot />
       </body>
     </html>

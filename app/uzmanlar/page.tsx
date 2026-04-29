@@ -1,5 +1,14 @@
 import Link from "next/link";
 
+import { ClipReveal } from "@/components/motion/clip-reveal";
+import { InView } from "@/components/motion/in-view";
+import { Marquee } from "@/components/motion/marquee";
+import { ParallaxImage } from "@/components/motion/parallax-image";
+import { RevealText } from "@/components/motion/reveal-text";
+import { StaffBentoCard } from "@/components/booking/staff-bento-card";
+import { DarkCTA } from "@/components/layout/dark-cta";
+import { NumberedEyebrow } from "@/components/layout/numbered-eyebrow";
+import { PageHero } from "@/components/layout/page-hero";
 import { getCatalog, getCategoryById } from "@/lib/catalog";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
@@ -26,72 +35,84 @@ export default function ExpertsPage() {
 
   return (
     <div>
-      {/* HERO */}
-      <section className="warm-wash">
-        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-          <p className="eyebrow-tag" data-reveal>
-            Uzmanlar
-          </p>
-          <h1
-            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
-            data-reveal
-            data-reveal-delay="1"
-          >
-            Bakım alanlarına göre deneyimli ekibimiz.
-          </h1>
-          <p
-            className="mt-8 max-w-xl text-base leading-8 text-ash"
-            data-reveal
-            data-reveal-delay="2"
-          >
-            Her kategori için uzman ekip üyelerini görüntüleyebilir, uzmanlık alanlarını
-            inceleyebilir ve ardından online randevu akışına geçebilirsiniz.
-          </p>
-          <div
-            className="mt-12 flex flex-wrap items-center gap-8"
-            data-reveal
-            data-reveal-delay="3"
-          >
-            <Link href="/randevu" className="btn-minimal-solid">
-              Randevu al
-            </Link>
-            <Link href="/hizmetler" className="link-underline">
-              Hizmetleri gör
-            </Link>
-          </div>
+      <PageHero
+        number="01"
+        eyebrow="Uzmanlar"
+        title="Bakım alanlarına göre deneyimli ekibimiz."
+        copy="Her kategori için uzman ekip üyelerini görüntüleyin, uzmanlık alanlarını inceleyin ve ardından online randevu akışına geçin."
+        photo={[
+          siteContent.serviceCategoryMedia["kuafor"],
+          siteContent.serviceCategoryMedia["cilt-bakimi"],
+          siteContent.serviceCategoryMedia["masaj"],
+        ]}
+        photoAlt="Uzman ekibimiz"
+        actions={[
+          { label: "Randevu al", href: "/randevu", primary: true },
+          { label: "Hizmetler", href: "/hizmetler" },
+        ]}
+        backdropWord="EKIP"
+        stats={[
+          { label: "Uzman", to: catalog.staff.length },
+          { label: "Bakım alanı", to: catalog.categories.length },
+          { label: "Memnuniyet", to: 4.9, decimals: 1 },
+        ]}
+      />
+
+      {/* Marquee */}
+      <section className="border-y border-hairline bg-white py-4 lg:py-5">
+        <Marquee
+          speed={45}
+          itemGap="3rem"
+          items={catalog.categories.flatMap((cat, idx) => [
+            <span
+              key={`cat-${cat.id}`}
+              className={`font-display text-xl font-bold tracking-tight lg:text-2xl ${
+                idx % 2 === 0 ? "text-graphite" : "italic text-graphite/55"
+              }`}
+            >
+              {cat.name}
+            </span>,
+            <span
+              key={`sep-${cat.id}`}
+              aria-hidden
+              className="font-display text-xl text-rosewood lg:text-2xl"
+            >
+              ✦
+            </span>,
+          ])}
+        />
+      </section>
+
+      {/* Anchor pills */}
+      <section className="border-t border-hairline bg-white">
+        <div className="shell py-10">
+          <InView>
+            <div className="flex flex-wrap gap-2">
+              {Object.keys(grouped).map((categoryId, index) => {
+                const category = getCategoryById(categoryId);
+                if (!category) return null;
+                return (
+                  <Link
+                    key={categoryId}
+                    href={`#${categoryId}`}
+                    className="group inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-4 py-1.5 text-[12px] font-semibold tracking-tight text-ink-400 transition hover:border-graphite/30 hover:bg-peachLight/40 hover:text-graphite"
+                  >
+                    <span className="font-display text-[11px] font-extrabold text-rosewood">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{category.name}</span>
+                    <span className="text-[10px] tabular-nums text-ash">
+                      {grouped[categoryId].length}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </InView>
         </div>
       </section>
 
-      {/* ANCHOR LIST */}
-      <section className="rule-top bg-bone">
-        <div className="shell py-12">
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {Object.keys(grouped).map((categoryId, index) => {
-              const category = getCategoryById(categoryId);
-              if (!category) return null;
-              return (
-                <Link
-                  key={categoryId}
-                  href={`#${categoryId}`}
-                  className="group inline-flex items-baseline gap-3 text-sm text-ash transition hover:text-graphite"
-                >
-                  <span className="font-display text-xs tabular-nums tracking-[0.18em]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="border-b border-transparent group-hover:border-graphite">
-                    {category.name}
-                  </span>
-                  <span className="text-[11px] tabular-nums text-ash/70">
-                    ({grouped[categoryId].length})
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* STAFF GROUPS */}
+      {/* Staff groups */}
       {Object.entries(grouped).map(([categoryId, members], groupIndex) => {
         const category = getCategoryById(categoryId);
         if (!category) return null;
@@ -101,93 +122,72 @@ export default function ExpertsPage() {
           <section
             key={categoryId}
             id={categoryId}
-            className="rule-top scroll-mt-24 bg-bone"
+            className="border-t border-hairline scroll-mt-24 bg-white"
           >
-            <div className="shell py-24 lg:py-32">
+            <div className="shell py-20 lg:py-28">
               <div
-                className={`grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20 ${
+                className={`grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16 ${
                   reverse ? "lg:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <div className="overflow-hidden" data-reveal>
-                  <img
-                    src={getCategoryImage(categoryId)}
-                    alt={category.name}
-                    className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
-                  />
-                </div>
+                <ClipReveal direction="up" duration={1.3}>
+                  <div className="relative overflow-hidden rounded-[36px]" style={{ aspectRatio: "5/4" }}>
+                    <ParallaxImage
+                      src={getCategoryImage(categoryId)}
+                      alt={category.name}
+                      className="absolute inset-0"
+                      amount={50}
+                      scale={1.12}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-mochaDeep/35 via-transparent to-transparent" />
+                  </div>
+                </ClipReveal>
 
                 <div>
-                  <p className="eyebrow-tag">
-                    {String(groupIndex + 1).padStart(2, "0")} · Kategori
-                  </p>
-                  <h2 className="mt-6 font-display text-display-lg text-graphite">
+                  <NumberedEyebrow
+                    number={String(groupIndex + 1).padStart(2, "0")}
+                    label="Kategori"
+                  />
+                  <RevealText
+                    as="h2"
+                    className="mt-6 font-display text-[clamp(2rem,4vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.025em] text-graphite"
+                  >
                     {category.name}
-                  </h2>
-                  <p className="mt-6 max-w-lg text-base leading-8 text-ash">
-                    {category.description}
-                  </p>
-
-                  <div className="mt-10 flex flex-wrap items-center gap-8">
-                    <Link href={`/hizmetler#${categoryId}`} className="link-underline">
-                      {category.name} hizmetleri
-                    </Link>
-                    <Link href="/randevu" className="link-underline">
-                      Randevu al
-                    </Link>
-                  </div>
+                  </RevealText>
+                  <InView delay={0.2}>
+                    <p className="mt-6 max-w-lg text-base leading-8 text-ash">
+                      {category.description}
+                    </p>
+                  </InView>
+                  <InView delay={0.3}>
+                    <div className="mt-8 flex flex-wrap items-center gap-3">
+                      <Link href={`/hizmetler#${categoryId}`} className="btn-pill-outline">
+                        <span>{category.name} hizmetleri</span>
+                        <span aria-hidden>↗</span>
+                      </Link>
+                    </div>
+                  </InView>
                 </div>
               </div>
 
-              <ul className="mt-16 rule-top">
-                {members.map((member, index) => (
-                  <li key={member.id}>
-                    <div className="service-row flex-col items-start gap-3 sm:flex-row sm:items-baseline sm:gap-6">
-                      <span className="service-row-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="flex-1">
-                        <p className="font-display text-2xl text-graphite">{member.name}</p>
-                        <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-ash">
-                          {member.title}
-                        </p>
-                        <p className="mt-4 max-w-xl text-sm leading-7 text-ash">
-                          {member.signature}
-                        </p>
-                        {member.specialties.length > 0 ? (
-                          <p className="mt-4 text-xs leading-6 text-ash/80">
-                            {member.specialties.slice(0, 4).join(" · ")}
-                          </p>
-                        ) : null}
-                      </div>
-                    </div>
-                  </li>
+              {/* Staff bento grid */}
+              <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {members.map((member, idx) => (
+                  <StaffBentoCard key={member.id} staff={member} delay={idx * 0.08} />
                 ))}
-              </ul>
+              </div>
             </div>
           </section>
         );
       })}
 
-      {/* BOTTOM CTA */}
-      <section className="rule-top bg-bone">
-        <div className="shell py-24 lg:py-32">
-          <div className="max-w-3xl">
-            <p className="eyebrow-tag">Devam</p>
-            <h2 className="mt-6 font-display text-display-lg text-graphite">
-              Uzmanı seçtiyseniz, size uygun hizmet ve saati birlikte planlayalım.
-            </h2>
-            <div className="mt-10 flex flex-wrap items-center gap-8">
-              <Link href="/randevu" className="btn-minimal-solid">
-                Randevu al
-              </Link>
-              <Link href="/paketler" className="link-underline">
-                Paketleri görüntüle
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DarkCTA
+        number={String(Object.keys(grouped).length + 2).padStart(2, "0")}
+        eyebrow="Devam"
+        title="Uzmanı seçtiyseniz, hizmet ve saati birlikte planlayalım."
+        primaryCta={{ label: "Randevu al", href: "/randevu" }}
+        secondaryCta={{ label: "Paketler", href: "/paketler" }}
+      />
     </div>
   );
 }

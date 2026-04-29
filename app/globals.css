@@ -4,12 +4,8 @@
 
 :root {
   color-scheme: light;
-  --background: #faf7f2;
+  --background: #ffffff;
   --foreground: #1a1a18;
-  --muted: #6b6660;
-  --card: #ffffff;
-  --line: rgba(26, 26, 24, 0.10);
-  --ring: rgba(168, 100, 90, 0.32);
 }
 
 html {
@@ -43,66 +39,21 @@ textarea {
 }
 
 ::selection {
-  background: rgba(168, 100, 90, 0.18);
+  background: rgba(245, 230, 220, 0.65);
 }
 
-/* ---------- Minimal luxe utilities ---------- */
-
-.shell-narrow {
-  @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+/* ---------- Layout ---------- */
+.shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
-.hairline {
-  border-color: rgba(26, 26, 24, 0.10);
+/* ---------- Wordmark ---------- */
+.wordmark {
+  @apply font-display text-lg font-bold tracking-tight text-graphite;
+  letter-spacing: -0.01em;
 }
 
-.rule-top {
-  border-top: 1px solid rgba(26, 26, 24, 0.10);
-}
-
-.rule-bottom {
-  border-bottom: 1px solid rgba(26, 26, 24, 0.10);
-}
-
-.eyebrow-tag {
-  @apply inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-ash;
-}
-
-.link-underline {
-  @apply relative inline-flex items-center gap-2 text-sm text-graphite transition;
-  padding-bottom: 2px;
-  border-bottom: 1px solid rgba(26, 26, 24, 0.35);
-}
-
-.link-underline:hover {
-  border-bottom-color: rgba(168, 100, 90, 0.9);
-  color: #a8645a;
-}
-
-.btn-minimal {
-  @apply inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-medium tracking-tight transition duration-300;
-  border-color: rgba(26, 26, 24, 0.85);
-  color: #1a1a18;
-}
-
-.btn-minimal:hover {
-  background: #1a1a18;
-  color: #ffffff;
-}
-
-.btn-minimal-solid {
-  @apply inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
-  background: #1a1a18;
-  border-color: #1a1a18;
-  color: #ffffff;
-}
-
-.btn-minimal-solid:hover {
-  background: #3d2820;
-  border-color: #3d2820;
-}
-
-/* Reference Beauty Center buttons */
+/* ---------- Pill buttons (Beauty Center reference) ---------- */
 .btn-pill-dark {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
   background: #1a1a18;
@@ -157,342 +108,17 @@ textarea {
   transform: scale(1.05);
 }
 
-.wordmark {
-  @apply font-display text-lg font-bold tracking-tight text-graphite;
-  letter-spacing: -0.01em;
+/* ---------- Hide horizontal scrollbar on pill rails ---------- */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.service-row {
-  @apply flex items-baseline gap-6 py-6;
-  border-bottom: 1px solid rgba(26, 26, 24, 0.10);
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
-.service-row-number {
-  @apply font-display text-xs font-medium text-ash tabular-nums;
-  letter-spacing: 0.12em;
-  min-width: 32px;
-}
-
-.service-row-name {
-  @apply flex-1 font-display text-xl font-semibold tracking-tight text-graphite;
-}
-
-.service-row-meta {
-  @apply text-sm text-ash tabular-nums;
-}
-
-/* Minimal line input */
-.form-line {
-  @apply block w-full border-0 border-b bg-transparent px-0 py-3 text-base text-graphite placeholder:text-ash/60;
-  border-bottom-color: rgba(26, 26, 24, 0.18);
-  transition: border-color 200ms ease;
-}
-
-.form-line:focus {
-  border-bottom-color: rgba(26, 26, 24, 0.9);
-  outline: none;
-  box-shadow: none;
-}
-
-.form-line-error {
-  border-bottom-color: #a8645a;
-}
-
-/* Layout */
-.shell {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-}
-
-/* ---------- Primitive components ---------- */
-
-/* Card */
-.card {
-  @apply rounded-3xl border bg-white shadow-soft transition;
-  border-color: rgba(214, 192, 173, 0.36);
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 252, 249, 0.98));
-}
-
-.card-editorial {
-  @apply overflow-hidden rounded-3xl border shadow-editorial;
-  border-color: rgba(214, 192, 173, 0.36);
-}
-
-.card-muted {
-  @apply rounded-3xl border p-5;
-  border-color: rgba(214, 192, 173, 0.36);
-  background: #fcf7f3;
-}
-
-.card-ghost {
-  @apply rounded-3xl border border-transparent p-5 transition;
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.card-ghost:hover {
-  border-color: rgba(146, 92, 97, 0.12);
-  background: rgba(255, 255, 255, 0.85);
-}
-
-/* Buttons */
-.btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-pill text-sm font-medium transition duration-300 ease-soft disabled:cursor-not-allowed disabled:opacity-60;
-}
-
-.btn-sm {
-  @apply px-4 py-2 text-xs;
-}
-
-.btn-md {
-  @apply px-5 py-3 text-sm;
-}
-
-.btn-lg {
-  @apply px-7 py-4 text-base;
-}
-
-.btn-primary {
-  @apply text-white shadow-soft hover:-translate-y-0.5 hover:shadow-elevated;
-  background: linear-gradient(135deg, #2b1d1b 0%, #925c61 100%);
-}
-
-.btn-primary:focus-visible {
-  outline: 2px solid rgba(146, 92, 97, 0.6);
-  outline-offset: 2px;
-}
-
-.btn-outline {
-  @apply border bg-white text-espresso hover:-translate-y-0.5 hover:bg-[#fdf8f4];
-  border-color: rgba(146, 92, 97, 0.18);
-}
-
-.btn-ghost {
-  @apply text-ink-500 hover:text-espresso;
-  background: transparent;
-}
-
-.btn-ghost:hover {
-  background: rgba(255, 252, 249, 0.7);
-}
-
-.btn-link {
-  @apply text-rosewood underline-offset-4 hover:underline;
-  background: transparent;
-  padding: 0;
-}
-
-/* Inputs */
-.field {
-  @apply w-full rounded-3xl border bg-white/85 px-4 py-3 text-sm text-espresso placeholder:text-[#a39395] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] transition;
-  border-color: rgba(232, 220, 209, 1);
-}
-
-.field:focus {
-  @apply bg-white;
-  border-color: rgba(146, 92, 97, 0.32);
-  box-shadow: 0 0 0 4px rgba(146, 92, 97, 0.1);
-}
-
-.field-error {
-  border-color: rgba(183, 76, 76, 0.6);
-}
-
-.field-label {
-  @apply mb-2 block text-xs font-semibold uppercase tracking-wider text-ink-500;
-}
-
-/* Badges / Chips */
-.eyebrow {
-  @apply inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-eyebrow text-rosewood;
-  border-color: rgba(146, 92, 97, 0.14);
-  background: rgba(251, 242, 234, 0.96);
-}
-
-.badge {
-  @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium;
-  border-color: rgba(146, 92, 97, 0.18);
-  background: rgba(255, 255, 255, 0.9);
-  color: rgba(146, 92, 97, 1);
-}
-
-.badge-soft {
-  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
-  background: #f7efe8;
-  color: rgba(146, 92, 97, 1);
-}
-
-.badge-dark {
-  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium text-white;
-  background: #2b1d1b;
-}
-
-.admin-chip {
-  @apply inline-flex items-center rounded-full border border-rosewood/10 bg-[#fcf7f3] px-3 py-1 text-xs font-medium text-[#7d5257];
-}
-
-.status-pill {
-  @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider;
-}
-
-/* Typography utilities */
-.section-title {
-  @apply font-display text-display-md font-bold tracking-tight text-graphite;
-}
-
-.section-title-lg {
-  @apply font-display text-display-lg font-bold tracking-tight text-graphite;
-}
-
-.section-title-xl {
-  @apply font-display text-display-xl font-bold tracking-tight text-graphite;
-}
-
-.section-copy {
-  @apply max-w-2xl text-sm leading-7 text-ink-500 sm:text-base sm:leading-8;
-}
-
-.eyebrow-text {
-  @apply text-[11px] font-semibold uppercase tracking-eyebrow text-ink-400;
-}
-
-/* Icons */
-.icon-badge {
-  @apply inline-flex items-center justify-center rounded-2xl border text-rosewood shadow-soft;
-  border-color: rgba(214, 192, 173, 0.36);
-  background: #fbf2ea;
-}
-
-.icon-badge-lg {
-  @apply h-16 w-16 rounded-3xl;
-}
-
-.icon-badge-sm {
-  @apply h-10 w-10 rounded-2xl;
-}
-
-/* Editorial panels */
-.spotlight-panel {
-  @apply relative overflow-hidden rounded-3xl border p-6 shadow-soft;
-  border-color: rgba(214, 192, 173, 0.36);
-  background: linear-gradient(180deg, #fffdfa, #fbf4ed);
-}
-
-.spotlight-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 4px;
-  background: linear-gradient(90deg, rgba(146, 92, 97, 0.52), rgba(214, 192, 173, 0.5));
-}
-
-.metric-card {
-  @apply relative overflow-hidden rounded-3xl border bg-[#fcf8f4] p-5;
-  border-color: rgba(214, 192, 173, 0.36);
-}
-
-.metric-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 4px;
-  background: linear-gradient(180deg, rgba(146, 92, 97, 0.6), rgba(169, 179, 166, 0.6));
-}
-
-.page-intro-glow {
-  background: linear-gradient(135deg, rgba(244, 214, 215, 0.58), rgba(255, 255, 255, 0.04));
-}
-
-.page-intro-blur {
-  background: rgba(169, 179, 166, 0.24);
-  filter: blur(16px);
-}
-
-.visual-grid {
-  @apply grid gap-4 md:grid-cols-2 xl:grid-cols-3;
-}
-
-/* ---------- Legacy (backward compat during migration) ---------- */
-.glass-card {
-  @apply card;
-}
-
-.soft-button {
-  @apply btn btn-md btn-primary;
-}
-
-.soft-button-secondary {
-  @apply btn btn-md btn-outline;
-}
-
-/* Animations */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes pulse-soft {
-  0%,
-  100% {
-    opacity: 0.85;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.float-slow {
-  animation: float 7s ease-in-out infinite;
-}
-
-.pulse-soft {
-  animation: pulse-soft 3.2s ease-in-out infinite;
-}
-
-.fade-up {
-  animation: fade-up 0.6s ease-soft both;
-}
-
-/* Scroll-triggered reveal */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-[data-reveal].is-revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-[data-reveal-delay="1"] {
-  transition-delay: 80ms;
-}
-
-[data-reveal-delay="2"] {
-  transition-delay: 160ms;
-}
-
-[data-reveal-delay="3"] {
-  transition-delay: 240ms;
-}
-
-/* Ken Burns for slider */
+/* ---------- Animations ---------- */
 @keyframes ken-burns {
   0% {
     transform: scale(1.02) translate3d(0, 0, 0);
@@ -507,70 +133,10 @@ textarea {
   transform-origin: center center;
 }
 
-/* Warm tonal washes */
-.warm-wash {
-  background:
-    radial-gradient(ellipse at 80% -10%, rgba(244, 214, 215, 0.45), transparent 55%),
-    radial-gradient(ellipse at -10% 110%, rgba(247, 239, 232, 0.7), transparent 55%),
-    #faf7f2;
-}
-
-.warm-wash-soft {
-  background:
-    radial-gradient(ellipse at 100% 0%, rgba(214, 192, 173, 0.22), transparent 50%),
-    radial-gradient(ellipse at 0% 100%, rgba(169, 179, 166, 0.18), transparent 55%),
-    #faf7f2;
-}
-
-/* Slow drift (decorative motion accent) */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(0, -10px, 0);
-  }
-}
-
-.drift {
-  animation: drift 8s ease-in-out infinite;
-}
-
-/* Service row bottom rule that fills on hover */
-.service-row-rule {
-  position: relative;
-}
-
-.service-row-rule::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  height: 1px;
-  width: 0;
-  background: rgba(26, 26, 24, 0.85);
-  transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.service-row-rule:hover::after {
-  width: 100%;
-}
-
-/* Accessibility: reduced motion */
+/* ---------- Accessibility ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .float-slow,
-  .pulse-soft,
-  .fade-up,
-  .ken-burns,
-  .drift {
+  .ken-burns {
     animation: none;
-  }
-
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 
   html {

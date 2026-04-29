@@ -22,11 +22,12 @@ export function AnimatedLink({ href, children, className = "", trailing, externa
   return (
     <Wrapper
       {...(props as { href: string })}
+      aria-label={children}
       className={`group relative inline-flex items-center gap-2 ${className}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <span className="relative inline-flex overflow-hidden">
+      <span className="relative inline-flex overflow-hidden" aria-hidden>
         {children.split("").map((ch, i) => (
           <span key={i} className="relative inline-block">
             <motion.span
@@ -46,8 +47,11 @@ export function AnimatedLink({ href, children, className = "", trailing, externa
           </span>
         ))}
       </span>
-      {trailing ? <span className="relative">{trailing}</span> : null}
-      <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100" />
+      {trailing ? <span className="relative" aria-hidden>{trailing}</span> : null}
+      <span
+        aria-hidden
+        className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100"
+      />
     </Wrapper>
   );
 }

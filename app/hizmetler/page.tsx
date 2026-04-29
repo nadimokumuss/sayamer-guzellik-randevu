@@ -1,7 +1,14 @@
 import Link from "next/link";
 
-import { buildPageMetadata, siteContent } from "@/lib/site";
+import { InView } from "@/components/motion/in-view";
+import { Marquee } from "@/components/motion/marquee";
+import { ManifestoMoment } from "@/components/motion/manifesto-moment";
+import { AltImageText } from "@/components/layout/alt-image-text";
+import { DarkCTA } from "@/components/layout/dark-cta";
+import { EditorialList } from "@/components/layout/editorial-list";
+import { PageHero } from "@/components/layout/page-hero";
 import { getCatalog } from "@/lib/catalog";
+import { buildPageMetadata, siteContent } from "@/lib/site";
 import { buildBookingHref, formatCurrency } from "@/lib/utils";
 
 export const metadata = buildPageMetadata(
@@ -22,143 +29,119 @@ export default function ServicesPage() {
 
   return (
     <div>
-      {/* HERO — minimal */}
-      <section className="warm-wash">
-        <div className="shell pt-20 pb-20 lg:pt-32 lg:pb-24">
-          <p className="eyebrow-tag" data-reveal>
-            Hizmetler
-          </p>
-          <h1
-            className="mt-8 max-w-3xl font-display text-display-xl text-graphite"
-            data-reveal
-            data-reveal-delay="1"
-          >
-            Saç, cilt, tırnak ve bakım için planlı bir akış.
-          </h1>
-          <p
-            className="mt-8 max-w-xl text-base leading-8 text-ash"
-            data-reveal
-            data-reveal-delay="2"
-          >
-            Her bakım alanını aynı netlik ve özenle tasarlıyoruz. Süre, fiyat ve uzman
-            eşleşmesi her zaman açık.
-          </p>
+      <PageHero
+        number="01"
+        eyebrow="Hizmetler"
+        title="Bakım alanlarımız."
+        copy="Her bakım alanını aynı netlik ve özenle tasarlıyoruz. Süre, fiyat ve uzman eşleşmesi her zaman açık."
+        photo={[
+          siteContent.serviceCategoryMedia["cilt-bakimi"],
+          siteContent.serviceCategoryMedia["tirnak-bakimi"],
+          siteContent.serviceCategoryMedia["kuafor"],
+        ]}
+        photoAlt="Sayamer hizmet alanları"
+        actions={[
+          { label: "Online randevu", href: "/randevu", primary: true },
+          { label: "Paketler", href: "/paketler" },
+        ]}
+        backdropWord="HIZMET"
+      />
+
+      {/* Marquee */}
+      <section className="border-y border-hairline bg-white py-4 lg:py-5">
+        <Marquee
+          speed={45}
+          itemGap="3rem"
+          items={catalog.categories.flatMap((cat, idx) => [
+            <span
+              key={`cat-${cat.id}`}
+              className={`font-display text-xl font-bold tracking-tight lg:text-2xl ${
+                idx % 2 === 0 ? "text-graphite" : "italic text-graphite/55"
+              }`}
+            >
+              {cat.name}
+            </span>,
+            <span key={`sep-${cat.id}`} aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
+              ✦
+            </span>,
+          ])}
+        />
+      </section>
+
+      {/* Anchor pills */}
+      <section className="border-t border-hairline bg-white">
+        <div className="shell py-10">
+          <InView>
+            <div className="flex flex-wrap gap-2">
+              {catalog.categories.map((category, index) => (
+                <Link
+                  key={category.id}
+                  href={`#${category.id}`}
+                  className="group inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-4 py-1.5 text-[12px] font-semibold tracking-tight text-ink-400 transition hover:border-graphite/30 hover:bg-peachLight/40 hover:text-graphite"
+                >
+                  <span className="font-display text-[11px] font-extrabold text-rosewood">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{category.name}</span>
+                </Link>
+              ))}
+            </div>
+          </InView>
         </div>
       </section>
 
-      {/* ANCHOR LIST */}
-      <section className="rule-top bg-bone">
-        <div className="shell py-12">
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {catalog.categories.map((category, index) => (
-              <Link
-                key={category.id}
-                href={`#${category.id}`}
-                className="group inline-flex items-baseline gap-3 text-sm text-ash transition hover:text-graphite"
-              >
-                <span className="font-display text-xs tabular-nums tracking-[0.18em]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="border-b border-transparent group-hover:border-graphite">
-                  {category.name}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ManifestoMoment eyebrow="Felsefe" caption="— Sayamer">
+        <span>Hizmetin </span>
+        <em className="not-italic font-extrabold">netliği</em>
+        <span>, sürenin </span>
+        <em className="not-italic font-extrabold">sadakati</em>
+        <span> ve uzmanın </span>
+        <em className="not-italic font-extrabold">özeni</em>
+        <span> aynı çerçevede tutulur.</span>
+      </ManifestoMoment>
 
-      {/* CATEGORIES */}
+      {/* Categories — alternating */}
       {catalog.categories.map((category, index) => {
         const services = catalog.services.filter((s) => s.categoryId === category.id);
         const image = getCategoryImage(category.id);
-        const reverse = index % 2 === 1;
-
         return (
-          <section
+          <AltImageText
             key={category.id}
-            id={category.id}
-            className="rule-top scroll-mt-24 bg-bone"
+            anchorId={category.id}
+            index={index}
+            image={image}
+            imageAlt={category.name}
+            badge={`Kategori · ${String(index + 1).padStart(2, "0")}`}
+            number={String(index + 1).padStart(2, "0")}
+            title={category.name}
           >
-            <div className="shell py-24 lg:py-32">
-              <div
-                className={`grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20 ${
-                  reverse ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <div className="overflow-hidden" data-reveal>
-                  <img
-                    src={image}
-                    alt={category.name}
-                    className="aspect-[5/4] w-full object-cover transition duration-[1400ms] ease-out hover:scale-[1.02]"
-                  />
-                </div>
-
-                <div>
-                  <p className="eyebrow-tag">
-                    {String(index + 1).padStart(2, "0")} · Kategori
-                  </p>
-                  <h2 className="mt-6 font-display text-display-lg text-graphite">
-                    {category.name}
-                  </h2>
-                  <p className="mt-6 max-w-lg text-base leading-8 text-ash">
-                    {category.description}
-                  </p>
-                </div>
-              </div>
-
-              <ul className="mt-16 rule-top">
-                {services.map((service) => (
-                  <li key={service.id}>
-                    <Link
-                      href={buildBookingHref("/personeller", {
-                        bookingType: "service",
-                        itemId: service.id,
-                      })}
-                      className="service-row service-row-rule flex-col items-start gap-3 transition hover:pl-2 hover:text-clay sm:flex-row sm:items-baseline sm:gap-6"
-                    >
-                      <span className="flex-1">
-                        <span className="block font-display text-xl text-graphite sm:text-2xl">
-                          {service.name}
-                        </span>
-                        <span className="mt-2 block max-w-xl text-sm leading-6 text-ash">
-                          {service.description}
-                        </span>
-                      </span>
-                      <span className="service-row-meta whitespace-nowrap">
-                        {service.durationMinutes} dk
-                      </span>
-                      <span className="service-row-meta whitespace-nowrap tabular-nums">
-                        {formatCurrency(service.price)}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <p className="max-w-lg text-base leading-8 text-ash">{category.description}</p>
+            <div className="mt-8">
+              <EditorialList
+                variant="row"
+                items={services.map((service) => ({
+                  id: service.id,
+                  title: service.name,
+                  description: service.description,
+                  meta: `${service.durationMinutes} dk · ${formatCurrency(service.price)}`,
+                  href: buildBookingHref("/personeller", {
+                    bookingType: "service",
+                    itemId: service.id,
+                  }),
+                }))}
+              />
             </div>
-          </section>
+          </AltImageText>
         );
       })}
 
-      {/* BOTTOM CTA */}
-      <section className="rule-top bg-bone">
-        <div className="shell py-24 lg:py-32">
-          <div className="max-w-3xl">
-            <p className="eyebrow-tag">Devam</p>
-            <h2 className="mt-6 font-display text-display-lg text-graphite">
-              Hizmetinizi seçtiyseniz, uzman ve saati birlikte planlayalım.
-            </h2>
-            <div className="mt-10 flex flex-wrap items-center gap-8">
-              <Link href="/randevu" className="btn-minimal-solid">
-                Randevu al
-              </Link>
-              <Link href="/paketler" className="link-underline">
-                Paketleri görüntüle
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DarkCTA
+        number={String(catalog.categories.length + 2).padStart(2, "0")}
+        eyebrow="Devam"
+        title="Hizmetinizi seçtiyseniz, uzman ve saati birlikte planlayalım."
+        primaryCta={{ label: "Randevu al", href: "/randevu" }}
+        secondaryCta={{ label: "Paketler", href: "/paketler" }}
+      />
     </div>
   );
 }

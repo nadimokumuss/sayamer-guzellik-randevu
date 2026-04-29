@@ -14,11 +14,9 @@ describe("ContactForm", () => {
     vi.stubGlobal("open", openMock);
 
     render(<ContactForm />);
-    fireEvent.change(screen.getByPlaceholderText("Ad Soyad"), { target: { value: "Ada" } });
-    fireEvent.change(screen.getByPlaceholderText("05XX XXX XX XX"), {
-      target: { value: "123" },
-    });
-    fireEvent.change(screen.getByPlaceholderText("Soru veya notunuz..."), {
+    fireEvent.change(screen.getByLabelText("Ad Soyad"), { target: { value: "Ada" } });
+    fireEvent.change(screen.getByLabelText("Telefon"), { target: { value: "123" } });
+    fireEvent.change(screen.getByLabelText("Mesajınız"), {
       target: { value: "Test mesajı" },
     });
     fireEvent.click(screen.getByRole("button", { name: /WhatsApp ile Gönder/i }));
@@ -32,11 +30,11 @@ describe("ContactForm", () => {
     vi.stubGlobal("open", openMock);
 
     render(<ContactForm />);
-    fireEvent.change(screen.getByPlaceholderText("Ad Soyad"), { target: { value: "Ada Kara" } });
-    fireEvent.change(screen.getByPlaceholderText("05XX XXX XX XX"), {
+    fireEvent.change(screen.getByLabelText("Ad Soyad"), { target: { value: "Ada Kara" } });
+    fireEvent.change(screen.getByLabelText("Telefon"), {
       target: { value: "0532 123 45 67" },
     });
-    fireEvent.change(screen.getByPlaceholderText("Soru veya notunuz..."), {
+    fireEvent.change(screen.getByLabelText("Mesajınız"), {
       target: { value: "Merhaba, paket bilgisi almak istiyorum." },
     });
     fireEvent.click(screen.getByRole("button", { name: /WhatsApp ile Gönder/i }));

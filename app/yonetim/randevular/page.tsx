@@ -1,6 +1,6 @@
-import { StatusSelect } from "@/components/admin/status-select";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { StatusPill } from "@/components/admin/status-pill";
-import { PageIntro } from "@/components/ui/page-intro";
+import { StatusSelect } from "@/components/admin/status-select";
 import { getStaffById } from "@/lib/catalog";
 import { getAppointments } from "@/lib/store";
 import { formatCurrency, formatLongDate, getInitials } from "@/lib/utils";
@@ -18,10 +18,10 @@ export default function AdminAppointmentsPage() {
 
   return (
     <div className="space-y-6">
-      <PageIntro
+      <AdminPageHeader
         eyebrow="Randevular"
         title="Durum ve müşteri yönetimi"
-        copy="Tablo yoğunluğu azaltıldı; randevular statü grupları altında ayrı kartlara ayrıldı. Böylece ekip hangi blokta ne olduğunu tek bakışta ayırt eder."
+        copy="Randevular statü grupları altında ayrı kartlara ayrıldı; ekip hangi blokta ne olduğunu tek bakışta ayırt eder."
         stats={[
           { label: "Toplam kayıt", value: String(appointments.length) },
           { label: "Onaylandı", value: String(groups[0].items.length) },
@@ -32,93 +32,76 @@ export default function AdminAppointmentsPage() {
 
       <section className="grid gap-6 xl:grid-cols-2">
         {groups.map((group) => (
-          <div key={group.status} className="glass-card p-6">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <StatusPill status={group.status} />
-                <p className="text-sm text-[#6f5c5e]">{group.items.length} kayıt</p>
-              </div>
+          <div key={group.status} className="rounded-[24px] border border-hairline bg-white p-6">
+            <div className="flex items-center gap-3 border-b border-hairline pb-4">
+              <StatusPill status={group.status} />
+              <p className="text-xs text-ash">{group.items.length} kayıt</p>
             </div>
 
-            <div className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-3">
               {group.items.length ? (
                 group.items.map((appointment) => (
-                  <article
+                  <li
                     key={appointment.id}
-                    className="rounded-[28px] border border-white/70 bg-[#fcf7f3] p-5"
+                    className="rounded-2xl border border-hairline bg-white p-4 transition hover:border-graphite/20"
                   >
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex items-start gap-4">
-                          <span className="icon-badge h-12 w-12 rounded-[18px] bg-white/80 font-display text-lg text-rosewood">
-                            {getInitials(
-                              `${appointment.customer.firstName} ${appointment.customer.lastName}`,
-                            )}
-                          </span>
-                          <div>
-                            <p className="font-display text-2xl text-espresso">
-                              {appointment.customer.firstName} {appointment.customer.lastName}
-                            </p>
-                            <p className="mt-1 text-sm text-[#8c7376]">
-                              {appointment.customer.phone}
-                            </p>
-                          </div>
-                        </div>
-                        <strong className="text-lg text-espresso">
-                          {formatCurrency(appointment.price)}
-                        </strong>
-                      </div>
-
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <div className="metric-card">
-                          <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">
-                            Hizmet
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-graphite font-display text-sm font-extrabold text-white">
+                          {getInitials(
+                            `${appointment.customer.firstName} ${appointment.customer.lastName}`,
+                          )}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-base font-extrabold tracking-tight text-graphite">
+                            {appointment.customer.firstName} {appointment.customer.lastName}
                           </p>
-                          <p className="mt-3 font-medium text-espresso">{appointment.itemName}</p>
-                        </div>
-                        <div className="metric-card">
-                          <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">
-                            Uzman
+                          <p className="text-[11px] text-ash tabular-nums">
+                            {appointment.customer.phone}
                           </p>
-                          <p className="mt-3 font-medium text-espresso">
-                            {getStaffById(appointment.staffId)?.name}
-                          </p>
-                        </div>
-                        <div className="metric-card">
-                          <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">
-                            Tarih
-                          </p>
-                          <p className="mt-3 font-medium text-espresso">
-                            {formatLongDate(appointment.date)}
-                          </p>
-                        </div>
-                        <div className="metric-card">
-                          <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">
-                            Saat
-                          </p>
-                          <p className="mt-3 font-medium text-espresso">{appointment.startTime}</p>
                         </div>
                       </div>
-
-                      <div className="flex items-center justify-between gap-4">
-                        <StatusPill status={appointment.status} />
-                        <StatusSelect
-                          appointmentId={appointment.id}
-                          currentStatus={appointment.status}
-                        />
-                      </div>
+                      <p className="font-display text-base font-extrabold tabular-nums text-graphite">
+                        {formatCurrency(appointment.price)}
+                      </p>
                     </div>
-                  </article>
+
+                    <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                      <Field label="Hizmet" value={appointment.itemName} />
+                      <Field label="Uzman" value={getStaffById(appointment.staffId)?.name ?? "—"} />
+                      <Field label="Tarih" value={formatLongDate(appointment.date)} />
+                      <Field label="Saat" value={appointment.startTime} />
+                    </div>
+
+                    <div className="mt-4 flex items-center justify-between gap-3 border-t border-hairline pt-3">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ash">
+                        Durum
+                      </span>
+                      <StatusSelect
+                        appointmentId={appointment.id}
+                        currentStatus={appointment.status}
+                      />
+                    </div>
+                  </li>
                 ))
               ) : (
-                <div className="rounded-[24px] border border-dashed border-rosewood/20 bg-white/60 p-5 text-sm text-[#6f5c5e]">
+                <li className="rounded-2xl border border-dashed border-hairline bg-peachLight/20 p-5 text-sm text-ash">
                   Bu statüde kayıt bulunmuyor.
-                </div>
+                </li>
               )}
-            </div>
+            </ul>
           </div>
         ))}
       </section>
+    </div>
+  );
+}
+
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-peachLight/40 p-3">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ash">{label}</p>
+      <p className="mt-1 text-sm font-medium text-graphite">{value}</p>
     </div>
   );
 }

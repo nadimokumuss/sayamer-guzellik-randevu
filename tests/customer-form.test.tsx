@@ -26,11 +26,9 @@ describe("CustomerForm", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     render(<CustomerForm {...baseProps} />);
-    fireEvent.change(screen.getByPlaceholderText("Ad"), { target: { value: "Ada" } });
-    fireEvent.change(screen.getByPlaceholderText("Soyad"), { target: { value: "Kara" } });
-    fireEvent.change(screen.getByPlaceholderText("05XX XXX XX XX"), {
-      target: { value: "1234" },
-    });
+    fireEvent.change(screen.getByLabelText("Ad"), { target: { value: "Ada" } });
+    fireEvent.change(screen.getByLabelText("Soyad"), { target: { value: "Kara" } });
+    fireEvent.change(screen.getByLabelText("Telefon"), { target: { value: "1234" } });
     fireEvent.click(screen.getByRole("button", { name: /Randevuyu Oluştur/i }));
 
     await waitFor(() => {
@@ -44,14 +42,12 @@ describe("CustomerForm", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     render(<CustomerForm {...baseProps} />);
-    fireEvent.change(screen.getByPlaceholderText("Ad"), { target: { value: "Ada" } });
-    fireEvent.change(screen.getByPlaceholderText("Soyad"), { target: { value: "Kara" } });
-    fireEvent.change(screen.getByPlaceholderText("05XX XXX XX XX"), {
+    fireEvent.change(screen.getByLabelText("Ad"), { target: { value: "Ada" } });
+    fireEvent.change(screen.getByLabelText("Soyad"), { target: { value: "Kara" } });
+    fireEvent.change(screen.getByLabelText("Telefon"), {
       target: { value: "0532 123 45 67" },
     });
-    fireEvent.change(screen.getByPlaceholderText("E-posta"), {
-      target: { value: "bozuk-email" },
-    });
+    fireEvent.change(screen.getByLabelText("E-posta"), { target: { value: "bozuk-email" } });
     fireEvent.click(screen.getByRole("button", { name: /Randevuyu Oluştur/i }));
 
     await waitFor(() => {
@@ -68,9 +64,9 @@ describe("CustomerForm", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     render(<CustomerForm {...baseProps} />);
-    fireEvent.change(screen.getByPlaceholderText("Ad"), { target: { value: "Ada" } });
-    fireEvent.change(screen.getByPlaceholderText("Soyad"), { target: { value: "Kara" } });
-    fireEvent.change(screen.getByPlaceholderText("05XX XXX XX XX"), {
+    fireEvent.change(screen.getByLabelText("Ad"), { target: { value: "Ada" } });
+    fireEvent.change(screen.getByLabelText("Soyad"), { target: { value: "Kara" } });
+    fireEvent.change(screen.getByLabelText("Telefon"), {
       target: { value: "0532 123 45 67" },
     });
     fireEvent.click(screen.getByRole("button", { name: /Randevuyu Oluştur/i }));

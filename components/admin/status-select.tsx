@@ -66,7 +66,7 @@ export function StatusSelect({ appointmentId, currentStatus }: StatusSelectProps
         }}
         disabled={isPending}
         className={classNames(
-          "rounded-full border px-4 py-2 text-sm font-medium transition disabled:opacity-70",
+          "rounded-full px-3 py-1.5 text-[12px] font-semibold tracking-tight transition disabled:opacity-70 cursor-pointer",
           getAppointmentStatusTone(value),
         )}
       >
@@ -77,7 +77,7 @@ export function StatusSelect({ appointmentId, currentStatus }: StatusSelectProps
         ))}
       </select>
       {error ? (
-        <span className="text-xs text-rosewood" role="alert">
+        <span className="text-[11px] text-rose-600" role="alert">
           {error}
         </span>
       ) : null}

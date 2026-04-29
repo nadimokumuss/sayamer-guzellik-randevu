@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 
+import { Magnetic } from "@/components/motion/magnetic";
+import { FloatingField } from "@/components/ui/floating-field";
 import { siteContent } from "@/lib/site";
 import {
   EMAIL_FORMAT_MESSAGE,
@@ -34,7 +36,7 @@ export function ContactForm() {
       return;
     }
 
-    if (!isValidEmail(email)) {
+    if (email && !isValidEmail(email)) {
       setError(EMAIL_FORMAT_MESSAGE);
       return;
     }
@@ -53,67 +55,44 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-8">
-      <label className="block">
-        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
-          Ad Soyad
-        </span>
-        <input
-          name="name"
-          placeholder="Ad Soyad"
-          autoComplete="name"
-          className="form-line mt-3"
-        />
-      </label>
+    <form onSubmit={handleSubmit} noValidate className="space-y-9">
+      <FloatingField label="Ad Soyad" name="name" autoComplete="name" />
 
-      <div className="grid gap-8 sm:grid-cols-2">
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
-            Telefon
-          </span>
-          <input
-            name="phone"
-            placeholder="05XX XXX XX XX"
-            inputMode="numeric"
-            maxLength={17}
-            autoComplete="tel"
-            className="form-line mt-3"
-          />
-        </label>
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
-            E-posta (opsiyonel)
-          </span>
-          <input
-            name="email"
-            type="email"
-            placeholder="E-posta"
-            autoComplete="email"
-            className="form-line mt-3"
-          />
-        </label>
+      <div className="grid gap-9 sm:grid-cols-2">
+        <FloatingField
+          label="Telefon"
+          name="phone"
+          inputMode="numeric"
+          maxLength={17}
+          autoComplete="tel"
+        />
+        <FloatingField
+          label="E-posta (opsiyonel)"
+          name="email"
+          type="email"
+          autoComplete="email"
+        />
       </div>
 
-      <label className="block">
-        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
-          Mesajınız
-        </span>
-        <textarea
-          name="message"
-          placeholder="Soru veya notunuz..."
-          className="form-line mt-3 min-h-[120px] resize-none"
-        />
-      </label>
+      <FloatingField multiline label="Mesajınız" name="message" />
 
       {error ? (
-        <p className="text-sm text-clay" role="alert">
+        <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700" role="alert">
           {error}
         </p>
       ) : null}
 
-      <button type="submit" className="btn-minimal-solid">
-        WhatsApp ile gönder
-      </button>
+      <Magnetic>
+        <button
+          type="submit"
+          className="group inline-flex items-center gap-3 rounded-full bg-graphite px-7 py-4 text-sm font-semibold text-white transition hover:bg-mocha"
+        >
+          <span>WhatsApp ile gönder</span>
+          <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-white text-graphite transition group-hover:rotate-45">
+            →
+          </span>
+        </button>
+      </Magnetic>
     </form>
   );
 }

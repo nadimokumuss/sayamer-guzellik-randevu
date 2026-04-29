@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
 
-import { AppIcon } from "@/components/ui/app-icon";
 import { BlockedSlot, StaffMember } from "@/lib/types";
 import { formatLongDate } from "@/lib/utils";
 
@@ -41,9 +40,7 @@ export function BlockedSlotManager({
       void (async () => {
         const response = await fetch("/api/admin/blocked-slots", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
 
@@ -60,177 +57,173 @@ export function BlockedSlotManager({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-      <form onSubmit={handleSubmit} className="glass-card relative overflow-hidden space-y-5 p-6">
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-br from-[#f6dfdf]/70 via-white/10 to-transparent" />
-
-        <div className="relative">
-          <div className="flex items-center gap-4">
-            <span className="icon-badge icon-badge-lg">
-              <AppIcon name="block" className="h-7 w-7" />
-            </span>
-            <div>
-              <span className="eyebrow">Bloke Saat</span>
-              <h2 className="mt-4 font-display text-3xl tracking-tight text-espresso">
-                Yeni kapanış ekle
-              </h2>
-            </div>
-          </div>
-          <p className="mt-4 text-sm leading-7 text-[#6f5c5e]">
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-[24px] border border-hairline bg-white p-6">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rosewood">
+            Bloke Saat
+          </p>
+          <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-graphite">
+            Yeni kapanış ekle
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-ash">
             Mola, oda hazırlığı veya ekip arası gibi durumları görünür kılmak için ayrı bir blok
             oluştur.
           </p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="metric-card">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Toplam ekip</p>
-            <p className="mt-2 font-display text-3xl text-espresso">{staff.length}</p>
-          </div>
-          <div className="metric-card">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Aktif bloke</p>
-            <p className="mt-2 font-display text-3xl text-espresso">{blockedSlots.length}</p>
-          </div>
+          <Field label="Toplam ekip" value={String(staff.length)} />
+          <Field label="Aktif bloke" value={String(blockedSlots.length)} />
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-              Uzman
-            </span>
-            <select name="staffId" className="field" defaultValue={staff[0]?.id}>
+          <FormField label="Uzman">
+            <select name="staffId" className={inputCls} defaultValue={staff[0]?.id}>
               {staff.map((member) => (
                 <option key={member.id} value={member.id}>
-                  {member.name} • {member.title}
+                  {member.name} · {member.title}
                 </option>
               ))}
             </select>
-          </label>
+          </FormField>
 
-          <label className="space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-              Tarih
-            </span>
-            <input name="date" type="date" className="field" defaultValue={defaultDate} />
-          </label>
+          <FormField label="Tarih">
+            <input name="date" type="date" className={inputCls} defaultValue={defaultDate} />
+          </FormField>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-              Başlangıç
-            </span>
-            <input name="startTime" type="time" className="field" defaultValue="12:00" />
-          </label>
-
-          <label className="space-y-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-              Bitiş
-            </span>
-            <input name="endTime" type="time" className="field" defaultValue="13:00" />
-          </label>
+          <FormField label="Başlangıç">
+            <input name="startTime" type="time" className={inputCls} defaultValue="12:00" />
+          </FormField>
+          <FormField label="Bitiş">
+            <input name="endTime" type="time" className={inputCls} defaultValue="13:00" />
+          </FormField>
         </div>
 
-        <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c7376]">
-            Sebep
-          </span>
+        <FormField label="Sebep">
           <input
             name="reason"
-            className="field"
+            className={inputCls}
             placeholder="Sebep"
             defaultValue="Mola / oda hazırlığı"
           />
-        </label>
+        </FormField>
 
         {error ? (
-          <div className="rounded-[20px] border border-rosewood/15 bg-[#fff4f4] px-4 py-3 text-sm text-rosewood">
+          <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
             {error}
           </div>
         ) : null}
 
-        <button type="submit" disabled={isPending} className="soft-button w-full">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-graphite px-6 py-3 text-sm font-semibold text-white transition hover:bg-mocha disabled:opacity-70"
+        >
           {isPending ? "Kaydediliyor..." : "Bloke Saat Ekle"}
         </button>
       </form>
 
-      <div className="glass-card p-6">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="icon-badge icon-badge-lg">
-              <AppIcon name="calendar" className="h-7 w-7" />
-            </span>
-            <div>
-              <span className="eyebrow">Mevcut Liste</span>
-              <h2 className="mt-4 font-display text-3xl tracking-tight text-espresso">
-                Kapanış ve aralar
-              </h2>
-            </div>
+      <div className="rounded-[24px] border border-hairline bg-white p-6">
+        <div className="flex items-center justify-between gap-4 border-b border-hairline pb-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rosewood">
+              Mevcut Liste
+            </p>
+            <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-graphite">
+              Kapanış ve aralar
+            </h2>
           </div>
-          <span className="admin-chip">{blockedSlots.length} kayıt</span>
+          <span className="rounded-full bg-peachLight px-3 py-1 text-[11px] font-semibold text-mocha">
+            {blockedSlots.length} kayıt
+          </span>
         </div>
 
         {deleteError ? (
-          <div className="mt-4 rounded-[20px] border border-rosewood/15 bg-[#fff4f4] px-4 py-3 text-sm text-rosewood" role="alert">
+          <div
+            className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
+            role="alert"
+          >
             {deleteError}
           </div>
         ) : null}
 
-        <div className="mt-6 space-y-3">
+        <ul className="mt-5 space-y-2">
           {blockedSlots.map((slot) => {
             const member = staff.find((entry) => entry.id === slot.staffId);
             return (
-              <div
+              <li
                 key={slot.id}
-                className="rounded-[28px] border border-white/70 bg-[#fcf7f3] p-4"
+                className="flex flex-col gap-3 rounded-2xl border border-hairline p-4 transition hover:border-graphite/20 sm:flex-row sm:items-start sm:justify-between"
               >
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div className="flex items-start gap-4">
-                    <span className="icon-badge h-12 w-12 rounded-[18px] bg-white/75">
-                      <AppIcon name="clock" />
-                    </span>
-                    <div>
-                      <p className="font-semibold text-espresso">{member?.name || "Uzman"}</p>
-                      <p className="mt-1 text-sm text-[#6f5c5e]">
-                        {formatLongDate(slot.date)} • {slot.startTime} - {slot.endTime}
-                      </p>
-                      <p className="mt-2 text-sm text-[#8c7376]">{slot.reason}</p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    className="soft-button-secondary"
-                    onClick={() =>
-                      startTransition(() => {
-                        void (async () => {
-                          setDeleteError(null);
-                          try {
-                            const response = await fetch(
-                              `/api/admin/blocked-slots/${slot.id}`,
-                              { method: "DELETE" },
-                            );
-                            if (!response.ok) {
-                              const result = (await response
-                                .json()
-                                .catch(() => ({}))) as { error?: string };
-                              setDeleteError(result.error || "Bloke saat silinemedi.");
-                              return;
-                            }
-                            router.refresh();
-                          } catch {
-                            setDeleteError("Bloke saat silinemedi.");
-                          }
-                        })();
-                      })
-                    }
-                  >
-                    Kaydı Sil
-                  </button>
+                <div className="min-w-0">
+                  <p className="font-display text-sm font-bold tracking-tight text-graphite">
+                    {member?.name || "Uzman"}
+                  </p>
+                  <p className="mt-1 text-xs tabular-nums text-ash">
+                    {formatLongDate(slot.date)} · {slot.startTime} - {slot.endTime}
+                  </p>
+                  <p className="mt-1 text-xs text-graphite/75">{slot.reason}</p>
                 </div>
-              </div>
+                <button
+                  type="button"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-hairline bg-white px-4 py-1.5 text-[12px] font-semibold tracking-tight text-graphite transition hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700"
+                  onClick={() =>
+                    startTransition(() => {
+                      void (async () => {
+                        setDeleteError(null);
+                        try {
+                          const response = await fetch(`/api/admin/blocked-slots/${slot.id}`, {
+                            method: "DELETE",
+                          });
+                          if (!response.ok) {
+                            const result = (await response.json().catch(() => ({}))) as {
+                              error?: string;
+                            };
+                            setDeleteError(result.error || "Bloke saat silinemedi.");
+                            return;
+                          }
+                          router.refresh();
+                        } catch {
+                          setDeleteError("Bloke saat silinemedi.");
+                        }
+                      })();
+                    })
+                  }
+                >
+                  Kaldır
+                </button>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
+    </div>
+  );
+}
+
+const inputCls =
+  "w-full rounded-full border border-hairline bg-white px-4 py-2.5 text-sm text-graphite transition focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15";
+
+function FormField({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.18em] text-ash">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function Field({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-peachLight/40 p-3">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ash">{label}</p>
+      <p className="mt-1 font-display text-2xl font-extrabold tabular-nums text-graphite">
+        {value}
+      </p>
     </div>
   );
 }

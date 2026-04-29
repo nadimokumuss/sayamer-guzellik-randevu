@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useTransition } from "react";
 
+import { Magnetic } from "@/components/motion/magnetic";
+import { FloatingField } from "@/components/ui/floating-field";
 import { Appointment, BookingType } from "@/lib/types";
 import {
   EMAIL_FORMAT_MESSAGE,
@@ -63,22 +65,14 @@ export function CustomerForm({
       staffId,
       date,
       startTime,
-      customer: {
-        firstName,
-        lastName,
-        phone: normalizedPhone,
-        email,
-        note,
-      },
+      customer: { firstName, lastName, phone: normalizedPhone, email, note },
     };
 
     startTransition(() => {
       void (async () => {
         const response = await fetch("/api/appointments", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
 
@@ -97,65 +91,58 @@ export function CustomerForm({
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-10">
       <div>
-        <p className="eyebrow-tag">Bilgileriniz</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rosewood">
+          Bilgileriniz
+        </p>
         <p className="mt-4 max-w-xl text-sm leading-7 text-ash">
-          Onay sonrası demo WhatsApp mesajı oluşturulur ve salon paneline randevu hemen
-          düşer. Zorunlu alanlar: ad, soyad ve telefon.
+          Onay sonrası WhatsApp mesajı oluşturulur ve salon paneline randevu hemen düşer.
+          Zorunlu alanlar: ad, soyad ve telefon.
         </p>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2">
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Ad</span>
-          <input name="firstName" placeholder="Ad" className="form-line mt-3" />
-        </label>
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Soyad</span>
-          <input name="lastName" placeholder="Soyad" className="form-line mt-3" />
-        </label>
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">Telefon</span>
-          <input
-            name="phone"
-            placeholder="05XX XXX XX XX"
-            inputMode="numeric"
-            maxLength={17}
-            autoComplete="tel"
-            className="form-line mt-3"
-          />
-        </label>
-        <label className="block">
-          <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">E-posta</span>
-          <input
-            name="email"
-            placeholder="E-posta"
-            type="email"
-            autoComplete="email"
-            className="form-line mt-3"
-          />
-        </label>
+      <div className="grid gap-9 sm:grid-cols-2">
+        <FloatingField label="Ad" name="firstName" autoComplete="given-name" />
+        <FloatingField label="Soyad" name="lastName" autoComplete="family-name" />
+        <FloatingField
+          label="Telefon"
+          name="phone"
+          inputMode="numeric"
+          maxLength={17}
+          autoComplete="tel"
+        />
+        <FloatingField label="E-posta" name="email" type="email" autoComplete="email" />
       </div>
 
-      <label className="block">
-        <span className="block text-[11px] uppercase tracking-[0.22em] text-ash">
-          İsteğe bağlı not
-        </span>
-        <textarea
-          name="note"
-          placeholder="Sessiz oda, hassasiyet, kısa notlar..."
-          className="form-line mt-3 min-h-[120px] resize-none"
-        />
-      </label>
+      <FloatingField multiline label="İsteğe bağlı not" name="note" />
 
       {error ? (
-        <p className="text-sm text-clay" role="alert">
+        <p
+          className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700"
+          role="alert"
+        >
           {error}
         </p>
       ) : null}
 
-      <button type="submit" disabled={isPending} className="btn-minimal-solid disabled:opacity-70">
-        {isPending ? "Randevu oluşturuluyor..." : "Randevuyu oluştur"}
-      </button>
+      <Magnetic>
+        <button
+          type="submit"
+          disabled={isPending}
+          className="group inline-flex items-center gap-3 rounded-full bg-graphite px-7 py-4 text-sm font-semibold text-white transition hover:bg-mocha disabled:cursor-not-allowed disabled:opacity-70"
+        >
+          <span>{isPending ? "Randevu oluşturuluyor..." : "Randevuyu oluştur"}</span>
+          {!isPending ? (
+            <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-white text-graphite transition group-hover:rotate-45">
+              →
+            </span>
+          ) : (
+            <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+              <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          )}
+        </button>
+      </Magnetic>
     </form>
   );
 }

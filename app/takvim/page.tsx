@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 
 import { AvailabilityPicker } from "@/components/booking/availability-picker";
+import { BookingProgress } from "@/components/booking/booking-progress";
 import { BookingSummaryCard } from "@/components/booking/booking-summary-card";
-import { PageIntro } from "@/components/ui/page-intro";
+import { SectionHeader } from "@/components/layout/section-header";
 import { getItemSummary, getStaffById } from "@/lib/catalog";
-import { getNextOpenDate } from "@/lib/utils";
+import { buildBookingHref, getNextOpenDate } from "@/lib/utils";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -35,21 +36,32 @@ export default async function CalendarPage({
 
   return (
     <div>
-      <PageIntro
-        eyebrow="03 · Takvim"
-        title="Gün ve saat seçimi"
-        copy="Uygunluk motoru; çalışma saatlerini, bloke aralıkları ve dolu randevuları birlikte dikkate alır. Yalnızca gerçekten müsait saatler görünür."
-        stats={[
-          { label: "Akış", value: "3 / 4" },
-          { label: "Uzman", value: staff.name },
-          { label: "Süre", value: `${item.durationMinutes} dk` },
-          { label: "Başlangıç", value: date },
-        ]}
+      <BookingProgress
+        current="time"
+        hrefs={{
+          service: bookingType === "service" ? "/hizmetler" : "/paketler",
+          staff: buildBookingHref("/personeller", { bookingType, itemId }),
+        }}
       />
 
-      <section className="rule-top bg-bone">
-        <div className="shell py-16 lg:py-24">
-          <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-0">
+      <section className="bg-white">
+        <div className="shell py-14 lg:py-20">
+          <SectionHeader
+            number="03"
+            eyebrow="Takvim"
+            title="Gün ve saat seçimi."
+            align="stacked"
+          />
+          <p className="mt-6 max-w-2xl text-base leading-8 text-ash">
+            Uygunluk motoru çalışma saatlerini, bloke aralıkları ve dolu randevuları birlikte
+            dikkate alır. Yalnızca gerçekten müsait saatler görünür.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-t border-hairline bg-white">
+        <div className="shell py-12 lg:py-16">
+          <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-12">
             <BookingSummaryCard
               title={item.name}
               description={item.description}
@@ -59,7 +71,7 @@ export default async function CalendarPage({
               bookingTypeLabel={bookingType === "package" ? "Paket" : "Hizmet"}
               includedServices={item.includedServices.map((service) => service.name)}
             />
-            <div className="lg:pl-12">
+            <div>
               <AvailabilityPicker
                 bookingType={bookingType}
                 itemId={itemId}

@@ -8,16 +8,14 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("SiteHeader", () => {
-  it("renders public navigation and hides demo/admin entry points", () => {
+  it("renders main navigation and CTA without legacy demo/admin entries", () => {
     render(<SiteHeader />);
 
-    expect(screen.getAllByRole("link", { name: "Anasayfa" }).length).toBeGreaterThan(0);
-    expect(screen.getByRole("button", { name: "Kurumsal" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Hizmetler" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Medya" })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: "İletişim" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "Online Randevu" }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: "WhatsApp" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Hizmetler" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Paketler" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: "Uzmanlar" }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /İletişim/ }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /Randevu al/ }).length).toBeGreaterThan(0);
 
     expect(screen.queryByRole("link", { name: "Yönetim Paneli" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Demo Girişi" })).not.toBeInTheDocument();

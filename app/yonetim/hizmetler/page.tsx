@@ -1,5 +1,4 @@
-import { AppIcon } from "@/components/ui/app-icon";
-import { PageIntro } from "@/components/ui/page-intro";
+import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { getCatalog, getCategoryById, getServiceById } from "@/lib/catalog";
 import { formatCurrency } from "@/lib/utils";
 
@@ -8,62 +7,68 @@ export default function AdminServicesPage() {
 
   return (
     <div className="space-y-6">
-      <PageIntro
+      <AdminPageHeader
         eyebrow="Katalog"
         title="Hizmet ve paket yapısı"
-        copy="Katalog ekranı, kategori bazlı bloklara ayrıldı. Böylece ekip hangi hizmetlerin hangi başlık altında durduğunu daha hızlı ayırt eder."
+        copy="Katalog ekranı kategori bazlı bloklara ayrıldı; ekip hangi hizmetin hangi başlık altında durduğunu hızlı ayırt eder."
         stats={[
           { label: "Kategori", value: String(catalog.categories.length) },
           { label: "Hizmet", value: String(catalog.services.length) },
           { label: "Paket", value: String(catalog.packages.length) },
-          { label: "Sunum", value: "Ayrı bloklar" },
+          { label: "Ekip", value: String(catalog.staff.length) },
         ]}
       />
 
       <div className="space-y-6">
         {catalog.categories.map((category) => {
-          const services = catalog.services.filter((service) => service.categoryId === category.id);
+          const services = catalog.services.filter((s) => s.categoryId === category.id);
+          const staffCount = catalog.staff.filter((m) => m.categoryId === category.id).length;
 
           return (
-            <section key={category.id} className="glass-card overflow-hidden">
-              <div className={`grid gap-6 bg-gradient-to-r ${category.accent} p-8 lg:grid-cols-[1fr_0.9fr]`}>
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="icon-badge h-11 w-11 rounded-[18px] bg-white/75">
-                      <AppIcon name="spark" />
-                    </span>
-                    <span className="eyebrow">{category.name}</span>
-                  </div>
-                  <h2 className="mt-4 font-display text-4xl text-espresso">{category.heroLine}</h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-[#5d494b]">
-                    {category.description}
-                  </p>
-                </div>
+            <section
+              key={category.id}
+              className="overflow-hidden rounded-[24px] border border-hairline bg-white"
+            >
+              <div className="border-b border-hairline bg-peachLight/40 p-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mocha">
+                  {category.name}
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-graphite lg:text-3xl">
+                  {category.heroLine}
+                </h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-graphite/75">
+                  {category.description}
+                </p>
 
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="metric-card">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Hizmet</p>
-                    <p className="mt-3 font-display text-3xl text-espresso">{services.length}</p>
-                  </div>
-                  <div className="metric-card">
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-[#8c7376]">Ekip</p>
-                    <p className="mt-3 font-display text-3xl text-espresso">
-                      {catalog.staff.filter((member) => member.categoryId === category.id).length}
-                    </p>
-                  </div>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Badge label="Hizmet" value={String(services.length)} />
+                  <Badge label="Ekip" value={String(staffCount)} />
                 </div>
               </div>
 
-              <div className="grid gap-4 p-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-3 p-5 md:grid-cols-2 xl:grid-cols-3">
                 {services.map((service) => (
-                  <article key={service.id} className="rounded-[24px] bg-white/80 p-4 shadow-soft">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="eyebrow">{getCategoryById(service.categoryId)?.name}</span>
-                      <span className="text-sm text-[#8c7376]">{service.durationMinutes} dk</span>
+                  <article
+                    key={service.id}
+                    className="rounded-2xl border border-hairline p-4 transition hover:border-graphite/20"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rosewood">
+                        {getCategoryById(service.categoryId)?.name}
+                      </span>
+                      <span className="text-[11px] font-semibold tabular-nums text-ash">
+                        {service.durationMinutes} dk
+                      </span>
                     </div>
-                    <p className="mt-4 font-medium text-espresso">{service.name}</p>
-                    <p className="mt-2 text-sm leading-7 text-[#6f5c5e]">{service.description}</p>
-                    <p className="mt-4 font-semibold text-espresso">{formatCurrency(service.price)}</p>
+                    <p className="mt-3 font-display text-base font-bold tracking-tight text-graphite">
+                      {service.name}
+                    </p>
+                    <p className="mt-2 line-clamp-2 text-xs leading-5 text-ash">
+                      {service.description}
+                    </p>
+                    <p className="mt-3 font-display text-base font-extrabold tabular-nums text-graphite">
+                      {formatCurrency(service.price)}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -71,38 +76,50 @@ export default function AdminServicesPage() {
           );
         })}
 
-        <section className="glass-card p-6">
-          <div className="flex items-center gap-4">
-            <span className="icon-badge icon-badge-lg">
-              <AppIcon name="layers" className="h-7 w-7" />
-            </span>
-            <div>
-              <span className="eyebrow">Hazır Paketler</span>
-              <h2 className="mt-4 font-display text-3xl text-espresso">Paket vitrini</h2>
-            </div>
-          </div>
+        <section className="rounded-[24px] border border-hairline bg-white p-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rosewood">
+            Hazır Paketler
+          </p>
+          <h2 className="mt-2 font-display text-xl font-extrabold tracking-tight text-graphite">
+            Paket vitrini
+          </h2>
 
-          <div className="mt-6 grid gap-4 xl:grid-cols-2">
+          <ul className="mt-5 grid gap-3 xl:grid-cols-2">
             {catalog.packages.map((pkg) => (
-              <article key={pkg.id} className="rounded-[24px] bg-[#fcf7f3] p-5">
+              <li key={pkg.id} className="rounded-2xl border border-hairline p-4">
                 <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[#8c7376]">
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-rosewood">
                       {pkg.savingsLabel}
                     </p>
-                    <h3 className="mt-2 font-display text-3xl text-espresso">{pkg.name}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#6f5c5e]">{pkg.description}</p>
-                    <p className="mt-3 text-xs uppercase tracking-[0.18em] text-[#8c7376]">
+                    <p className="mt-2 font-display text-base font-extrabold tracking-tight text-graphite">
+                      {pkg.name}
+                    </p>
+                    <p className="mt-2 line-clamp-2 text-xs leading-5 text-ash">
+                      {pkg.description}
+                    </p>
+                    <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-ash">
                       Ana hizmet: {getServiceById(pkg.primaryServiceId)?.name}
                     </p>
                   </div>
-                  <strong className="text-espresso">{formatCurrency(pkg.price)}</strong>
+                  <p className="font-display text-base font-extrabold tabular-nums text-graphite">
+                    {formatCurrency(pkg.price)}
+                  </p>
                 </div>
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       </div>
     </div>
+  );
+}
+
+function Badge({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-[11px] font-semibold tracking-tight">
+      <span className="text-ash">{label}</span>
+      <span className="font-display font-extrabold tabular-nums text-graphite">{value}</span>
+    </span>
   );
 }
