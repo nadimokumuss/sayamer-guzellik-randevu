@@ -18,9 +18,17 @@ html {
 
 body {
   min-height: 100vh;
-  background: #faf7f2;
+  background:
+    linear-gradient(to right, rgba(245, 230, 220, 0.55) 0%, transparent 6%, transparent 94%, rgba(245, 230, 220, 0.55) 100%),
+    #ffffff;
   color: var(--foreground);
   font-feature-settings: "ss01", "cv11";
+}
+
+@media (max-width: 768px) {
+  body {
+    background: #ffffff;
+  }
 }
 
 a {
@@ -57,7 +65,7 @@ textarea {
 }
 
 .eyebrow-tag {
-  @apply inline-block text-[11px] font-medium uppercase tracking-[0.22em] text-ash;
+  @apply inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-ash;
 }
 
 .link-underline {
@@ -72,31 +80,86 @@ textarea {
 }
 
 .btn-minimal {
-  @apply inline-flex items-center justify-center rounded-none border px-6 py-3 text-[13px] font-medium uppercase tracking-[0.18em] transition duration-300;
+  @apply inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-medium tracking-tight transition duration-300;
   border-color: rgba(26, 26, 24, 0.85);
   color: #1a1a18;
 }
 
 .btn-minimal:hover {
   background: #1a1a18;
-  color: #faf7f2;
+  color: #ffffff;
 }
 
 .btn-minimal-solid {
-  @apply inline-flex items-center justify-center rounded-none border px-6 py-3 text-[13px] font-medium uppercase tracking-[0.18em] transition duration-300;
+  @apply inline-flex items-center justify-center rounded-full border px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
   background: #1a1a18;
   border-color: #1a1a18;
-  color: #faf7f2;
+  color: #ffffff;
 }
 
 .btn-minimal-solid:hover {
-  background: #a8645a;
-  border-color: #a8645a;
+  background: #3d2820;
+  border-color: #3d2820;
+}
+
+/* Reference Beauty Center buttons */
+.btn-pill-dark {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
+  background: #1a1a18;
+  color: #ffffff;
+}
+
+.btn-pill-dark:hover {
+  background: #3d2820;
+  transform: translateY(-1px);
+}
+
+.btn-pill-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border px-5 py-2.5 text-[12px] font-semibold tracking-tight transition duration-300;
+  border-color: rgba(26, 26, 24, 0.85);
+  color: #1a1a18;
+  background: transparent;
+}
+
+.btn-pill-outline:hover {
+  background: #1a1a18;
+  color: #ffffff;
+  border-color: #1a1a18;
+}
+
+.btn-icon-dark {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition duration-300;
+  background: #1a1a18;
+}
+
+.btn-icon-dark:hover {
+  background: #3d2820;
+  transform: scale(1.05);
+}
+
+.btn-icon-light {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-graphite transition duration-300;
+  background: #ffffff;
+  border: 1px solid rgba(26, 26, 24, 0.12);
+}
+
+.btn-icon-light:hover {
+  background: #f5e6dc;
+}
+
+.btn-icon-peach {
+  @apply inline-flex h-12 w-12 items-center justify-center rounded-full text-graphite transition duration-300;
+  background: #f5e6dc;
+}
+
+.btn-icon-peach:hover {
+  background: #fbeee2;
+  transform: scale(1.05);
 }
 
 .wordmark {
-  @apply font-display text-lg tracking-[0.18em] text-graphite;
-  text-transform: uppercase;
+  @apply font-display text-lg font-bold tracking-tight text-graphite;
+  letter-spacing: -0.01em;
 }
 
 .service-row {
@@ -105,13 +168,13 @@ textarea {
 }
 
 .service-row-number {
-  @apply font-display text-xs text-ash tabular-nums;
-  letter-spacing: 0.18em;
+  @apply font-display text-xs font-medium text-ash tabular-nums;
+  letter-spacing: 0.12em;
   min-width: 32px;
 }
 
 .service-row-name {
-  @apply flex-1 font-display text-2xl text-graphite;
+  @apply flex-1 font-display text-xl font-semibold tracking-tight text-graphite;
 }
 
 .service-row-meta {
@@ -272,15 +335,15 @@ textarea {
 
 /* Typography utilities */
 .section-title {
-  @apply font-display text-display-md text-espresso;
+  @apply font-display text-display-md font-bold tracking-tight text-graphite;
 }
 
 .section-title-lg {
-  @apply font-display text-display-lg text-espresso;
+  @apply font-display text-display-lg font-bold tracking-tight text-graphite;
 }
 
 .section-title-xl {
-  @apply font-display text-display-xl text-espresso;
+  @apply font-display text-display-xl font-bold tracking-tight text-graphite;
 }
 
 .section-copy {

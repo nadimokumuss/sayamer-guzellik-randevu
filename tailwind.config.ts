@@ -21,6 +21,10 @@ const config: Config = {
         sage: "#a9b3a6",
         rosewood: "#925c61",
         sand: "#d6c0ad",
+        peach: "#f5e6dc",
+        peachLight: "#fbeee2",
+        mocha: "#3d2820",
+        mochaDeep: "#2a1a14",
         ink: {
           50: "#f8f4f0",
           100: "#ece3da",
@@ -85,12 +89,12 @@ const config: Config = {
       fontFamily: {
         display: [
           "var(--font-display)",
-          "Playfair Display",
-          "Iowan Old Style",
-          "Palatino Linotype",
-          "Book Antiqua",
-          "Baskerville",
-          "serif",
+          "Manrope",
+          "Inter",
+          "Avenir Next",
+          "Segoe UI",
+          "Helvetica Neue",
+          "sans-serif",
         ],
         sans: [
           "var(--font-sans)",
@@ -102,10 +106,10 @@ const config: Config = {
         ],
       },
       fontSize: {
-        "display-2xl": ["clamp(3.5rem, 9vw, 7.5rem)", { lineHeight: "0.98", letterSpacing: "-0.035em" }],
-        "display-xl": ["clamp(3rem, 6vw, 5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2.25rem, 4.5vw, 3.75rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(1.875rem, 3.5vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
+        "display-2xl": ["clamp(3.25rem, 8vw, 6.5rem)", { lineHeight: "1.0", letterSpacing: "-0.04em" }],
+        "display-xl": ["clamp(2.75rem, 5.5vw, 4.5rem)", { lineHeight: "1.05", letterSpacing: "-0.035em" }],
+        "display-lg": ["clamp(2.25rem, 4vw, 3.5rem)", { lineHeight: "1.08", letterSpacing: "-0.03em" }],
+        "display-md": ["clamp(1.75rem, 3vw, 2.5rem)", { lineHeight: "1.12", letterSpacing: "-0.025em" }],
       },
       letterSpacing: {
         eyebrow: "0.28em",

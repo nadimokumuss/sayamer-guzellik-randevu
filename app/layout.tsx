@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Manrope, Inter } from "next/font/google";
 
 import "@/app/globals.css";
 
+import { CursorDot } from "@/components/motion/cursor-dot";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { RevealInit } from "@/components/ui/reveal-init";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
 import { siteContent } from "@/lib/site";
 
-const playfair = Playfair_Display({
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const inter = Inter({
@@ -36,14 +38,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="tr" className={`${manrope.variable} ${inter.variable}`}>
       <body className="bg-bone font-sans text-graphite antialiased">
         <div className="relative min-h-screen">
+          <ScrollProgress />
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />
         </div>
         <RevealInit />
+        <CursorDot />
       </body>
     </html>
   );
