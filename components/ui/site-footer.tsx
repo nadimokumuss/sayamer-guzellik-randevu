@@ -1,91 +1,90 @@
 import Link from "next/link";
 
 import { AnimatedLink } from "@/components/motion/animated-link";
-import { LiveClock } from "@/components/motion/live-clock";
 import { Wordmark } from "@/components/ui/wordmark";
+import { getCatalog } from "@/lib/catalog";
 import { siteContent } from "@/lib/site";
 
-const navLinks = [
-  { label: "Hizmetler", href: "/hizmetler" },
-  { label: "Paketler", href: "/paketler" },
-  { label: "Uzmanlar", href: "/uzmanlar" },
+const quickLinks = [
+  { label: "Anasayfa", href: "/" },
   { label: "Hakkımızda", href: "/hakkimizda" },
-  { label: "Blog", href: "/blog" },
+  { label: "Hizmetler", href: "/hizmetler" },
+  { label: "Galeri", href: "/galeri" },
   { label: "İletişim", href: "/iletisim" },
 ];
 
+const socialIcons: Record<string, React.ReactNode> = {
+  Instagram: (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+    </svg>
+  ),
+  WhatsApp: (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <path d="M3.5 20.5l1.4-4.2a8 8 0 1 1 3 3l-4.4 1.2z" strokeLinejoin="round" />
+      <path d="M9 9.5c.3 1.6 1.6 3.6 3.4 4.5 1 .5 1.7.4 2.4-.2l.6-.6 1.7 1c.2.3.3.6.1 1-.5 1-1.6 1.4-2.7 1.2-2.6-.4-5.1-3-5.6-5.5-.2-1 .3-2.2 1.3-2.6.4-.2.7 0 .9.2l1 1.7-.6.6c-.4.4-.6 1-.5 1.7" strokeLinejoin="round" />
+    </svg>
+  ),
+  Email: (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m3 7 9 7 9-7" strokeLinecap="round" />
+    </svg>
+  ),
+};
+
 export function SiteFooter() {
+  const catalog = getCatalog();
+
   return (
-    <footer className="relative overflow-hidden bg-mochaDeep text-white">
-      {/* Massive backdrop wordmark */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -bottom-16 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[28vw] font-extrabold leading-[0.85] tracking-[-0.04em] text-transparent lg:text-[22vw]"
-        style={{ WebkitTextStroke: "1px rgba(245,230,220,0.10)" }}
-      >
-        SAYAMER
-      </span>
-
-      <div className="shell relative pb-10 pt-20 lg:pt-28">
-        {/* Top row — big CTA + clock */}
-        <div className="grid items-end gap-12 border-b border-white/10 pb-16 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/55">
-              <span className="mr-3 inline-block h-[1px] w-10 align-middle bg-white/40" />
-              Şehir ritmini yavaşlat
-            </p>
-            <h2 className="mt-7 font-display text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold leading-[1.0] tracking-[-0.035em] text-white">
-              Bir sonraki bakım<br />
-              <span className="italic font-medium text-peach">randevunuz</span><br />
-              bekliyor.
-            </h2>
-            <Link
-              href="/randevu"
-              className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-graphite transition hover:bg-peach"
-            >
-              <span>Randevu al</span>
-              <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-graphite text-white transition group-hover:rotate-45">
-                →
-              </span>
-            </Link>
-          </div>
-
-          <div className="space-y-6 text-sm text-white/70 lg:text-right">
-            <LiveClock tone="light" />
-            <div>
-              <p className="font-display text-base font-bold text-white">
-                {siteContent.contact.addressTitle}
-              </p>
-              {siteContent.contact.addressLines.map((line) => (
-                <p key={line} className="leading-7">{line}</p>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm tabular-nums lg:justify-end">
-              <a href={`tel:${siteContent.contact.phoneRaw}`} className="transition hover:text-white">
-                {siteContent.contact.phoneDisplay}
-              </a>
-              <a href={`mailto:${siteContent.contact.email}`} className="transition hover:text-white">
-                {siteContent.contact.email}
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Middle — columns */}
-        <div className="grid gap-12 py-16 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:gap-16">
+    <footer className="relative overflow-hidden bg-night text-white">
+      <div className="shell relative pb-10 pt-16 lg:pt-20">
+        {/* Top — 4 columns */}
+        <div className="grid gap-12 pb-14 lg:grid-cols-[1.4fr_0.9fr_1fr_1.2fr] lg:gap-12">
+          {/* Brand col */}
           <div>
             <Wordmark tone="light" />
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/65">
+            <p className="mt-5 max-w-sm text-sm leading-7 text-white/60">
               {siteContent.brand.description}
             </p>
+            <div className="mt-6 flex items-center gap-2.5">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white/80 transition hover:bg-brand-500 hover:text-white"
+                aria-label="Instagram"
+              >
+                {socialIcons.Instagram}
+              </a>
+              <a
+                href={siteContent.contact.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white/80 transition hover:bg-brand-500 hover:text-white"
+                aria-label="WhatsApp"
+              >
+                {socialIcons.WhatsApp}
+              </a>
+              <a
+                href={`mailto:${siteContent.contact.email}`}
+                className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white/80 transition hover:bg-brand-500 hover:text-white"
+                aria-label="E-posta"
+              >
+                {socialIcons.Email}
+              </a>
+            </div>
           </div>
 
+          {/* Quick links */}
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Sayfalar</p>
-            <ul className="mt-6 flex flex-col gap-3.5 text-sm">
-              {navLinks.map((item) => (
+            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-white">Hızlı Erişim</p>
+            <ul className="mt-5 flex flex-col gap-3 text-sm">
+              {quickLinks.map((item) => (
                 <li key={item.href}>
-                  <AnimatedLink href={item.href} className="text-white/80 hover:text-white">
+                  <AnimatedLink href={item.href} className="text-white/65 hover:text-white">
                     {item.label}
                   </AnimatedLink>
                 </li>
@@ -93,47 +92,77 @@ export function SiteFooter() {
             </ul>
           </div>
 
+          {/* Services */}
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Çalışma</p>
-            <ul className="mt-6 flex flex-col gap-3 text-sm tabular-nums text-white/80">
-              {siteContent.contact.hours.map((entry) => (
-                <li key={entry.label} className="flex items-baseline justify-between gap-4">
-                  <span>{entry.label}</span>
-                  <span className="text-white">{entry.value}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Sosyal</p>
-            <ul className="mt-6 flex flex-col gap-3 text-sm">
-              {siteContent.contact.socials.map((entry) => (
-                <li key={entry.label}>
-                  <AnimatedLink
-                    href="#"
-                    className="text-white/80 hover:text-white"
-                    trailing={<span aria-hidden className="text-white/40">↗</span>}
-                  >
-                    {entry.label}
+            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-white">Hizmetler</p>
+            <ul className="mt-5 flex flex-col gap-3 text-sm">
+              {catalog.categories.slice(0, 6).map((cat) => (
+                <li key={cat.id}>
+                  <AnimatedLink href={`/hizmetler#${cat.id}`} className="text-white/65 hover:text-white">
+                    {cat.name}
                   </AnimatedLink>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs leading-6 text-white/50">
-              {siteContent.contact.socials.map((s) => s.handle).join(" · ")}
-            </p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-white">İletişim</p>
+            <ul className="mt-5 flex flex-col gap-3.5 text-sm text-white/65">
+              <li className="flex items-start gap-2.5">
+                <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-500/20 text-brand-300">
+                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z" />
+                    <circle cx="12" cy="9" r="2.4" />
+                  </svg>
+                </span>
+                <span>
+                  {siteContent.contact.addressTitle}
+                  <br />
+                  {siteContent.contact.addressLines[2] ?? "İstanbul"}
+                </span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-500/20 text-brand-300">
+                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z" />
+                  </svg>
+                </span>
+                <a href={`tel:${siteContent.contact.phoneRaw}`} className="hover:text-white">
+                  {siteContent.contact.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-500/20 text-brand-300">
+                  {socialIcons.Email}
+                </span>
+                <a href={`mailto:${siteContent.contact.email}`} className="hover:text-white">
+                  {siteContent.contact.email}
+                </a>
+              </li>
+            </ul>
+
+            <p className="mt-6 text-[12px] font-bold uppercase tracking-[0.16em] text-white">Çalışma Saatleri</p>
+            <ul className="mt-4 space-y-2 text-sm tabular-nums text-white/65">
+              {siteContent.contact.hours.map((entry) => (
+                <li key={entry.label} className="flex items-baseline justify-between gap-4">
+                  <span>{entry.label}</span>
+                  <span className="text-white/90">{entry.value}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col gap-3 border-t border-white/10 pt-8 text-[11px] tracking-[0.16em] text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 border-t border-white/10 pt-7 text-[12px] text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 {siteContent.brand.name}. Tüm hakları saklıdır.</p>
-          <p className="flex items-center gap-3">
-            <span aria-hidden className="text-white/30">✦</span>
-            <span>Premium · soft · editorial</span>
-            <span aria-hidden className="text-white/30">✦</span>
-          </p>
+          <div className="flex items-center gap-5">
+            <Link href="/gizlilik-politikasi" className="hover:text-white">Gizlilik Politikası</Link>
+            <span aria-hidden className="text-white/20">|</span>
+            <Link href="/kullanim-sartlari" className="hover:text-white">Kullanım Şartları</Link>
+          </div>
         </div>
       </div>
     </footer>

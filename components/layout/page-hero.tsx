@@ -1,13 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { ClipReveal } from "@/components/motion/clip-reveal";
 import { CountUp } from "@/components/motion/count-up";
 import { InView } from "@/components/motion/in-view";
-import { Magnetic } from "@/components/motion/magnetic";
-import { ParallaxImage } from "@/components/motion/parallax-image";
 import { RevealText } from "@/components/motion/reveal-text";
-import { NumberedEyebrow } from "@/components/layout/numbered-eyebrow";
 
 export type PageHeroStat = {
   label: string;
@@ -28,69 +24,37 @@ type Props = {
   eyebrow: string;
   title: string;
   copy?: string | ReactNode;
-  /** First letter of `copy` rendered as drop cap if string and dropCap=true */
   dropCap?: boolean;
   actions?: PageHeroAction[];
-  /** Optional side image — string for single, array for bento */
   photo?: string | string[];
   photoAlt?: string;
-  /** When set, shows stats row at bottom of hero */
   stats?: PageHeroStat[];
-  /** Optional backdrop word (outlined) — only renders on home or large heros */
   backdropWord?: string;
-  /** Allow hero to be full-bleed (no side image) — wider title */
   variant?: "split" | "centered" | "wide";
   className?: string;
 };
 
 export function PageHero({
-  number = "00",
   eyebrow,
   title,
   copy,
-  dropCap,
   actions,
   photo,
   photoAlt = "",
   stats,
-  backdropWord,
   variant = "split",
   className = "",
 }: Props) {
   const photos = typeof photo === "string" ? [photo] : photo ?? [];
   const hasSide = variant === "split" && photos.length > 0;
 
-  let copyNode: ReactNode = copy;
-  if (typeof copy === "string" && dropCap && copy.length > 0) {
-    const first = copy.charAt(0);
-    const rest = copy.slice(1);
-    copyNode = (
-      <>
-        <span className="float-left mr-3 mt-1 font-display text-[3.4rem] font-extrabold leading-[0.85] tracking-tight text-graphite">
-          {first}
-        </span>
-        {rest}
-      </>
-    );
-  }
-
   return (
-    <section className={`relative overflow-hidden bg-white ${className}`}>
-      {backdropWord ? (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[20vw] font-extrabold leading-[0.85] tracking-[-0.04em] text-transparent lg:text-[18vw]"
-          style={{ WebkitTextStroke: "1px rgba(26,26,24,0.06)" }}
-        >
-          {backdropWord}
-        </span>
-      ) : null}
-
-      <div className="shell relative py-20 lg:py-28">
+    <section className={`relative overflow-hidden bg-surface ${className}`}>
+      <div className="shell relative pt-12 pb-12 lg:pt-16 lg:pb-20">
         <div
           className={
             hasSide
-              ? "grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
+              ? "grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
               : variant === "centered"
                 ? "mx-auto max-w-3xl text-center"
                 : "max-w-4xl"
@@ -98,12 +62,14 @@ export function PageHero({
         >
           <div>
             <InView>
-              <NumberedEyebrow number={number} label={eyebrow} />
+              <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-brand-600">
+                {eyebrow}
+              </p>
             </InView>
 
             <RevealText
               as="h1"
-              className="mt-7 font-display text-[clamp(2.5rem,7vw,5.5rem)] font-extrabold leading-[1.02] tracking-[-0.035em] text-graphite"
+              className="mt-3 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight text-ink-900"
               stagger={0.06}
             >
               {title}
@@ -111,69 +77,33 @@ export function PageHero({
 
             {copy ? (
               <InView delay={0.15}>
-                <p className="mt-8 max-w-xl text-base leading-8 text-ash">{copyNode}</p>
+                <div className="mt-5 max-w-xl text-[15px] leading-7 text-ink-500">{copy}</div>
               </InView>
             ) : null}
 
             {actions && actions.length > 0 ? (
               <InView delay={0.25}>
                 <div
-                  className={`mt-10 flex flex-wrap items-center gap-4 ${
+                  className={`mt-8 flex flex-wrap items-center gap-3 ${
                     variant === "centered" ? "justify-center" : ""
                   }`}
                 >
                   {actions.map((action) => {
                     const isPrimary = action.primary ?? false;
-                    if (isPrimary) {
-                      return (
-                        <Magnetic key={action.href} strength={0.3}>
-                          {action.external ? (
-                            <a
-                              href={action.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group inline-flex items-center gap-3 rounded-full bg-graphite px-7 py-4 text-sm font-semibold text-white transition hover:bg-mocha"
-                            >
-                              <span>{action.label}</span>
-                              <span
-                                aria-hidden
-                                className="grid h-7 w-7 place-items-center rounded-full bg-white text-graphite transition group-hover:rotate-45"
-                              >
-                                →
-                              </span>
-                            </a>
-                          ) : (
-                            <Link
-                              href={action.href}
-                              className="group inline-flex items-center gap-3 rounded-full bg-graphite px-7 py-4 text-sm font-semibold text-white transition hover:bg-mocha"
-                            >
-                              <span>{action.label}</span>
-                              <span
-                                aria-hidden
-                                className="grid h-7 w-7 place-items-center rounded-full bg-white text-graphite transition group-hover:rotate-45"
-                              >
-                                →
-                              </span>
-                            </Link>
-                          )}
-                        </Magnetic>
-                      );
-                    }
+                    const className = isPrimary ? "btn-pill-brand" : "btn-pill-ghost";
                     return action.external ? (
                       <a
                         key={action.href}
                         href={action.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-pill-outline"
+                        className={className}
                       >
-                        <span>{action.label}</span>
-                        <span aria-hidden>↗</span>
+                        {action.label}
                       </a>
                     ) : (
-                      <Link key={action.href} href={action.href} className="btn-pill-outline">
-                        <span>{action.label}</span>
-                        <span aria-hidden>↗</span>
+                      <Link key={action.href} href={action.href} className={className}>
+                        {action.label}
                       </Link>
                     );
                   })}
@@ -184,16 +114,16 @@ export function PageHero({
             {stats && stats.length > 0 ? (
               <InView delay={0.4} y={20}>
                 <div
-                  className={`mt-16 grid gap-6 border-t border-hairline pt-8`}
+                  className="mt-12 grid gap-3"
                   style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}
                 >
                   {stats.map((stat) => (
-                    <div key={stat.label}>
-                      <p className="font-display text-3xl font-extrabold tracking-tight text-graphite lg:text-4xl">
+                    <div key={stat.label} className="rounded-2xl bg-brand-50 px-4 py-5 text-center">
+                      <p className="font-display text-2xl font-extrabold tracking-tight text-brand-700">
                         <CountUp to={stat.to} decimals={stat.decimals ?? 0} />
                         {stat.suffix ?? ""}
                       </p>
-                      <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-ash">
+                      <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-ink-600">
                         {stat.label}
                       </p>
                     </div>
@@ -204,49 +134,11 @@ export function PageHero({
           </div>
 
           {hasSide ? (
-            <div className="relative h-[480px] lg:h-[600px]">
-              <ClipReveal direction="up" duration={1.4}>
-                <ParallaxImage
-                  src={photos[0]}
-                  alt={photoAlt}
-                  className="absolute inset-0 rounded-[36px]"
-                  amount={50}
-                  scale={1.1}
-                />
-              </ClipReveal>
-              <div className="pointer-events-none absolute inset-0 rounded-[36px] bg-gradient-to-tr from-mochaDeep/45 via-mocha/0 to-transparent" />
-
-              {photos[1] ? (
-                <InView delay={0.6} y={40}>
-                  <div className="absolute -right-3 top-12 hidden h-40 w-32 overflow-hidden rounded-2xl border-4 border-white shadow-[0_30px_70px_-20px_rgba(43,29,27,0.35)] sm:block">
-                    <img src={photos[1]} alt="" className="h-full w-full object-cover" />
-                  </div>
-                </InView>
-              ) : null}
-              {photos[2] ? (
-                <InView delay={0.8} y={40}>
-                  <div className="absolute -left-3 bottom-10 hidden h-36 w-28 overflow-hidden rounded-2xl border-4 border-white shadow-[0_30px_70px_-20px_rgba(43,29,27,0.35)] sm:block">
-                    <img src={photos[2]} alt="" className="h-full w-full object-cover" />
-                  </div>
-                </InView>
-              ) : null}
-
-              <svg
-                aria-hidden
-                viewBox="0 0 100 100"
-                className="pointer-events-none absolute -bottom-6 -right-6 h-24 w-24 text-peach lg:h-32 lg:w-32"
-              >
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="48"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeDasharray="2 5"
-                  strokeWidth="1"
-                />
-              </svg>
-            </div>
+            <InView>
+              <div className="relative overflow-hidden rounded-3xl shadow-card" style={{ aspectRatio: "5/4" }}>
+                <img src={photos[0]} alt={photoAlt} className="h-full w-full object-cover" />
+              </div>
+            </InView>
           ) : null}
         </div>
       </div>

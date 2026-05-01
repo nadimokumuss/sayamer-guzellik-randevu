@@ -1,16 +1,12 @@
-import { ClipReveal } from "@/components/motion/clip-reveal";
-import { InView } from "@/components/motion/in-view";
-import { LiveClock } from "@/components/motion/live-clock";
-import { Marquee } from "@/components/motion/marquee";
 import { ContactForm } from "@/components/contact/contact-form";
-import { DarkCTA } from "@/components/layout/dark-cta";
-import { PageHero } from "@/components/layout/page-hero";
-import { SectionHeader } from "@/components/layout/section-header";
+import { InView } from "@/components/motion/in-view";
+import { RevealText } from "@/components/motion/reveal-text";
+import { InfoCard } from "@/components/layout/info-card";
 import { buildPageMetadata, siteContent } from "@/lib/site";
 
 export const metadata = buildPageMetadata(
   "İletişim",
-  "Sayamer Güzellik iletişim bilgileri, salon adresi ve online randevu alanı.",
+  "Sayamer Güzellik Merkezi iletişim bilgileri, salon adresi ve online randevu alanı.",
 );
 
 export default function ContactPage() {
@@ -18,215 +14,152 @@ export default function ContactPage() {
     ", ",
   );
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+  const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
 
   return (
-    <div>
-      <PageHero
-        number="01"
-        eyebrow="İletişim"
-        title="Hızlı iletişim ve online randevu."
-        copy="Salon konumu, iletişim bilgileri ve randevu başlangıç adımları aynı sayfada kolayca erişilebilir biçimde sunulur."
-        photo={[
-          siteContent.media.editorial[3].src,
-          siteContent.media.editorial[2].src,
-        ]}
-        photoAlt={siteContent.media.editorial[3].alt}
-        actions={[
-          { label: "Online randevu", href: "/randevu", primary: true },
-          {
-            label: "WhatsApp",
-            href: siteContent.contact.whatsappUrl,
-            external: true,
-          },
-        ]}
-        backdropWord="ILETISIM"
-      />
-
-      {/* Marquee — channels */}
-      <section className="border-y border-hairline bg-white py-4 lg:py-5">
-        <Marquee
-          speed={50}
-          itemGap="3rem"
-          items={[
-            <span key="a" className="font-display text-xl font-bold tracking-tight text-graphite lg:text-2xl">
-              WhatsApp
-            </span>,
-            <span key="b" aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
-              ✦
-            </span>,
-            <span key="c" className="font-display text-xl font-bold italic tracking-tight text-graphite/55 lg:text-2xl">
-              Telefon
-            </span>,
-            <span key="d" aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
-              ✦
-            </span>,
-            <span key="e" className="font-display text-xl font-bold tracking-tight text-graphite lg:text-2xl">
-              E-posta
-            </span>,
-            <span key="f" aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
-              ✦
-            </span>,
-            <span key="g" className="font-display text-xl font-bold italic tracking-tight text-graphite/55 lg:text-2xl">
-              Instagram
-            </span>,
-            <span key="h" aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
-              ✦
-            </span>,
-            <span key="i" className="font-display text-xl font-bold tracking-tight text-graphite lg:text-2xl">
-              Online randevu
-            </span>,
-            <span key="j" aria-hidden className="font-display text-xl text-rosewood lg:text-2xl">
-              ✦
-            </span>,
-          ]}
-        />
+    <div className="bg-surface">
+      {/* Header */}
+      <section>
+        <div className="shell pt-12 pb-8 lg:pt-16">
+          <InView>
+            <RevealText
+              as="h1"
+              className="font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[1.05] tracking-tight text-ink-900"
+            >
+              Bize Ulaşın
+            </RevealText>
+          </InView>
+          <InView delay={0.15}>
+            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-ink-500">
+              Güzelliğinizi ortaya çıkarmak için buradayız. Sorularınız, randevu talepleriniz veya
+              önerileriniz için aşağıdaki kanallardan bize ulaşabilirsiniz.
+            </p>
+          </InView>
+        </div>
       </section>
 
-      {/* Form + Info — asymmetric */}
-      <section className="border-t border-hairline bg-white">
-        <div className="shell py-20 lg:py-28">
-          <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
-            {/* LEFT — Form card */}
+      {/* 3 info cards */}
+      <section>
+        <div className="shell pb-10">
+          <div className="grid gap-5 md:grid-cols-3">
+            <InView delay={0.05}>
+              <InfoCard
+                icon={
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                    <path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z" strokeLinejoin="round" />
+                    <circle cx="12" cy="9" r="2.4" />
+                  </svg>
+                }
+                label="Adres"
+                caption={siteContent.contact.addressTitle}
+                value={siteContent.contact.addressLines[2] ?? "İstanbul / Anadolu Yakası"}
+              />
+            </InView>
+            <InView delay={0.15}>
+              <InfoCard
+                icon={
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                    <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z" strokeLinejoin="round" />
+                  </svg>
+                }
+                label="Telefon"
+                caption="Haftanın her günü 09:00 - 20:00"
+                value={siteContent.contact.phoneDisplay}
+                href={`tel:${siteContent.contact.phoneRaw}`}
+              />
+            </InView>
+            <InView delay={0.25}>
+              <InfoCard
+                icon={
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 7 9-7" strokeLinecap="round" />
+                  </svg>
+                }
+                label="E-posta"
+                caption="Her türlü sorunuz için"
+                value={siteContent.contact.email}
+                href={`mailto:${siteContent.contact.email}`}
+              />
+            </InView>
+          </div>
+        </div>
+      </section>
+
+      {/* Form + map */}
+      <section>
+        <div className="shell pb-16 lg:pb-24">
+          <div className="grid gap-6 lg:grid-cols-2">
             <InView>
-              <div className="rounded-[36px] border border-hairline bg-white p-7 shadow-[0_30px_70px_-30px_rgba(43,29,27,0.18)] lg:p-10">
-                <SectionHeader
-                  number="02"
-                  eyebrow="Mesaj bırakın"
-                  title="Kısa bir not yazın, size dönelim."
-                  align="stacked"
-                />
-                <p className="mt-5 max-w-md text-sm leading-7 text-ash">
-                  Formu doldurun, mesajınız WhatsApp üzerinden salona iletilir. Çalışma saatleri
-                  içinde aynı gün dönüş yapıyoruz.
+              <div className="rounded-3xl bg-white p-7 shadow-card lg:p-9">
+                <h2 className="font-display text-[22px] font-extrabold tracking-tight text-ink-900">
+                  Bize Yazın
+                </h2>
+                <p className="mt-2 text-[13px] font-semibold text-brand-600">
+                  Formu doldurun, en kısa sürede size geri dönüş yapalım.
                 </p>
-                <div className="mt-10">
+                <div className="mt-7">
                   <ContactForm />
                 </div>
               </div>
             </InView>
 
-            {/* RIGHT — Info column */}
-            <div className="space-y-8">
-              <InView delay={0.15}>
-                <div className="rounded-[28px] bg-peachLight p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mocha">
-                    Salon · şu an
-                  </p>
-                  <div className="mt-3">
-                    <LiveClock tone="dark" />
-                  </div>
-                </div>
-              </InView>
-
-              <InView delay={0.25}>
-                <div className="rounded-[28px] border border-hairline bg-white p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ash">
-                    Adres
-                  </p>
-                  <p className="mt-3 font-display text-xl font-bold tracking-tight text-graphite">
-                    {siteContent.contact.addressTitle}
-                  </p>
-                  <div className="mt-3 space-y-1 text-sm leading-7 text-ash">
-                    {siteContent.contact.addressLines.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
-                  </div>
-                </div>
-              </InView>
-
-              <InView delay={0.35}>
-                <div className="grid gap-3">
-                  <a
-                    href={`tel:${siteContent.contact.phoneRaw}`}
-                    className="group flex items-center justify-between rounded-full border border-hairline bg-white px-5 py-3 transition hover:border-graphite/30 hover:bg-peachLight/40"
-                  >
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ash">
-                        Telefon
-                      </span>
-                      <span className="font-display text-base font-semibold tracking-tight text-graphite">
-                        {siteContent.contact.phoneDisplay}
-                      </span>
-                    </div>
-                    <span className="grid h-9 w-9 place-items-center rounded-full bg-graphite text-white transition group-hover:rotate-45 group-hover:bg-mocha">
-                      <span aria-hidden>↗</span>
-                    </span>
-                  </a>
-
-                  <a
-                    href={`mailto:${siteContent.contact.email}`}
-                    className="group flex items-center justify-between rounded-full border border-hairline bg-white px-5 py-3 transition hover:border-graphite/30 hover:bg-peachLight/40"
-                  >
-                    <div className="flex items-baseline gap-3">
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ash">
-                        E-posta
-                      </span>
-                      <span className="font-display text-base font-semibold tracking-tight text-graphite">
-                        {siteContent.contact.email}
-                      </span>
-                    </div>
-                    <span className="grid h-9 w-9 place-items-center rounded-full bg-graphite text-white transition group-hover:rotate-45 group-hover:bg-mocha">
-                      <span aria-hidden>↗</span>
-                    </span>
-                  </a>
-                </div>
-              </InView>
-
-              <InView delay={0.45}>
-                <div className="rounded-[28px] border border-hairline bg-white p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-ash">
-                    Çalışma saatleri
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm tabular-nums">
-                    {siteContent.contact.hours.map((entry) => (
-                      <li
-                        key={entry.label}
-                        className="flex items-baseline justify-between gap-4 border-b border-hairline pb-2 last:border-0 last:pb-0 text-ash"
-                      >
-                        <span>{entry.label}</span>
-                        <span className="text-graphite">{entry.value}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </InView>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Map */}
-      <section className="border-t border-hairline bg-white">
-        <div className="shell py-20 lg:py-28">
-          <SectionHeader number="03" eyebrow="Konum" title="Bağdat Caddesi · Anadolu Yakası." />
-          <div className="mt-10">
-            <ClipReveal direction="up" duration={1.4}>
-              <div className="overflow-hidden rounded-[36px] border border-hairline">
+            <InView delay={0.1}>
+              <div className="relative h-full min-h-[480px] overflow-hidden rounded-3xl shadow-card">
                 <iframe
                   src={mapSrc}
                   title="Salon konumu"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="aspect-[16/9] w-full border-0"
+                  className="absolute inset-0 h-full w-full border-0"
                   allowFullScreen
                 />
+
+                {/* Animated map pin overlay center */}
+                <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <span className="relative grid h-12 w-12 place-items-center">
+                    <span className="absolute inset-0 animate-ping rounded-full bg-brand-500/40" />
+                    <span className="relative grid h-12 w-12 place-items-center rounded-full bg-brand-gradient text-white shadow-elevated">
+                      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                        <path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z" strokeLinejoin="round" />
+                        <circle cx="12" cy="9" r="2.4" />
+                      </svg>
+                    </span>
+                  </span>
+                </div>
+
+                {/* Bottom info chip */}
+                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-2xl bg-white/95 px-5 py-3.5 shadow-card backdrop-blur">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-100 text-brand-600">
+                      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                        <rect x="3" y="9" width="18" height="9" rx="1.5" />
+                        <path d="M5 9V7a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" />
+                        <circle cx="8" cy="14.5" r="0.7" fill="currentColor" />
+                        <circle cx="16" cy="14.5" r="0.7" fill="currentColor" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-600">
+                        Ulaşım
+                      </p>
+                      <p className="text-[14px] font-bold text-ink-900">Otopark Mevcuttur</p>
+                    </div>
+                  </div>
+                  <a
+                    href={directionsHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[13px] font-semibold text-brand-600 hover:gap-1.5 transition-all"
+                  >
+                    Yol Tarifi <span aria-hidden>→</span>
+                  </a>
+                </div>
               </div>
-            </ClipReveal>
+            </InView>
           </div>
         </div>
       </section>
-
-      <DarkCTA
-        number="04"
-        eyebrow="Devam"
-        title="Mesaj yerine doğrudan online randevu da bırakabilirsiniz."
-        primaryCta={{ label: "Randevu al", href: "/randevu" }}
-        secondaryCta={{
-          label: "WhatsApp",
-          href: siteContent.contact.whatsappUrl,
-          external: true,
-        }}
-      />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 import { RevealText } from "@/components/motion/reveal-text";
-import { NumberedEyebrow } from "@/components/layout/numbered-eyebrow";
 
 type Props = {
-  number: string;
+  number?: string;
   eyebrow: string;
   title: string;
   cta?: { label: string; href: string };
@@ -13,7 +12,6 @@ type Props = {
 };
 
 export function SectionHeader({
-  number,
   eyebrow,
   title,
   cta,
@@ -22,24 +20,28 @@ export function SectionHeader({
 }: Props) {
   const layout =
     align === "row"
-      ? "flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end"
-      : "flex flex-col gap-6";
+      ? "flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end"
+      : "flex flex-col gap-4";
 
   return (
     <div className={`${layout} ${className}`}>
       <div className="max-w-2xl">
-        <NumberedEyebrow number={number} label={eyebrow} />
+        <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-brand-600">
+          {eyebrow}
+        </p>
         <RevealText
           as="h2"
-          className="mt-6 font-display text-[clamp(2.25rem,5vw,4rem)] font-extrabold leading-[1.04] tracking-[-0.03em] text-graphite"
+          className="mt-3 font-display text-[clamp(1.75rem,3.6vw,2.75rem)] font-extrabold leading-[1.1] tracking-tight text-ink-900"
         >
           {title}
         </RevealText>
       </div>
       {cta ? (
-        <Link href={cta.href} className="btn-pill-outline shrink-0">
-          <span>{cta.label}</span>
-          <span aria-hidden>↗</span>
+        <Link
+          href={cta.href}
+          className="inline-flex items-center gap-1 text-[13px] font-semibold text-brand-600 hover:gap-2 transition-all"
+        >
+          {cta.label} <span aria-hidden>→</span>
         </Link>
       ) : null}
     </div>

@@ -1,34 +1,24 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { AnimatedLink } from "@/components/motion/animated-link";
-import { LiveClock } from "@/components/motion/live-clock";
 import { Wordmark } from "@/components/ui/wordmark";
 import { classNames } from "@/lib/utils";
 
 const navItems: ReadonlyArray<{ label: string; href: string }> = [
+  { label: "Anasayfa", href: "/" },
   { label: "Hizmetler", href: "/hizmetler" },
-  { label: "Paketler", href: "/paketler" },
-  { label: "Uzmanlar", href: "/uzmanlar" },
+  { label: "Galeri", href: "/galeri" },
   { label: "Hakkımızda", href: "/hakkimizda" },
   { label: "İletişim", href: "/iletisim" },
 ];
 
-const categoryPills: ReadonlyArray<{ label: string; href: string }> = [
-  { label: "Saç Tasarımı", href: "/hizmetler#kuafor" },
-  { label: "Cilt Bakımı", href: "/hizmetler#cilt-bakimi" },
-  { label: "Tırnak Bakımı", href: "/hizmetler#tirnak-bakimi" },
-  { label: "Epilasyon", href: "/hizmetler#epilasyon" },
-  { label: "Masaj", href: "/hizmetler#masaj" },
-  { label: "Paketler", href: "/paketler" },
-];
-
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
-  return pathname.startsWith(href.split("#")[0]);
+  return pathname.startsWith(href);
 }
 
 export function SiteHeader() {
@@ -37,7 +27,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -47,69 +37,59 @@ export function SiteHeader() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const isHome = pathname === "/";
-
   return (
     <header
       className={classNames(
-        "sticky top-0 z-40 transition-all duration-500",
+        "sticky top-0 z-40 transition-all duration-300",
         scrolled
-          ? "border-b border-hairline bg-white/92 backdrop-blur-md"
-          : "border-b border-transparent bg-white/70 backdrop-blur-sm",
+          ? "bg-white/95 shadow-[0_2px_24px_rgba(17,24,39,0.06)] backdrop-blur"
+          : "bg-white/85 backdrop-blur-sm",
       )}
     >
-      {/* Top utility row */}
-      <div className="border-b border-hairline/70 bg-white/40">
-        <div className="shell flex h-8 items-center justify-between gap-4 text-[11px] text-ash">
-          <LiveClock tone="dark" compact />
-          <div className="hidden items-center gap-5 sm:flex">
-            <span>Bağdat Caddesi · Anadolu Yakası</span>
-            <span aria-hidden className="text-ash/40">·</span>
-            <a href="tel:+905388887766" className="transition hover:text-graphite">
-              +90 538 888 77 66
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main nav row */}
-      <div className="shell flex h-16 items-center justify-between gap-6 lg:h-18">
+      <div className="shell flex h-16 items-center justify-between gap-6 lg:h-20">
         <Wordmark size="md" />
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navItems.map((item) => (
-            <AnimatedLink
-              key={item.href}
-              href={item.href}
-              className={classNames(
-                "text-[13px] font-medium tracking-tight transition-colors",
-                isActive(pathname, item.href) ? "text-graphite" : "text-ink-400 hover:text-graphite",
-              )}
-            >
-              {item.label}
-            </AnimatedLink>
-          ))}
+        <nav className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={classNames(
+                  "relative inline-flex items-center px-4 py-2 text-[14px] font-medium tracking-tight transition-colors",
+                  active ? "text-brand-600" : "text-ink-600 hover:text-ink-900",
+                )}
+              >
+                {item.label}
+                {active ? (
+                  <motion.span
+                    layoutId="active-nav-underline"
+                    className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-brand-gradient"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                ) : null}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
           <Link
             href="/randevu"
-            className="hidden lg:inline-flex group items-center gap-2 rounded-full bg-graphite px-5 py-2.5 text-[12px] font-semibold tracking-tight text-white transition hover:bg-mocha"
+            className="hidden lg:inline-flex btn-pill-brand"
           >
-            <span>Randevu al</span>
-            <span aria-hidden className="grid h-5 w-5 place-items-center rounded-full bg-white/95 text-graphite transition group-hover:rotate-45 text-[11px]">
-              →
-            </span>
+            <span>Randevu Al</span>
           </Link>
 
           <button
             type="button"
             aria-label="Menü"
             aria-expanded={menuOpen}
-            className="inline-flex h-9 w-9 items-center justify-center text-graphite lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-900 transition hover:bg-brand-50 lg:hidden"
             onClick={() => setMenuOpen((v) => !v)}
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
               {menuOpen ? (
                 <path d="m6 6 12 12M18 6 6 18" strokeLinecap="round" />
               ) : (
@@ -123,58 +103,41 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Category pills sub-bar — only on home + hizmetler */}
-      {(isHome || pathname.startsWith("/hizmetler")) && !menuOpen && (
-        <div className="border-t border-hairline">
-          <div className="shell flex items-center gap-2 overflow-x-auto py-3 scrollbar-none">
-            {categoryPills.map((pill, idx) => {
-              const active = idx === 0;
-              return (
-                <Link
-                  key={pill.href}
-                  href={pill.href}
-                  className={classNames(
-                    "shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[12px] font-semibold tracking-tight transition-colors",
-                    active
-                      ? "bg-graphite text-white"
-                      : "border border-hairline text-ink-400 hover:border-graphite/30 hover:text-graphite",
-                  )}
+      <AnimatePresence>
+        {menuOpen ? (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-line bg-white lg:hidden"
+          >
+            <div className="shell flex flex-col py-4">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.04, duration: 0.3 }}
                 >
-                  {active ? (
-                    <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                      <path d="m6 6 12 12M18 6 6 18" strokeLinecap="round" />
-                    </svg>
-                  ) : null}
-                  <span>{pill.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="border-t border-hairline bg-white lg:hidden">
-          <div className="shell flex flex-col py-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={classNames(
-                  "border-b border-hairline py-4 text-[15px] tracking-tight",
-                  isActive(pathname, item.href) ? "text-graphite" : "text-ink-400",
-                )}
-              >
-                {item.label}
+                  <Link
+                    href={item.href}
+                    className={classNames(
+                      "block border-b border-line py-4 text-[15px] tracking-tight",
+                      isActive(pathname, item.href) ? "text-brand-600 font-semibold" : "text-ink-700",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <Link href="/randevu" className="btn-pill-brand mt-6 justify-center">
+                Randevu Al
               </Link>
-            ))}
-            <Link href="/randevu" className="btn-pill-dark mt-6 justify-center">
-              Randevu al →
-            </Link>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

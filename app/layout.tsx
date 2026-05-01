@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${manrope.variable} ${inter.variable}`}>
-      <body className="bg-bone font-sans text-graphite antialiased">
+      <body className="bg-surface font-sans text-ink-900 antialiased">
         <div className="relative min-h-screen">
           <ScrollProgress />
           <SiteHeader />
