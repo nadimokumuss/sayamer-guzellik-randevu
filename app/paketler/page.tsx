@@ -102,7 +102,7 @@ export default function PackagesPage() {
             id: s.id,
             title: s.name,
             description: `${s.durationMinutes} dk`,
-            href: buildBookingHref("/personeller", { bookingType: "service", itemId: s.id }),
+            href: "/randevu",
           }));
 
         return (
@@ -175,10 +175,7 @@ export default function PackagesPage() {
                       <p className="mt-1 text-sm text-ash">{pkg.durationMinutes} dk</p>
                     </div>
                     <Link
-                      href={buildBookingHref("/personeller", {
-                        bookingType: "package",
-                        itemId: pkg.id,
-                      })}
+                      href="/randevu"
                       className="group inline-flex items-center gap-3 rounded-full bg-graphite px-7 py-4 text-sm font-semibold text-white transition hover:bg-mocha"
                     >
                       <span>Paketi seç</span>

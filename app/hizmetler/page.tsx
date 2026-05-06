@@ -99,10 +99,7 @@ export default function ServicesPage() {
                     transition={{ duration: 0.28, delay: Math.min(i * 0.04, 0.2) }}
                   >
                     <ServiceCard
-                      href={buildBookingHref("/personeller", {
-                        bookingType: "service",
-                        itemId: service.id,
-                      })}
+                      href="/randevu"
                       image={image}
                       imageAlt={service.name}
                       category={cat?.name}
