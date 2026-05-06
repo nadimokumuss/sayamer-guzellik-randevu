@@ -35,7 +35,7 @@ export function RevealText({
       {tokens.map((token, i) => {
         if (/^\s+$/.test(token)) return <span key={`s-${i}`}>{token}</span>;
         return (
-          <span key={i} className="inline-block overflow-hidden align-baseline" aria-hidden>
+          <span key={i} className="inline-block overflow-hidden align-baseline pb-[0.35em] -mb-[0.35em]" aria-hidden>
             <motion.span
               className="inline-block will-change-transform"
               initial={{ y: "110%" }}

@@ -45,53 +45,94 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ── 1. HERO — full-width image with gradient text ───────────── */}
-      <section className="relative overflow-hidden bg-night">
-        <img
-          src="https://images.pexels.com/photos/3985330/pexels-photo-3985330.jpeg?auto=compress&cs=tinysrgb&w=1800"
-          alt="Profesyonel cilt bakımı uygulaması"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/55 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night/60 via-transparent to-transparent" />
+      {/* ── 1. HERO ──────────────────────────────────────────────────── */}
+      <section className="border-b border-line bg-[#f8f5f2]">
+        <div className="shell">
+          <div className="grid min-h-[660px] items-center gap-0 py-16 lg:grid-cols-[1fr_2fr_1fr] lg:py-0">
 
-        <div className="shell relative grid min-h-[560px] items-center py-20 lg:min-h-[640px] lg:py-28">
-          <div className="max-w-2xl">
-            <RevealText
-              as="h1"
-              className="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[1.05] tracking-tight text-white"
-              stagger={0.06}
-            >
-              Doğal Güzelliğinizi
-            </RevealText>
-            <InView delay={0.4}>
-              <h1 className="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-extrabold leading-[1.05] tracking-tight">
-                <span className="text-brand-gradient inline-block animate-hue-pulse">
-                  Ortaya Çıkarın
-                </span>
-              </h1>
-            </InView>
-
-            <InView delay={0.6}>
-              <p className="mt-6 max-w-xl text-[16px] leading-7 text-white/85">
-                Uzman dokunuşlar, en son teknoloji cihazlar ve size özel bakım ritüelleri ile
-                kendinizi yenilenmiş hissedin.
+            {/* Sol: hizmet listesi */}
+            <div className="hidden lg:flex lg:flex-col lg:justify-center lg:border-r lg:border-line lg:pr-12 lg:py-20">
+              <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.22em] text-ink-400">
+                Hizmetlerimiz
               </p>
-            </InView>
+              <ul>
+                {catalog.categories.map((cat, i) => (
+                  <li key={cat.id} className={i !== 0 ? "border-t border-line" : ""}>
+                    <Link
+                      href={`/hizmetler#${cat.slug}`}
+                      className="group flex items-center justify-between py-3 text-[13px] font-medium text-ink-600 transition-colors hover:text-ink-900"
+                    >
+                      {cat.name}
+                      <span className="opacity-0 transition-opacity group-hover:opacity-100 text-brand-500">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <InView delay={0.75}>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link href="/randevu" className="btn-pill-brand">
-                  Hemen Randevu Al
-                </Link>
-                <Link
-                  href="/hizmetler"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-[13px] font-semibold text-white backdrop-blur transition hover:bg-white/20"
-                >
-                  Hizmetleri İncele
-                </Link>
+            {/* Orta: slogan */}
+            <div className="flex flex-col items-center justify-center px-0 text-center lg:px-14 lg:py-20">
+              <RevealText
+                as="h1"
+                className="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-[1.15] tracking-tight text-ink-900"
+                stagger={0.06}
+              >
+                Doğal Güzelliğinizi
+              </RevealText>
+              <InView delay={0.4}>
+                <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-[1.15] tracking-tight">
+                  <span className="text-brand-gradient inline-block animate-hue-pulse">
+                    Ortaya Çıkarın
+                  </span>
+                </h1>
+              </InView>
+              <InView delay={0.6}>
+                <p className="mt-5 max-w-[300px] text-[14px] leading-7 text-ink-500">
+                  Uzman dokunuşlar ve size özel bakım ritüelleriyle kendinizi yenilenmiş hissedin.
+                </p>
+              </InView>
+              <InView delay={0.75}>
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                  <Link href="/randevu" className="btn-pill-brand">
+                    Hemen Randevu Al
+                  </Link>
+                  <Link
+                    href="/hizmetler"
+                    className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-[13px] font-semibold text-ink-700 transition hover:border-brand-300 hover:text-ink-900"
+                  >
+                    Hizmetleri İncele
+                  </Link>
+                </div>
+              </InView>
+            </div>
+
+            {/* Sağ: fotoğraflar */}
+            <div className="hidden lg:flex lg:flex-col lg:gap-3 lg:border-l lg:border-line lg:pl-12 lg:py-16">
+              <div className="h-52 overflow-hidden rounded-2xl">
+                <img
+                  src={siteContent.media.editorial[0].src}
+                  alt={siteContent.media.editorial[0].alt}
+                  className="h-full w-full object-cover"
+                />
               </div>
-            </InView>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="h-36 overflow-hidden rounded-xl">
+                  <img
+                    src={siteContent.media.editorial[1].src}
+                    alt={siteContent.media.editorial[1].alt}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="h-36 overflow-hidden rounded-xl">
+                  <img
+                    src={siteContent.media.editorial[2].src}
+                    alt={siteContent.media.editorial[2].alt}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

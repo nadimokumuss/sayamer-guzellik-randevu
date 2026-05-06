@@ -210,8 +210,8 @@ export const siteContent = {
         copy: "Cildinizin ihtiyacına göre planlanan profesyonel uygulama.",
       },
       {
-        src: "https://images.pexels.com/photos/3993421/pexels-photo-3993421.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Doğal makyaj ve glow — yakın plan",
+        src: "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Uzman cilt bakımı uygulaması",
         eyebrow: "Beauty",
         title: "Makyaj & Cilt detay",
         copy: "Detay odaklı, profesyonel uygulama anları.",
