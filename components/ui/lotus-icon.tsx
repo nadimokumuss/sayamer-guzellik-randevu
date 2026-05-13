@@ -5,7 +5,7 @@ type Props = {
 
 export function LotusIcon({ className = "h-5 w-5", tone = "brand" }: Props) {
   const fill = tone === "light" ? "#ffffff" : "url(#lotus-gradient)";
-  const accent = tone === "light" ? "rgba(255,255,255,0.55)" : "#C026D3";
+  const accent = tone === "light" ? "rgba(255,255,255,0.55)" : "#8B5E3C";
 
   return (
     <svg
@@ -16,8 +16,8 @@ export function LotusIcon({ className = "h-5 w-5", tone = "brand" }: Props) {
     >
       <defs>
         <linearGradient id="lotus-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#A855F7" />
-          <stop offset="1" stopColor="#C026D3" />
+          <stop offset="0" stopColor="#C8956D" />
+          <stop offset="1" stopColor="#8B5E3C" />
         </linearGradient>
       </defs>
       {/* center petal */}

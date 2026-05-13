@@ -41,7 +41,7 @@ export default function PackagesPage() {
       />
 
       {/* Promo strip */}
-      <section className="border-t border-hairline bg-white">
+      <section className="border-t border-hairline bg-white/60">
         <div className="shell py-20 lg:py-28">
           <SectionHeader number="02" eyebrow="Bu ay" title="Kampanyalar." />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -106,7 +106,7 @@ export default function PackagesPage() {
           }));
 
         return (
-          <section key={pkg.id} className="border-t border-hairline bg-white">
+          <section key={pkg.id} className="border-t border-hairline bg-white/60">
             <div
               className={`shell flex flex-col gap-12 py-20 lg:flex-row lg:items-center lg:gap-16 lg:py-28 ${
                 reverse ? "lg:flex-row-reverse" : ""

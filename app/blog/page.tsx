@@ -47,7 +47,7 @@ export default function BlogPage() {
       />
 
       {/* Marquee — categories */}
-      <section className="border-y border-hairline bg-white py-4 lg:py-5">
+      <section className="border-y border-hairline bg-white/60 py-4 lg:py-5">
         <Marquee
           speed={45}
           itemGap="3rem"
@@ -88,7 +88,7 @@ export default function BlogPage() {
 
       {/* Featured */}
       {featured ? (
-        <section className="border-t border-hairline bg-white">
+        <section className="border-t border-hairline bg-white/60">
           <div className="shell py-20 lg:py-28">
             <Link href={`/blog/${featured.slug}`} className="group block">
               <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -137,7 +137,7 @@ export default function BlogPage() {
 
       {/* Rest — masonry-style peach cards */}
       {rest.length > 0 ? (
-        <section className="border-t border-hairline bg-white">
+        <section className="border-t border-hairline bg-white/60">
           <div className="shell py-20 lg:py-28">
             <SectionHeader number="02" eyebrow="Diğer yazılar" title="Yazı arşivi." />
 

@@ -5,6 +5,7 @@ import "@/app/globals.css";
 
 import { CursorDot } from "@/components/motion/cursor-dot";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { PageBackdrop } from "@/components/ui/page-backdrop";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
 import { siteContent } from "@/lib/site";
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-surface font-sans text-ink-900 antialiased">
+        <PageBackdrop />
         <div className="relative min-h-screen">
           <ScrollProgress />
           <SiteHeader />

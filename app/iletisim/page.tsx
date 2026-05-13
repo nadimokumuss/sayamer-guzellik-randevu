@@ -17,7 +17,7 @@ export default function ContactPage() {
   const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
 
   return (
-    <div className="bg-surface">
+    <div className="">
       {/* Header */}
       <section>
         <div className="shell pt-12 pb-8 lg:pt-16">

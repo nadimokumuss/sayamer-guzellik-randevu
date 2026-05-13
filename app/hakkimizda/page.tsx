@@ -48,7 +48,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-surface">
+    <div className="">
       {/* Hero */}
       <section>
         <div className="shell pt-12 pb-10 lg:pt-16 lg:pb-12">
@@ -137,7 +137,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="bg-surface">
+      <section className="">
         <div className="shell py-16 lg:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-brand-600">

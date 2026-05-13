@@ -49,7 +49,7 @@ export function PageHero({
   const hasSide = variant === "split" && photos.length > 0;
 
   return (
-    <section className={`relative overflow-hidden bg-surface ${className}`}>
+    <section className={`relative overflow-hidden ${className}`}>
       <div className="shell relative pt-12 pb-12 lg:pt-16 lg:pb-20">
         <div
           className={

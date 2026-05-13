@@ -31,7 +31,7 @@ export function FilterPills({ options, activeId, onChange, layoutId = "filter-ac
             {active ? (
               <motion.span
                 layoutId={layoutId}
-                className="absolute inset-0 rounded-full bg-brand-gradient shadow-[0_6px_18px_rgba(168,85,247,0.30)]"
+                className="absolute inset-0 rounded-full bg-brand-gradient shadow-[0_6px_18px_rgba(176,122,82,0.32)]"
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
               />
             ) : (

@@ -112,7 +112,7 @@ export default function GalleryPage() {
   }, [activeId]);
 
   return (
-    <div className="bg-surface">
+    <div className="">
       <section>
         <div className="shell pt-12 pb-8 lg:pt-16">
           <InView>

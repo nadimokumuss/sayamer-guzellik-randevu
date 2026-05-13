@@ -33,7 +33,7 @@ export default function ServicesPage() {
   return (
     <div>
       {/* Breadcrumb */}
-      <section className="bg-surface">
+      <section className="">
         <div className="shell pt-6 lg:pt-8">
           <nav className="flex items-center gap-2 text-[12px] text-ink-500" aria-label="Breadcrumb">
             <Link href="/" className="inline-flex items-center gap-1.5 hover:text-brand-600">
@@ -50,7 +50,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Hero card */}
-      <section className="bg-surface">
+      <section className="">
         <div className="shell py-8 lg:py-10">
           <InView>
             <div className="relative overflow-hidden rounded-[28px] bg-brand-gradient px-7 py-16 lg:px-14 lg:py-20">
@@ -72,14 +72,14 @@ export default function ServicesPage() {
       </section>
 
       {/* Filter */}
-      <section className="bg-surface">
+      <section className="">
         <div className="shell pb-6">
           <FilterPills options={filterOptions} activeId={activeId} onChange={setActiveId} layoutId="services-active-pill" />
         </div>
       </section>
 
       {/* Service cards grid */}
-      <section className="bg-surface">
+      <section className="">
         <div className="shell pb-16 lg:pb-24">
           <motion.div layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence mode="popLayout">

@@ -4,7 +4,7 @@
 
 :root {
   color-scheme: light;
-  --background: #F5F5F7;
+  --background: #FAF6F1;
   --foreground: #111827;
 }
 
@@ -14,7 +14,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: #F5F5F7;
+  background: #FAF6F1;
   color: var(--foreground);
   font-feature-settings: "ss01", "cv11";
 }
@@ -31,8 +31,8 @@ textarea {
 }
 
 ::selection {
-  background: rgba(168, 85, 247, 0.22);
-  color: #581C87;
+  background: rgba(176, 122, 82, 0.25);
+  color: #4A3320;
 }
 
 /* ---------- Layout ---------- */
@@ -49,14 +49,14 @@ textarea {
 /* ---------- Pill buttons (Reference brand language) ---------- */
 .btn-pill-brand {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight text-white transition duration-300;
-  background: linear-gradient(135deg, #A855F7 0%, #C026D3 100%);
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.30);
+  background: linear-gradient(135deg, #C8956D 0%, #8B5E3C 100%);
+  box-shadow: 0 8px 24px rgba(176, 122, 82, 0.32);
 }
 
 .btn-pill-brand:hover {
-  background: linear-gradient(135deg, #9333EA 0%, #A21CAF 100%);
+  background: linear-gradient(135deg, #B07A52 0%, #6B4A2E 100%);
   transform: translateY(-1px);
-  box-shadow: 0 12px 32px rgba(168, 85, 247, 0.40);
+  box-shadow: 0 12px 32px rgba(176, 122, 82, 0.42);
 }
 
 .btn-pill-ghost {
@@ -67,20 +67,20 @@ textarea {
 }
 
 .btn-pill-ghost:hover {
-  background: #FAF5FF;
-  border-color: #A855F7;
-  color: #7E22CE;
+  background: #FAF6F1;
+  border-color: #C8956D;
+  color: #6B4A2E;
 }
 
 .btn-pill-white {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
   background: #ffffff;
-  color: #7E22CE;
+  color: #6B4A2E;
   box-shadow: 0 8px 24px rgba(15, 15, 18, 0.10);
 }
 
 .btn-pill-white:hover {
-  background: #FAF5FF;
+  background: #FAF6F1;
   transform: translateY(-1px);
 }
 
@@ -95,7 +95,7 @@ textarea {
 
 .btn-icon-dark {
   @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition duration-300;
-  background: linear-gradient(135deg, #A855F7 0%, #C026D3 100%);
+  background: linear-gradient(135deg, #C8956D 0%, #8B5E3C 100%);
 }
 
 .btn-icon-dark:hover {
@@ -109,18 +109,18 @@ textarea {
 }
 
 .btn-icon-light:hover {
-  background: #FAF5FF;
-  border-color: #A855F7;
+  background: #FAF6F1;
+  border-color: #C8956D;
 }
 
 .btn-icon-peach {
   @apply inline-flex h-12 w-12 items-center justify-center rounded-full transition duration-300;
-  background: #F3E8FF;
-  color: #7E22CE;
+  background: #F4E4D6;
+  color: #6B4A2E;
 }
 
 .btn-icon-peach:hover {
-  background: #E9D5FF;
+  background: #E8C9A8;
   transform: scale(1.05);
 }
 
@@ -132,21 +132,21 @@ textarea {
 }
 
 .chip-filter:hover {
-  border-color: rgba(168, 85, 247, 0.45);
-  color: #7E22CE;
+  border-color: rgba(176, 122, 82, 0.45);
+  color: #6B4A2E;
 }
 
 .chip-filter-active {
   @apply inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[13px] font-semibold tracking-tight text-white transition;
-  background: linear-gradient(135deg, #A855F7 0%, #C026D3 100%);
-  box-shadow: 0 6px 18px rgba(168, 85, 247, 0.30);
+  background: linear-gradient(135deg, #C8956D 0%, #8B5E3C 100%);
+  box-shadow: 0 6px 18px rgba(176, 122, 82, 0.32);
 }
 
 /* ---------- Icon badge (circular pastel with mono icon) ---------- */
 .icon-badge {
   @apply inline-flex items-center justify-center rounded-full;
-  background: #F3E8FF;
-  color: #7E22CE;
+  background: #F4E4D6;
+  color: #6B4A2E;
 }
 
 /* ---------- Card with brand-soft hover ---------- */
@@ -170,7 +170,7 @@ textarea {
 
 /* ---------- Brand gradient text ---------- */
 .text-brand-gradient {
-  background: linear-gradient(135deg, #A855F7 0%, #C026D3 100%);
+  background: linear-gradient(135deg, #C8956D 0%, #8B5E3C 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
