@@ -52,8 +52,8 @@ const galleryItems: ReadonlyArray<GalleryItem> = [
   {
     id: "6",
     category: "clients",
-    src: "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=900",
-    alt: "Mutlu müşteri portresi",
+    src: "https://images.pexels.com/photos/1382729/pexels-photo-1382729.jpeg?auto=compress&cs=tinysrgb&w=900",
+    alt: "Doğal güzellik portresi",
   },
   {
     id: "7",
@@ -77,8 +77,8 @@ const galleryItems: ReadonlyArray<GalleryItem> = [
   {
     id: "10",
     category: "interior",
-    src: "https://images.pexels.com/photos/3997988/pexels-photo-3997988.jpeg?auto=compress&cs=tinysrgb&w=900",
-    alt: "Spa atmosferi",
+    src: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?auto=compress&cs=tinysrgb&w=900",
+    alt: "Modern salon iç mekan",
   },
   {
     id: "11",

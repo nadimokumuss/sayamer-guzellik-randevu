@@ -1,11 +1,10 @@
 # Sayamer Guzellik - Next Steps
 
 ## Mevcut Durum
-- Proje `Next.js + TypeScript + Tailwind CSS` ile kuruldu.
+- Proje `Next.js 15 + TypeScript + Tailwind CSS` ile kuruldu.
 - Musteri tarafi akislari hazir:
-  - Anasayfa
-  - Hizmet secimi
-  - Paket secimi
+  - Anasayfa (3 slaytli hero slider + sag-yarı portre, sloganla uyumlu Pexels gorseller)
+  - Hizmet ve paket secimi
   - Uzman secimi
   - Takvim / saat secimi
   - Musteri bilgi formu
@@ -23,6 +22,19 @@
   - `npm run typecheck`
   - `npm test`
   - `npm run build`
+
+## Tamamlanan Tasarim Asamalari
+- Rasm beauty salon sablonuna gore yapi hizalamasi
+- Krem/seftali/mocha brand paleti, `bg-night` footer kaldirildi
+- Hero: 3 slaytli framer-motion carousel + sag-yari soft maskeli portre
+- Footer: krem zemin + Son Yazilar + Bulten widget'lari
+- Section title-mark suslemesi
+- Avantajli Paketler bolumu urun-kart formatina cevrildi (foto + 5 yildiz + fiyat)
+- Brand strip metin yerine marquee carousel'a yukseltildi (opsiyonel `logoSrc` ile)
+- Testimonial portreleri (Pexels) + blog post unique cover'lar
+- Tum violet/mor renkler brand paletine cevrildi (randevu sayfasi)
+- Site geneli Ingilizce metinler Turkce'ye cevrildi
+- Foto duplikatlari temizlendi (3373736, 3985329, 3997988)
 
 ## Bugunku Temel Kararlar
 - Marka adi: `Sayamer Guzellik`

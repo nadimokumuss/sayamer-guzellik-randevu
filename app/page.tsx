@@ -9,8 +9,9 @@ import { Botanical } from "@/components/ui/botanical";
 import { BrandStrip } from "@/components/ui/brand-strip";
 import { BrandVideo } from "@/components/ui/brand-video";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
-import { HomeHero } from "@/components/ui/home-hero";
+import { HomeHeroSlider } from "@/components/ui/home-hero-slider";
 import { PricingCard } from "@/components/ui/pricing-card";
+import { SectionTitleMark } from "@/components/ui/section-title-mark";
 import { CategoryIcon } from "@/components/ui/service-icons";
 import { getCatalog } from "@/lib/catalog";
 import { siteContent } from "@/lib/site";
@@ -28,23 +29,41 @@ export default function HomePage() {
     catalog.categories.find((c) => c.id === "masaj")!,
   ];
 
-  // Pricing — combine site promos with one package
+  // Pricing — combine site promos with one package, enriched as product cards
   const pkg = catalog.packages[0];
+  const promoImageMap: Record<string, { src: string; cat: string }> = {
+    "G5 Masajı": { src: media.g5, cat: "Vücut" },
+    "Cilt Bakımı": { src: media["cilt-bakimi"], cat: "Cilt" },
+    "Zarif Tırnak": { src: media["tirnak-bakimi"], cat: "Tırnak" },
+  };
   const pricingCards = [
-    ...siteContent.promos.map((p) => ({
-      title: p.title,
-      description: p.detail,
-      oldPrice: p.oldPrice,
-      price: p.price,
-      detail: p.detail,
-      href: p.href,
-    })),
+    ...siteContent.promos.map((p) => {
+      const img = promoImageMap[p.title] ?? { src: media["cilt-bakimi"], cat: "Premium" };
+      return {
+        title: p.title,
+        description: p.detail,
+        oldPrice: p.oldPrice,
+        price: p.price,
+        detail: p.detail,
+        href: p.href,
+        imageSrc: img.src,
+        imageAlt: `${p.title} paketi`,
+        category: img.cat,
+        rating: 5,
+        ctaLabel: "Detaylı İncele",
+      };
+    }),
     {
       title: pkg?.name ?? "Bakım Paketi",
       description: pkg?.description ?? "Çoklu seanslı paket avantajı",
       price: pkg ? `${pkg.price.toLocaleString("tr-TR")} TL` : "—",
       detail: pkg?.savingsLabel ?? "Paket avantajı",
       href: "/paketler",
+      imageSrc: media.kuafor,
+      imageAlt: pkg?.name ?? "Bakım paketi",
+      category: "Paket",
+      rating: 5,
+      ctaLabel: "Detaylı İncele",
     },
   ];
 
@@ -100,10 +119,37 @@ export default function HomePage() {
     { value: 24, suffix: "+", label: "Uzman Personel" },
   ];
 
+  const whyChoosePricing = [
+    {
+      title: "Saç Bakımı",
+      description: "Kesim, fön ve ışıltı seansları.",
+      price: "₺1.250",
+      iconId: "kuafor",
+    },
+    {
+      title: "Cilt Bakımı",
+      description: "Arınma, nem ve canlı bir görünüm.",
+      price: "₺1.700",
+      iconId: "cilt-bakimi",
+    },
+    {
+      title: "Tırnak Bakımı",
+      description: "Manikür + uzun ömürlü kalıcı oje.",
+      price: "₺1.450",
+      iconId: "tirnak-bakimi",
+    },
+    {
+      title: "Vücut & Masaj",
+      description: "G5 ve rahatlatıcı seans birleşimi.",
+      price: "₺2.150",
+      iconId: "masaj",
+    },
+  ];
+
   return (
     <div>
       {/* ── 1. HERO ─────────────────────────────────────────────────── */}
-      <HomeHero />
+      <HomeHeroSlider />
 
       {/* ── 2. ABOUT + STATS ────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-white">
@@ -146,6 +192,7 @@ export default function HomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                   Hakkımızda
                 </p>
+                <SectionTitleMark align="left" className="mt-2" />
               </InView>
               <RevealText
                 as="h2"
@@ -167,7 +214,6 @@ export default function HomePage() {
                   "Sertifikalı uzman kadro",
                   "Premium ürün ve son teknoloji ekipman",
                   "Hijyen odaklı, sakin ve modern salon",
-                  "Açık fiyat, net süre, kolay rezervasyon",
                 ].map((line, i) => (
                   <InView key={line} delay={i * 0.05}>
                     <li className="flex items-center gap-3 text-[14px] text-ink-700">
@@ -251,6 +297,7 @@ export default function HomePage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                 Hizmetlerimiz
               </p>
+              <SectionTitleMark className="mt-2" />
             </InView>
             <RevealText
               as="h2"
@@ -280,7 +327,7 @@ export default function HomePage() {
                     {cat.description}
                   </p>
                   <span className="mt-6 inline-flex items-center gap-1.5 border-b border-brand-300 pb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-700 transition group-hover:gap-2.5 group-hover:border-brand-600">
-                    Book Now <span aria-hidden>→</span>
+                    Randevu Al <span aria-hidden>→</span>
                   </span>
                 </Link>
               </InView>
@@ -313,6 +360,7 @@ export default function HomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                   Tecrübemiz
                 </p>
+                <SectionTitleMark align="left" className="mt-2" />
               </InView>
               <RevealText
                 as="h2"
@@ -367,32 +415,38 @@ export default function HomePage() {
                   flip
                   className="pointer-events-none absolute -right-8 -bottom-8 h-32 w-32 text-brand-300 opacity-50"
                 />
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[40px] shadow-elevated">
-                  <img
-                    src={media["cilt-bakimi"]}
-                    alt="Cilt bakımı uygulaması"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-900/15 via-transparent to-transparent" />
-                </div>
-                {/* Floating stat badge */}
-                <div className="absolute bottom-6 left-6 rounded-2xl bg-white/95 px-5 py-4 shadow-elevated backdrop-blur lg:bottom-8 lg:left-8">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-gradient text-white">
-                      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
-                        <path d="m5 12 4 4 10-10" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    <div>
-                      <p className="font-display text-lg font-extrabold tracking-tight text-brand-700">
-                        100% Doğal
-                      </p>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink-500">
-                        Premium Ürünler
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <ul className="relative flex flex-col gap-4">
+                  {whyChoosePricing.map((card, i) => (
+                    <InView key={card.title} delay={i * 0.08}>
+                      <li className="group flex items-center justify-between gap-4 rounded-3xl border border-brand-100 bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-cardHover lg:p-6">
+                        <div className="flex items-center gap-4">
+                          <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-100 to-brand-50 text-brand-700">
+                            <CategoryIcon categoryId={card.iconId} className="h-7 w-7" />
+                          </span>
+                          <div>
+                            <p className="font-display text-[17px] font-bold tracking-tight text-ink-900">
+                              {card.title}
+                            </p>
+                            <p className="mt-1 text-[12px] leading-5 text-ink-500">
+                              {card.description}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end gap-1.5">
+                          <span className="font-display text-xl font-extrabold tabular-nums text-brand-700">
+                            {card.price}
+                          </span>
+                          <Link
+                            href="/randevu"
+                            className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-700 transition group-hover:text-brand-800"
+                          >
+                            Randevu Al →
+                          </Link>
+                        </div>
+                      </li>
+                    </InView>
+                  ))}
+                </ul>
               </div>
             </InView>
           </div>
@@ -413,6 +467,7 @@ export default function HomePage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                 Galeri
               </p>
+              <SectionTitleMark className="mt-2" />
             </InView>
             <RevealText
               as="h2"
@@ -511,6 +566,7 @@ export default function HomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                   Hızlı İletişim
                 </p>
+                <SectionTitleMark align="left" className="mt-2" />
               </InView>
               <RevealText
                 as="h2"
@@ -546,6 +602,7 @@ export default function HomePage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                 Sık Sorulanlar
               </p>
+              <SectionTitleMark className="mt-2" />
             </InView>
             <RevealText
               as="h2"
@@ -575,6 +632,7 @@ export default function HomePage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                 Avantajlar
               </p>
+              <SectionTitleMark className="mt-2" />
             </InView>
             <RevealText
               as="h2"
@@ -633,6 +691,7 @@ export default function HomePage() {
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                 Yorumlar
               </p>
+              <SectionTitleMark className="mt-2" />
             </InView>
             <RevealText
               as="h2"
@@ -684,8 +743,12 @@ export default function HomePage() {
                   </p>
 
                   <div className="mt-6 flex items-center gap-3 border-t border-brand-100 pt-5">
-                    <div className="grid h-12 w-12 place-items-center rounded-full bg-brand-200 font-display text-lg font-extrabold text-brand-800">
-                      {t.name[0]}
+                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-brand-100">
+                      <img
+                        src={t.photoUrl}
+                        alt={t.name}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
                     </div>
                     <div>
                       <p className="font-display text-[14px] font-bold text-ink-900">
@@ -718,6 +781,7 @@ export default function HomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brand-600">
                   Bilgi & Bakım
                 </p>
+                <SectionTitleMark align="left" className="mt-2" />
               </InView>
               <RevealText
                 as="h2"
@@ -736,7 +800,7 @@ export default function HomePage() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {siteContent.blogPosts.slice(0, 3).map((post, i) => {
-              const cover = editorial[i % editorial.length].src;
+              const cover = post.coverUrl;
               return (
                 <InView key={post.slug} delay={i * 0.1} y={28}>
                   <Link
@@ -755,7 +819,12 @@ export default function HomePage() {
                     </div>
                     <div className="flex flex-1 flex-col p-6">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-500">
-                        {post.readMinutes} dakika okuma
+                        Yazar: {post.author} ·{" "}
+                        {new Date(post.publishedAt).toLocaleDateString("tr-TR", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
                       </p>
                       <h3 className="mt-3 font-display text-[19px] font-bold leading-snug tracking-tight text-ink-900 transition group-hover:text-brand-700">
                         {post.title}

@@ -12,18 +12,6 @@ import { buildPageMetadata, siteContent } from "@/lib/site";
 
 export const metadata = buildPageMetadata("Blog", "Sayamer Güzellik blog yazıları ve bakım notları.");
 
-const categoryImageMap: Record<string, keyof typeof siteContent.serviceCategoryMedia> = {
-  "Cilt Bakımı": "cilt-bakimi",
-  "Tırnak Bakımı": "tirnak-bakimi",
-  Epilasyon: "epilasyon",
-  "Vücut Bakımı": "g5",
-};
-
-function imageFor(category: string) {
-  const key = categoryImageMap[category] ?? "cilt-bakimi";
-  return siteContent.serviceCategoryMedia[key];
-}
-
 export default function BlogPage() {
   const [featured, ...rest] = siteContent.blogPosts;
 
@@ -38,12 +26,12 @@ export default function BlogPage() {
           siteContent.media.editorial[1].src,
           siteContent.media.editorial[0].src,
         ]}
-        photoAlt="Editorial bakım yazıları"
+        photoAlt="Editöryel bakım yazıları"
         actions={[
           { label: "Online randevu", href: "/randevu", primary: true },
           { label: "Hizmetler", href: "/hizmetler" },
         ]}
-        backdropWord="JOURNAL"
+        backdropWord="GÜNCE"
       />
 
       {/* Marquee — categories */}
@@ -95,7 +83,7 @@ export default function BlogPage() {
                 <ClipReveal direction="up" duration={1.4}>
                   <div className="relative overflow-hidden rounded-[36px]" style={{ aspectRatio: "5/4" }}>
                     <ParallaxImage
-                      src={imageFor(featured.category)}
+                      src={featured.coverUrl}
                       alt={featured.title}
                       className="absolute inset-0"
                       amount={50}
@@ -152,7 +140,7 @@ export default function BlogPage() {
                     >
                       <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
                         <img
-                          src={imageFor(post.category)}
+                          src={post.coverUrl}
                           alt={post.title}
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                         />

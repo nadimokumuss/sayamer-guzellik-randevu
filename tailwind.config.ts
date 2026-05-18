@@ -154,11 +154,16 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "hue-pulse": "hue-pulse 6s ease-in-out infinite",
         "pulse-slow": "pulse-slow 8s ease-in-out infinite",
         "float": "float 4s ease-in-out infinite",
+        "marquee": "marquee 28s linear infinite",
       },
     },
   },

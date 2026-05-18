@@ -25,13 +25,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return { title: post.title, description: post.excerpt };
 }
 
-const categoryImageMap: Record<string, keyof typeof siteContent.serviceCategoryMedia> = {
-  "Cilt Bakımı": "cilt-bakimi",
-  "Tırnak Bakımı": "tirnak-bakimi",
-  Epilasyon: "epilasyon",
-  "Vücut Bakımı": "g5",
-};
-
 export default async function BlogDetailPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const post = siteContent.blogPosts.find((p) => p.slug === slug);
@@ -39,8 +32,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<Param
     notFound();
   }
 
-  const imageKey = categoryImageMap[post.category] ?? "cilt-bakimi";
-  const image = siteContent.serviceCategoryMedia[imageKey];
+  const image = post.coverUrl;
 
   const related = siteContent.blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
@@ -191,8 +183,6 @@ export default async function BlogDetailPage({ params }: { params: Promise<Param
 
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p, idx) => {
-                const cat = categoryImageMap[p.category] ?? "cilt-bakimi";
-                const img = siteContent.serviceCategoryMedia[cat];
                 const tilt = idx % 3 === 1 ? "lg:translate-y-4" : "";
                 return (
                   <InView key={p.slug} delay={idx * 0.08} y={28}>
@@ -202,7 +192,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<Param
                     >
                       <div className="relative overflow-hidden" style={{ aspectRatio: "16/10" }}>
                         <img
-                          src={img}
+                          src={p.coverUrl}
                           alt={p.title}
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                         />

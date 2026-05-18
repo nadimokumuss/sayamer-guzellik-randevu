@@ -79,7 +79,7 @@ const categories: ServiceCategory[] = [
 const staffSeeds: Record<string, Array<{ name: string; title: string; signature: string }>> = {
   kuafor: [
     { name: "Zeynep Arın", title: "Saç Tasarım Uzmanı", signature: "Doğal geçişli renkler", },
-    { name: "Elif Tunca", title: "Styling Uzmanı", signature: "Fön ve parlak bitiş", },
+    { name: "Elif Tunca", title: "Şekillendirme Uzmanı", signature: "Fön ve parlak bitiş", },
     { name: "Derya Sayan", title: "Kesim Uzmanı", signature: "Yüz formuna uygun kesimler", },
   ],
   "ayak-bakimi": [
@@ -88,7 +88,7 @@ const staffSeeds: Record<string, Array<{ name: string; title: string; signature:
     { name: "Şule Deniz", title: "Bakım Terapisti", signature: "Topuk yenileme rutini", },
   ],
   "tirnak-bakimi": [
-    { name: "Merve Aktaş", title: "Nail Artist", signature: "Minimal ve sofistike tasarımlar", },
+    { name: "Merve Aktaş", title: "Tırnak Sanatçısı", signature: "Minimal ve sofistike tasarımlar", },
     { name: "Gamze Ilıca", title: "Kalıcı Oje Uzmanı", signature: "Uzun süre dayanıklı uygulamalar", },
     { name: "Buse Koral", title: "Protez Tırnak Uzmanı", signature: "Temiz form ve bakım dengesi", },
   ],
@@ -99,12 +99,12 @@ const staffSeeds: Record<string, Array<{ name: string; title: string; signature:
   ],
   g5: [
     { name: "İlayda Özen", title: "G5 Uzmanı", signature: "Toparlayıcı seans serileri", },
-    { name: "Pelin Uçar", title: "Body Sculpt Uzmanı", signature: "Ritimli uygulama yaklaşımı", },
+    { name: "Pelin Uçar", title: "Beden Şekillendirme Uzmanı", signature: "Ritimli uygulama yaklaşımı", },
     { name: "Ceyda Er", title: "Beden Bakım Uzmanı", signature: "Programlı sıkılaşma takibi", },
   ],
   "cilt-bakimi": [
     { name: "Nazlı Duran", title: "Cilt Terapisti", signature: "Nem ve ışıltı dengesi", },
-    { name: "Ece Nur", title: "Hydrafacial Uzmanı", signature: "Arınma ve canlı görünüm", },
+    { name: "Ece Nur", title: "Hidra Cilt Bakım Uzmanı", signature: "Arınma ve canlı görünüm", },
     { name: "Melis Kaan", title: "Bakım Danışmanı", signature: "Hassas cilt rutinleri", },
   ],
   masaj: [
@@ -114,8 +114,8 @@ const staffSeeds: Record<string, Array<{ name: string; title: string; signature:
   ],
   "kafa-masaji": [
     { name: "Lina Toprak", title: "Kafa Masajı Uzmanı", signature: "Kısa sürede derin rahatlama", },
-    { name: "Gizem Alkan", title: "Head Spa Terapisti", signature: "Sakinleştirici temas ritmi", },
-    { name: "İrem Asil", title: "Wellness Uzmanı", signature: "Stres azaltan seans akışı", },
+    { name: "Gizem Alkan", title: "Saç Derisi Spa Terapisti", signature: "Sakinleştirici temas ritmi", },
+    { name: "İrem Asil", title: "Esenlik Uzmanı", signature: "Stres azaltan seans akışı", },
   ],
   "sac-taramasi": [
     { name: "Aslı Soner", title: "Saç Analiz Uzmanı", signature: "Saç derisi tarama ve yorumlama", },
@@ -160,7 +160,7 @@ export const catalog: Catalog = {
     {
       id: "signature-cut",
       categoryId: "kuafor",
-      name: "Signature Kesim & Fön",
+      name: "İmza Kesim & Fön",
       description: "Yüz formuna göre kesim ve hacimli fön ile tamamlanan salon imzası.",
       durationMinutes: 75,
       price: 1500,
@@ -256,7 +256,7 @@ export const catalog: Catalog = {
     {
       id: "hydra-glow",
       categoryId: "cilt-bakimi",
-      name: "Hydra Glow Cilt Bakımı",
+      name: "Nem Işıltı Cilt Bakımı",
       description: "Arınma, nem ve ışıldayan görünüm etkisini hedefleyen bakım.",
       durationMinutes: 60,
       price: 1700,
@@ -305,7 +305,7 @@ export const catalog: Catalog = {
     {
       id: "head-spa",
       categoryId: "kafa-masaji",
-      name: "Head Spa Mini Seans",
+      name: "Saç Derisi Spası Mini Seans",
       description: "Saç derisini rahatlatan kısa ama etkili bakım akışı.",
       durationMinutes: 45,
       price: 1100,
@@ -334,7 +334,7 @@ export const catalog: Catalog = {
   packages: [
     {
       id: "bride-soft-glow",
-      name: "Soft Glow Saç Paketi",
+      name: "Yumuşak Işıltı Saç Paketi",
       description: "Kesim, ışıltı bakımı ve styling ile davet günleri için kusursuz hazırlık.",
       primaryServiceId: "signature-cut",
       includedServiceIds: ["signature-cut", "gloss-refresh"],
@@ -356,7 +356,7 @@ export const catalog: Catalog = {
     },
     {
       id: "nail-elegance-edit",
-      name: "Elegant Nails Paketi",
+      name: "Zarif Tırnak Paketi",
       description: "Kalıcı oje görünümünü güçlendirici bakım ile birleştiren zarif set.",
       primaryServiceId: "manicure-gel",
       includedServiceIds: ["manicure-gel", "nail-strength"],
@@ -368,7 +368,7 @@ export const catalog: Catalog = {
     {
       id: "skin-luster-session",
       name: "Cilt Işıltı Seremonisi",
-      description: "Hydra Glow ve kolajen destekli bakımın tek blokta sunulduğu premium paket.",
+      description: "Nem Işıltı ve kolajen destekli bakımın tek blokta sunulduğu premium paket.",
       primaryServiceId: "hydra-glow",
       includedServiceIds: ["hydra-glow", "collagen-reset"],
       durationMinutes: 135,
@@ -378,7 +378,7 @@ export const catalog: Catalog = {
     },
     {
       id: "body-reset-ritual",
-      name: "Body Reset Ritüeli",
+      name: "Beden Yenileme Ritüeli",
       description: "G5 seansını rahatlatıcı masaj hissiyle birleştiren toparlayıcı akış.",
       primaryServiceId: "g5-tightening",
       includedServiceIds: ["g5-tightening", "back-neck-release"],
@@ -389,8 +389,8 @@ export const catalog: Catalog = {
     },
     {
       id: "scalp-wellness-route",
-      name: "Saç Derisi Wellness Paketi",
-      description: "Saç analizi ve head spa ile desteklenen başlangıç bakım yolu.",
+      name: "Saç Derisi Esenlik Paketi",
+      description: "Saç analizi ve saç derisi spası ile desteklenen başlangıç bakım yolu.",
       primaryServiceId: "hair-scan",
       includedServiceIds: ["hair-scan", "head-spa"],
       durationMinutes: 75,
@@ -403,19 +403,19 @@ export const catalog: Catalog = {
     {
       id: "testimonial-1",
       author: "Aybüke K.",
-      treatment: "Hydra Glow Cilt Bakımı",
+      treatment: "Nem Işıltı Cilt Bakımı",
       quote: "Salonun sakinliği ve bakımın sonucu birlikte çok güçlü. Cildim daha aydınlık göründü.",
     },
     {
       id: "testimonial-2",
       author: "Eda T.",
-      treatment: "Elegant Nails Paketi",
+      treatment: "Zarif Tırnak Paketi",
       quote: "Detaylara çok dikkat edildi. Uzun süredir bu kadar temiz bir tırnak hizmeti almamıştım.",
     },
     {
       id: "testimonial-3",
       author: "Sinem B.",
-      treatment: "Body Reset Ritüeli",
+      treatment: "Beden Yenileme Ritüeli",
       quote: "Hem G5 hem rahatlama etkisini aynı gün hissetmek çok iyi geldi. Planlı ve güven veren bir ekip.",
     },
   ],

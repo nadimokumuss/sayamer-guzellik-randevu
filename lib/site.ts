@@ -56,7 +56,7 @@ export const siteContent = {
         { label: "Tırnak Bakımı", href: "/hizmetler#tirnak-bakimi" },
         { label: "Epilasyon", href: "/hizmetler#epilasyon" },
         { label: "Vücut Bakımı", href: "/hizmetler#g5" },
-        { label: "Masaj ve Head Spa", href: "/hizmetler#masaj" },
+        { label: "Masaj ve Saç Derisi Spası", href: "/hizmetler#masaj" },
       ],
     },
     {
@@ -78,7 +78,9 @@ export const siteContent = {
     slides: [
       {
         src: "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        alt: "Doğal ışıkta yumuşak makyajıyla model — yakın plan",
+        portraitSrc:
+          "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Doğal ışıkta yumuşak makyajıyla model — yakın plan portre",
         title: "Güzelliğinizi uzman ellere bırakın",
         copy: "Saç, cilt ve bakım ritüellerinizi sakin bir atmosferde planlıyoruz.",
         href: "/randevu",
@@ -86,6 +88,8 @@ export const siteContent = {
       },
       {
         src: "https://images.pexels.com/photos/2253833/pexels-photo-2253833.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        portraitSrc:
+          "https://images.pexels.com/photos/2253833/pexels-photo-2253833.jpeg?auto=compress&cs=tinysrgb&w=1200",
         alt: "Modern saç tasarımı — yakın plan portre",
         title: "Detaya özen, sonuca odak",
         copy: "Her hizmet için uzman bazlı planlanan, hijyenik ve net bir akış.",
@@ -93,8 +97,10 @@ export const siteContent = {
         label: "Saç Tasarımı",
       },
       {
-        src: "https://images.pexels.com/photos/3993456/pexels-photo-3993456.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        alt: "Salon ortamında bakım uygulaması",
+        src: "https://images.pexels.com/photos/939836/pexels-photo-939836.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        portraitSrc:
+          "https://images.pexels.com/photos/939836/pexels-photo-939836.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Yakın plan pembe manikür uygulaması",
         title: "Bakım ve dinginlik bir arada",
         copy: "Sakin aydınlatma, özenli hazırlık ve uzman eşliğinde bakım seansları.",
         href: "/randevu",
@@ -187,7 +193,7 @@ export const siteContent = {
       href: "/randevu",
     },
     {
-      title: "Elegant Nails",
+      title: "Zarif Tırnak",
       oldPrice: "2.250 TL",
       price: "1.850 TL",
       detail: "paket avantajı",
@@ -210,18 +216,18 @@ export const siteContent = {
         copy: "Cildinizin ihtiyacına göre planlanan profesyonel uygulama.",
       },
       {
-        src: "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Uzman cilt bakımı uygulaması",
-        eyebrow: "Beauty",
-        title: "Makyaj & Cilt detay",
-        copy: "Detay odaklı, profesyonel uygulama anları.",
+        src: "https://images.pexels.com/photos/4202325/pexels-photo-4202325.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Mermer rafta bakım ve kozmetik ürünleri",
+        eyebrow: "Detay",
+        title: "Premium ürün ve özenli sunum",
+        copy: "Seçilmiş profesyonel ürünlerle her seans için hazır bir atmosfer.",
       },
       {
-        src: "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg?auto=compress&cs=tinysrgb&w=1400",
-        alt: "Profesyonel salon uygulama anı",
-        eyebrow: "Uygulama",
-        title: "Sakin uygulama anı",
-        copy: "Uzman eşliğinde, planlı seanslar.",
+        src: "https://images.pexels.com/photos/853427/pexels-photo-853427.jpeg?auto=compress&cs=tinysrgb&w=1400",
+        alt: "Modern ve geniş salon iç mekanı",
+        eyebrow: "Salon",
+        title: "Geniş ve sakin atmosfer",
+        copy: "Açık plan, modern aydınlatma ve özenli düzenle huzurlu bir bakım alanı.",
       },
       {
         src: "https://images.pexels.com/photos/3997393/pexels-photo-3997393.jpeg?auto=compress&cs=tinysrgb&w=1400",
@@ -240,6 +246,10 @@ export const siteContent = {
         "Nem dengesi, arınma ve hassasiyet yönetimi için bakım ritmini mevsime göre ayarlamanın pratik yolları.",
       category: "Cilt Bakımı",
       readMinutes: 5,
+      author: "Nazlı Duran",
+      publishedAt: "2026-04-12",
+      coverUrl:
+        "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=1400",
       body: [
         "Mevsim geçişlerinde cilt, farklı sıcaklık ve nem koşullarına uyum sağlamak için destek bekler. Kış aylarının koruyucu nem yoğunluğundan ilkbaharın daha hafif dokularına geçerken bakım ritmini yeniden düzenlemek, cildin hem dengesini korumasına hem de canlı görünüme kavuşmasına yardımcı olur.",
         "İlk adım, temizleme rutinini sadeleştirmek. Yoğun yağ bariyeri gerektirmeyen dönemlerde daha hafif temizleyiciler cildin doğal bariyerini yormadan ihtiyacı karşılar. İkinci adım, nem ve peeling dengesi. Haftada bir veya iki kez yapılan kontrollü peeling, ölü hücre birikimini azaltır; ardından uygulanan nemlendirici ise cildin ışıltısını geri getirir.",
@@ -254,10 +264,14 @@ export const siteContent = {
         "Günlük kullanım alışkanlığına göre hangi tırnak hizmetinin daha uygun olduğuna hızlı bir bakış.",
       category: "Tırnak Bakımı",
       readMinutes: 4,
+      author: "Merve Aktaş",
+      publishedAt: "2026-03-28",
+      coverUrl:
+        "https://images.pexels.com/photos/3997392/pexels-photo-3997392.jpeg?auto=compress&cs=tinysrgb&w=1400",
       body: [
         "Kalıcı oje ve protez tırnak arasındaki seçim, günlük alışkanlıklarınızdan kozmetik beklentinize kadar birden fazla unsura bağlıdır. İkisi de uzun süreli dayanıklılık sunar; ancak bakım ritmi ve estetik sonuç farklılaşır.",
         "Kalıcı oje, kendi tırnağınızın yapısını koruyarak renk ve parlaklık sağlar. Doğal görünümü tercih edenler ve iki-üç haftalık bakım periyodunu yeterli bulanlar için uygundur. Protez tırnak ise uzunluk, şekil ve daha iddialı tasarımlar için ideal bir alan yaratır; bununla birlikte periyodik dolgu seanslarını gerekli kılar.",
-        "Nail Artist ile yapılacak kısa bir ön görüşme, hangi seçeneğin sizin için daha mantıklı olduğunu netleştirir. Sayamer'de her iki alanda da uzman kadro ile çalışıyoruz.",
+        "Tırnak sanatçısıyla yapılacak kısa bir ön görüşme, hangi seçeneğin sizin için daha mantıklı olduğunu netleştirir. Sayamer'de her iki alanda da uzman kadro ile çalışıyoruz.",
       ],
       href: "/hizmetler#tirnak-bakimi",
     },
@@ -268,6 +282,10 @@ export const siteContent = {
         "Daha konforlu ve planlı bir ilk seans için küçük ama etkili hazırlık notları.",
       category: "Epilasyon",
       readMinutes: 3,
+      author: "Tuğçe Baş",
+      publishedAt: "2026-03-15",
+      coverUrl:
+        "https://images.pexels.com/photos/3997984/pexels-photo-3997984.jpeg?auto=compress&cs=tinysrgb&w=1400",
       body: [
         "İlk epilasyon seansında konforu artırmak için birkaç basit hazırlık adımı yeterli olabilir. Seansa 24 saat kala bölgenin jiletle tıraş edilmesi, cihazın foliküle doğru etki etmesini sağlar. Cilt tahrişini azaltmak için tıraş sonrası sabunsuz, hafif bir nemlendirici tercih edin.",
         "Seans günü cilde krem, losyon veya parfüm uygulanmaması önerilir. Bu, cihazın verimli çalışması ve reaksiyon riskinin en aza inmesi için önemlidir. Açık renk ve bol kıyafetler, uygulama sonrasında cildin nefes almasını kolaylaştırır.",
@@ -282,6 +300,10 @@ export const siteContent = {
         "Vücut bakımında ritimli programlar oluştururken hangi başlıklar öne çıkar, ne beklenmeli?",
       category: "Vücut Bakımı",
       readMinutes: 4,
+      author: "İlayda Özen",
+      publishedAt: "2026-02-22",
+      coverUrl:
+        "https://images.pexels.com/photos/3997991/pexels-photo-3997991.jpeg?auto=compress&cs=tinysrgb&w=1400",
       body: [
         "G5, kısa sürede sıkılaşma ve toparlanma hissi yaratan mekanik bir masaj uygulamasıdır. Tek başına bir mucize değildir; ancak düzenli, planlı bir programla birlikte görünür bir fark yaratır.",
         "En iyi sonuç için G5, haftada iki seans ritmiyle ortalama 8-12 seans programı halinde uygulanır. Seanslar arasında cildin ve kasların dinlenmesi için en az bir günlük aralık bırakılır. Programın başında ve sonunda yapılan kısa ölçüm ve fotoğraf kayıtları, değişimi somut olarak takip etmenizi sağlar.",
@@ -297,6 +319,8 @@ export const siteContent = {
       rating: 5,
       text: "Cilt bakımı için gittiğimde o kadar profesyoneldi ki beklentimin çok üzerinde bir deneyim yaşadım. Salon temizliği ve düzeni de ayrıca takdire şayan.",
       service: "Cilt Bakımı",
+      photoUrl:
+        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
     {
       id: "t2",
@@ -304,13 +328,17 @@ export const siteContent = {
       rating: 5,
       text: "Online randevu sistemi çok kolay ve net. Hangi uzmanla çalışacağımı, fiyatı ve süreyi önceden bilmek büyük avantaj.",
       service: "Tırnak Bakımı",
+      photoUrl:
+        "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
     {
       id: "t3",
       name: "Selin K.",
       rating: 5,
-      text: "Elegant Nails paketi tam benim aradığım şeydi. Hem manikür hem pedikür aynı seansta, uzmanı gerçekten işini seviyor.",
-      service: "Elegant Nails Paketi",
+      text: "Zarif Tırnak paketi tam benim aradığım şeydi. Hem manikür hem pedikür aynı seansta, uzmanı gerçekten işini seviyor.",
+      service: "Zarif Tırnak Paketi",
+      photoUrl:
+        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
     {
       id: "t4",
@@ -318,6 +346,8 @@ export const siteContent = {
       rating: 5,
       text: "G5 seanslarını buradan başlattım, 8 seans sonunda farkı net görebildim. Uzman her seansta durumu değerlendiriyor, süreci takip ediyor.",
       service: "Vücut Bakımı",
+      photoUrl:
+        "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
     {
       id: "t5",
@@ -325,13 +355,17 @@ export const siteContent = {
       rating: 5,
       text: "Saç boyama için geldim, sonuç tam istediğim gibi çıktı. Üstüne üstlük saat ve fiyat tahminleri tuttu — bu nadir bir şey.",
       service: "Saç Tasarımı",
+      photoUrl:
+        "https://images.pexels.com/photos/712521/pexels-photo-712521.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
     {
       id: "t6",
       name: "Buse Y.",
       rating: 5,
       text: "Masaj seansı için rezervasyon yaptırdım. Ortam sakin, uzman işini biliyor. Kesinlikle tekrar geleceğim.",
-      service: "Masaj & Head Spa",
+      service: "Masaj & Saç Derisi Spası",
+      photoUrl:
+        "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=240",
     },
   ],
   knowledgeBase: [

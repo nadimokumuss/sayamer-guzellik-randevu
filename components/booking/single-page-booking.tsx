@@ -454,7 +454,7 @@ function PillField({
       </span>
       <input
         {...rest}
-        className="block w-full rounded-full border border-hairline bg-white px-4 py-3 pl-11 text-sm text-graphite transition placeholder:text-ash/70 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-200"
+        className="block w-full rounded-full border border-hairline bg-white px-4 py-3 pl-11 text-sm text-graphite transition placeholder:text-ash/70 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200"
       />
     </label>
   );
@@ -469,7 +469,7 @@ function PillTextarea({
       <span className="pointer-events-none absolute left-4 top-4 text-ash">{icon}</span>
       <textarea
         {...rest}
-        className="block min-h-[88px] w-full resize-none rounded-2xl border border-hairline bg-white px-4 py-3 pl-11 text-sm text-graphite transition placeholder:text-ash/70 focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-200"
+        className="block min-h-[88px] w-full resize-none rounded-2xl border border-hairline bg-white px-4 py-3 pl-11 text-sm text-graphite transition placeholder:text-ash/70 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200"
       />
     </label>
   );
@@ -495,16 +495,16 @@ function PaymentOption({
       onClick={() => onChange(value)}
       className={`flex w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition ${
         active
-          ? "border-violet-500 bg-violet-50/60"
-          : "border-hairline bg-white hover:border-violet-300"
+          ? "border-brand-500 bg-brand-50/60"
+          : "border-hairline bg-white hover:border-brand-300"
       }`}
     >
       <span
         className={`mt-1 grid h-4 w-4 shrink-0 place-items-center rounded-full border-2 transition ${
-          active ? "border-violet-600" : "border-ash/40"
+          active ? "border-brand-600" : "border-ash/40"
         }`}
       >
-        {active && <span className="h-1.5 w-1.5 rounded-full bg-violet-600" />}
+        {active && <span className="h-1.5 w-1.5 rounded-full bg-brand-600" />}
       </span>
       <span className="flex flex-col">
         <span className="font-display text-sm font-semibold tracking-tight text-graphite">
@@ -711,11 +711,11 @@ function BookingSidebar({
         </span>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-violet-100 bg-violet-50 px-4 py-3">
-        <p className="font-display text-sm font-semibold tracking-tight text-violet-900">
+      <div className="mt-5 rounded-2xl border border-brand-100 bg-brand-50 px-4 py-3">
+        <p className="font-display text-sm font-semibold tracking-tight text-brand-800">
           Güvenli Ödeme
         </p>
-        <p className="mt-0.5 text-[11px] text-violet-900/70">
+        <p className="mt-0.5 text-[11px] text-brand-800/70">
           Ödemeniz güvenli bağlantı ile korunur.
         </p>
       </div>
@@ -761,8 +761,8 @@ function BookingSidebar({
         disabled={!canSubmit}
         className={`mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold text-white transition ${
           canSubmit
-            ? "bg-violet-700 hover:bg-violet-800"
-            : "cursor-not-allowed bg-violet-700/60"
+            ? "bg-brand-gradient hover:shadow-cardHover"
+            : "cursor-not-allowed bg-brand-700/60"
         }`}
       >
         {isPending ? (

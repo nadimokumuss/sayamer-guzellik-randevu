@@ -37,10 +37,6 @@ export function SiteHeader() {
     setMenuOpen(false);
   }, [pathname]);
 
-  // Homepage renders its own integrated hero+header via <HomeHero />.
-  // Early-return must come AFTER all hooks to satisfy Rules of Hooks.
-  if (pathname === "/") return null;
-
   return (
     <header
       className={classNames(

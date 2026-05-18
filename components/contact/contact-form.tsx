@@ -125,6 +125,7 @@ export function ContactForm() {
                   {cat.name}
                 </option>
               ))}
+              <option value="Genel Bilgi">Genel Bilgi</option>
             </select>
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink-400">
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
