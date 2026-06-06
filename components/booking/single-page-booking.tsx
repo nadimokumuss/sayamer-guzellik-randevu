@@ -331,7 +331,7 @@ function CalendarSection({
                   const v = e.target.value;
                   startTransition(() => setDate(v));
                 }}
-                className="block w-full min-w-[200px] rounded-full border border-hairline bg-white px-4 py-2 text-sm font-semibold text-graphite transition focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15"
+                className="block w-full min-w-0 rounded-full border border-hairline bg-white px-4 py-2 text-sm font-semibold text-graphite transition focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15"
               />
             </label>
           </div>
@@ -343,7 +343,7 @@ function CalendarSection({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid grid-cols-3 gap-2 sm:grid-cols-4"
+                className="grid grid-cols-2 gap-2 sm:grid-cols-4"
               >
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="h-[60px] animate-pulse rounded-2xl bg-peachLight/60" />
@@ -366,7 +366,7 @@ function CalendarSection({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {availableSlots.map((slot, idx) => {
                     const isSelected =
                       selectedSlot?.date === deferredDate &&

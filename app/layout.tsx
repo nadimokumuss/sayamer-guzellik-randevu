@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 
 import "@/app/globals.css";
@@ -31,6 +31,12 @@ export const metadata: Metadata = {
     template: `%s | ${siteContent.brand.name}`,
   },
   description: siteContent.brand.description,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

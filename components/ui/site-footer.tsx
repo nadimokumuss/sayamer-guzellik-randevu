@@ -44,7 +44,7 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden border-t border-brand-200 bg-brand-50 text-ink-700">
       <div className="shell relative pb-10 pt-16 lg:pt-20">
         {/* Top — 4 main columns */}
-        <div className="grid gap-12 pb-12 lg:grid-cols-[1.3fr_0.9fr_1fr_1.2fr] lg:gap-12">
+        <div className="grid gap-12 pb-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_1fr_1.2fr] lg:gap-12">
           {/* Brand col */}
           <div>
             <Wordmark />

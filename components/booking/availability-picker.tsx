@@ -95,7 +95,7 @@ export function AvailabilityPicker({
               const nextDate = event.target.value;
               startTransition(() => setDate(nextDate));
             }}
-            className="mt-2 block w-full min-w-[220px] rounded-full border border-hairline bg-white px-4 py-2.5 text-sm font-semibold text-graphite transition focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15"
+            className="mt-2 block w-full min-w-0 rounded-full border border-hairline bg-white px-4 py-2.5 text-sm font-semibold text-graphite transition focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15"
           />
         </label>
       </div>
@@ -109,7 +109,7 @@ export function AvailabilityPicker({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6"
+              className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6"
             >
               {Array.from({ length: 12 }).map((_, index) => (
                 <div
@@ -133,7 +133,7 @@ export function AvailabilityPicker({
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-rosewood">
                 Uygun saatler
               </p>
-              <ul className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
+              <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6">
                 {availableSlots.map((slot, idx) => (
                   <motion.li
                     key={slot.startTime}

@@ -114,7 +114,7 @@ export function HomeHeroSlider() {
       />
 
       {/* HERO COPY (left side) */}
-      <div className="shell relative z-30 grid min-h-[78vh] items-center pb-24 pt-16 lg:min-h-[88vh] lg:grid-cols-2 lg:pb-32 lg:pt-20">
+      <div className="shell relative z-30 grid min-h-[72vh] items-center pb-24 pt-16 lg:min-h-[88vh] lg:grid-cols-2 lg:pb-32 lg:pt-20">
         <AnimatePresence mode="wait">
           <motion.div
             key={`text-${index}`}
