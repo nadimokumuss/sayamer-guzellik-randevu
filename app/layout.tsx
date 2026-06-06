@@ -8,6 +8,7 @@ import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { PageBackdrop } from "@/components/ui/page-backdrop";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
+import { WhatsAppFab } from "@/components/ui/whatsapp-fab";
 import { siteContent } from "@/lib/site";
 
 const playfair = Playfair_Display({
@@ -54,6 +55,7 @@ export default function RootLayout({
           <main>{children}</main>
           <SiteFooter />
         </div>
+        <WhatsAppFab />
         <CursorDot />
       </body>
     </html>

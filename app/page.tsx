@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { ContactForm } from "@/components/contact/contact-form";
@@ -841,6 +842,26 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ── BRAND SIGNATURE ─────────────────────────────────────────── */}
+      <section className="bg-brand-50 pt-16 lg:pt-20">
+        <div className="shell flex flex-col items-center gap-5 text-center">
+          <InView>
+            <Image
+              src="/sayamer-logo.png"
+              alt={siteContent.brand.name}
+              width={280}
+              height={239}
+              className="h-auto w-44 lg:w-52"
+            />
+          </InView>
+          <InView delay={0.1}>
+            <p className="max-w-md font-display text-[15px] italic leading-7 text-ink-500">
+              {siteContent.brand.tagline}
+            </p>
+          </InView>
         </div>
       </section>
 
