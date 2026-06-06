@@ -34,6 +34,11 @@ const socialIcons: Record<string, React.ReactNode> = {
       <path d="m3 7 9 7 9-7" strokeLinecap="round" />
     </svg>
   ),
+  LinkedIn: (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z" />
+    </svg>
+  ),
 };
 
 export function SiteFooter() {
@@ -53,7 +58,7 @@ export function SiteFooter() {
             </p>
             <div className="mt-6 flex items-center gap-2.5">
               <a
-                href="https://instagram.com"
+                href={siteContent.contact.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="grid h-10 w-10 place-items-center rounded-full border border-brand-200 bg-white text-brand-700 transition hover:bg-brand-gradient hover:text-white hover:border-transparent"
@@ -69,6 +74,15 @@ export function SiteFooter() {
                 aria-label="WhatsApp"
               >
                 {socialIcons.WhatsApp}
+              </a>
+              <a
+                href={siteContent.contact.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-10 w-10 place-items-center rounded-full border border-brand-200 bg-white text-brand-700 transition hover:bg-brand-gradient hover:text-white hover:border-transparent"
+                aria-label="LinkedIn"
+              >
+                {socialIcons.LinkedIn}
               </a>
               <a
                 href={`mailto:${siteContent.contact.email}`}

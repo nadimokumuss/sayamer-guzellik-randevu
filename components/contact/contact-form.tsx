@@ -145,7 +145,7 @@ export function ContactForm() {
           name="email"
           type="email"
           autoComplete="email"
-          placeholder="ornek@sayamer.com"
+          placeholder="ornek@sayamerguzellik.com"
           className={`mt-2 ${inputClass}`}
         />
       </div>

@@ -9,15 +9,17 @@ export const siteContent = {
       "Sayamer Güzellik; saç, cilt, tırnak ve bakım ritüellerini sakin, planlı ve premium-soft bir deneyim içinde sunan güzellik salonudur.",
   },
   contact: {
-    phoneRaw: "905388887766",
-    phoneDisplay: "+90 538 888 77 66",
-    email: "hello@sayamer.com",
-    whatsappUrl: "https://wa.me/905388887766",
-    addressTitle: "Bağdat Caddesi çevresi",
+    phoneRaw: "905011513044",
+    phoneDisplay: "+90 501 151 30 44",
+    email: "bilgi@sayamerguzellik.com",
+    whatsappUrl: "https://wa.me/905011513044",
+    instagramUrl: "https://www.instagram.com/sayamer.guzellik/",
+    linkedinUrl: "https://www.linkedin.com/company/mobilmasaj",
+    addressTitle: "Mimar Sinan Mah. Şenay Sok. No:2",
     addressLines: [
-      "Cadde hattına yakın sakin salon konumu",
-      "Konum bilgisi rezervasyon sonrası paylaşılır",
-      "İstanbul / Anadolu Yakası",
+      "Çekmeköy",
+      "İstanbul, Türkiye",
+      "Çekmeköy / İstanbul",
     ],
     hours: [
       { label: "Pazartesi - Cuma", value: "10:00 - 20:00" },
@@ -25,8 +27,9 @@ export const siteContent = {
       { label: "Pazar", value: "Kapalı" },
     ],
     socials: [
-      { label: "Instagram", handle: "@sayamerbeauty" },
-      { label: "WhatsApp", handle: "+90 538 888 77 66" },
+      { label: "Instagram", handle: "@sayamer.guzellik" },
+      { label: "WhatsApp", handle: "+90 501 151 30 44" },
+      { label: "LinkedIn", handle: "mobilmasaj" },
     ],
   },
   cta: {
