@@ -48,7 +48,7 @@ textarea {
 
 /* ---------- Pill buttons (Reference brand language) ---------- */
 .btn-pill-brand {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight text-white transition duration-300;
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight text-white transition duration-300;
   background: linear-gradient(135deg, #C8956D 0%, #8B5E3C 100%);
   box-shadow: 0 8px 24px rgba(176, 122, 82, 0.32);
 }
@@ -60,7 +60,7 @@ textarea {
 }
 
 .btn-pill-ghost {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
   border-color: rgba(17, 24, 39, 0.14);
   color: #111827;
   background: #ffffff;
@@ -73,7 +73,7 @@ textarea {
 }
 
 .btn-pill-white {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-[13px] font-semibold tracking-tight transition duration-300;
   background: #ffffff;
   color: #6B4A2E;
   box-shadow: 0 8px 24px rgba(15, 15, 18, 0.10);

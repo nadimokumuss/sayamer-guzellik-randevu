@@ -75,12 +75,11 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/randevu"
-            className="hidden lg:inline-flex btn-pill-brand"
-          >
-            <span>Randevu Al</span>
-          </Link>
+          <div className="hidden lg:block">
+            <Link href="/randevu" className="btn-pill-brand">
+              <span>Randevu Al</span>
+            </Link>
+          </div>
 
           <button
             type="button"
