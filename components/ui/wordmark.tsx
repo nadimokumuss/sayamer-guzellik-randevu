@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import { LotusIcon } from "@/components/ui/lotus-icon";
 import { siteContent } from "@/lib/site";
 
 type Props = {
@@ -20,9 +20,16 @@ export function Wordmark({ tone = "dark", size = "md" }: Props) {
       aria-label={siteContent.brand.name}
     >
       <span
-        className={`relative grid ${iconSize} place-items-center transition-transform duration-700 ease-soft group-hover:rotate-180 group-hover:scale-105`}
+        className={`relative ${iconSize} transition-transform duration-700 ease-soft group-hover:rotate-180 group-hover:scale-105`}
       >
-        <LotusIcon className="h-full w-full" tone={tone === "light" ? "light" : "brand"} />
+        <Image
+          src="/sayamer-icon.png"
+          alt={siteContent.brand.name}
+          fill
+          sizes="32px"
+          priority
+          className="object-contain"
+        />
       </span>
       <span className={`font-display font-extrabold tracking-tight ${wordmarkSize} ${text}`}>
         Sayamer Güzellik Merkezi
